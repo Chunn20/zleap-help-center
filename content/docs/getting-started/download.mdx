@@ -1,0 +1,90 @@
+---
+title: 下载使用
+description: Zleap 提供多平台版本，您可根据设备类型选择以下使用方式。
+---
+
+<style>{`
+  .platform-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px) {
+    .platform-grid { grid-template-columns: 1fr; }
+  }
+`}</style>
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+{/* 网页版 - 主推卡片 */}
+<div style={{ background: '#0D131A', borderRadius: '12px', padding: '32px', color: 'white', position: 'relative', overflow: 'hidden' }}>
+  <div style={{ position: 'absolute', top: 0, right: 0, width: '220px', height: '220px', background: '#FF8A00', borderRadius: '50%', transform: 'translate(40%, -40%)', opacity: 0.12 }} />
+  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', justifyContent: 'center' }}>
+    <span style={{ fontSize: '30px' }}>🌐</span>
+    <span style={{ fontSize: '20px', fontWeight: 700 }}>网页版</span>
+  </div>
+  <p style={{ color: '#CFD9DE', fontSize: '14px', lineHeight: 1.8, marginBottom: '20px', textAlign: 'center' }}>
+    无需下载安装，通过浏览器即可直接访问。推荐使用 Chrome、Edge、Safari 或 Firefox 以获得最佳体验。
+  </p>
+  <div style={{ textAlign: 'center' }}>
+    <a href="https://www.zleap.com" target="_blank" rel="noopener noreferrer"
+      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FF8A00', color: 'white', padding: '10px 22px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, textDecoration: 'none' }}>
+      立即访问 www.zleap.com →
+    </a>
+  </div>
+</div>
+
+{/* iOS + Android 并排 */}
+<div className="platform-grid">
+
+  {/* iOS */}
+  <div style={{ border: '1px solid #EDEDED', borderRadius: '12px', padding: '24px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <span style={{ fontSize: '26px' }}>🍎</span>
+      <div>
+        <p style={{ fontWeight: 700, fontSize: '16px', color: '#0D131A', margin: 0 }}>iOS 版</p>
+        <p style={{ fontSize: '12px', color: '#898989', margin: 0 }}>iPhone · iPad</p>
+      </div>
+    </div>
+    <p style={{ fontSize: '14px', color: '#0D131A', lineHeight: 1.7, margin: 0 }}>
+      支持 iPhone 与 iPad，可通过 App Store 安全下载。
+    </p>
+    <div style={{ background: '#F9F9F9', borderRadius: '8px', padding: '12px 14px', fontSize: '13px', color: '#8F9090', lineHeight: 1.8 }}>
+      在 App Store 中搜索 <strong style={{ color: '#0D131A' }}>「Zleap」</strong> 点击获取，或扫描下方二维码跳转至下载页面。
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '16px', background: 'white', border: '1px solid #EDEDED', borderRadius: '8px' }}>
+      <img src="/images/qr-ios.png" alt="iOS 下载二维码" style={{ width: '120px', height: '120px', objectFit: 'contain', display: 'block' }} />
+    </div>
+  </div>
+
+  {/* Android */}
+  <div style={{ border: '1px solid #EDEDED', borderRadius: '12px', padding: '24px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <span style={{ fontSize: '26px' }}>🤖</span>
+      <div>
+        <p style={{ fontWeight: 700, fontSize: '16px', color: '#0D131A', margin: 0 }}>Android 版</p>
+        <p style={{ fontSize: '12px', color: '#898989', margin: 0 }}>手机 · 平板</p>
+      </div>
+    </div>
+    <p style={{ fontSize: '14px', color: '#0D131A', lineHeight: 1.7, margin: 0 }}>
+      支持手机及平板设备，可通过 Google Play 下载。
+    </p>
+    <div style={{ background: '#F9F9F9', borderRadius: '8px', padding: '12px 14px', fontSize: '13px', color: '#8F9090', lineHeight: 1.8 }}>
+      在 Google Play 中搜索 <strong style={{ color: '#0D131A' }}>「Zleap」</strong> 进行安装，或扫描下方二维码进入下载页面。
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '16px', background: 'white', border: '1px solid #EDEDED', borderRadius: '8px' }}>
+      <img src="/images/qr-android.png" alt="Android 下载二维码" style={{ width: '120px', height: '120px', objectFit: 'contain', display: 'block' }} />
+    </div>
+  </div>
+
+</div>
+
+{/* 温馨提示 */}
+<div style={{ background: '#FFE9B9', borderRadius: '10px', padding: '14px 18px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+  <span style={{ fontSize: '16px', flexShrink: 0, marginTop: '2px' }}>💡</span>
+  <p style={{ fontSize: '14px', color: '#0D131A', lineHeight: 1.7, margin: 0 }}>
+    <strong>温馨提示：</strong>请确保从官方渠道下载，以保证软件安全与最新版本。如遇下载或使用问题，可<a href="/docs/contact/contact" style={{ color: '#FF8A00', fontWeight: 600, textDecoration: 'none' }}>联系客服</a>获取帮助。
+  </p>
+</div>
+
+</div>

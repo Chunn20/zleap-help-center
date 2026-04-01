@@ -1,0 +1,13 @@
+{
+  "title": "创建私有信息源",
+  "pages": [
+    "index",
+    "document-upload",
+    "browser-extension",
+    "api",
+    "wecom-bot",
+    "feishu-bot",
+    "salesmartly",
+    "rss"
+  ]
+}

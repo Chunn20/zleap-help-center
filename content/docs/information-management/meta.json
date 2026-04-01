@@ -1,0 +1,9 @@
+{
+  "title": "信息管理",
+  "pages": [
+    "information-management",
+    "event-table",
+    "subscribe-shared",
+    "create-private"
+  ]
+}

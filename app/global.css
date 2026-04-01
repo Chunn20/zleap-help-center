@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+:root {
+  --color-fd-primary: #FF8A00;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: #FF8A00;
+}
+
+.dark {
+  --color-fd-primary: #FF8A00;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: #FF8A00;
+}
+
+/* 面包屑 - 让一级目录标题更显眼，但比 h1 小 */
+#nd-page > div:first-child > a:last-child,
+#nd-page > div:first-child > span:last-child {
+  font-size: 15px;
+  font-weight: 600;
+  color: #FF8A00;
+}
+
+#nd-page > div:first-child {
+  padding-bottom: 4px;
+}
+
+#nd-page > h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
