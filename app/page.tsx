@@ -345,7 +345,7 @@ export default function HomePage() {
         {/* Bottom bar */}
         <div className="border-t px-6 py-4">
           <p className="text-fd-muted-foreground text-center text-xs">
-            © 2025 智跃（广州）科技有限公司 · 保留所有权利
+            © 2025 广州智跃深空人工智能科技有限公司 · 保留所有权利
           </p>
         </div>
       </footer>
