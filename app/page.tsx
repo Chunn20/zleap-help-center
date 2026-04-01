@@ -180,12 +180,12 @@ export default function HomePage() {
       <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-10">
         {/* Sidebar */}
         <aside className="hidden w-52 shrink-0 lg:block">
-          <p className="text-fd-foreground mb-3 px-3 text-sm font-semibold">
+          <p className="text-fd-foreground mb-3 px-3 text-base font-semibold">
             参考文档
           </p>
           {navSections.map((section) => (
             <details key={section.title} className="group mb-0.5">
-              <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium select-none transition-colors">
+              <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-[15px] font-medium select-none transition-colors">
                 {section.title}
                 <svg
                   className="text-fd-muted-foreground size-3.5 shrink-0 transition-transform duration-200 group-open:rotate-90"
@@ -202,7 +202,7 @@ export default function HomePage() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-fd-muted-foreground hover:text-fd-foreground hover:bg-fd-accent block rounded-md px-3 py-1.5 text-xs transition-colors"
+                      className="text-fd-muted-foreground hover:text-fd-foreground hover:bg-fd-accent block rounded-md px-3 py-1.5 text-[13px] transition-colors"
                     >
                       {link.title}
                     </Link>
