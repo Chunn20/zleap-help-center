@@ -139,6 +139,15 @@ export default function HomePage() {
           </a>
           <span className="text-fd-muted-foreground/30">·</span>
           <a
+            href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
+          >
+            提交反馈
+          </a>
+          <span className="text-fd-muted-foreground/30">·</span>
+          <a
             href="/docs/contact/contact"
             className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
           >
