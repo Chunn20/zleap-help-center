@@ -15,7 +15,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider
+          i18n={{
+            locale: 'zh-CN',
+            translations: {
+              toc: '本页目录',
+            },
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   );

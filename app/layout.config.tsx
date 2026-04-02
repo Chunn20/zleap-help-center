@@ -26,7 +26,4 @@ export const baseOptions: BaseLayoutProps = {
       external: true,
     },
   ],
-  i18n: {
-    toc: '本页目录',
-  } as any,
 };
