@@ -48,3 +48,37 @@
   background: linear-gradient(90deg, #FF8A00 0%, #FFB84D 50%, #FF8A00 100%);
   border-radius: 2px;
 }
+
+/* 目录项左侧装饰线 - 根据层级缩短 */
+[data-toc] a {
+  position: relative;
+  padding-left: 12px;
+}
+
+[data-toc] a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 2px;
+  background: #FF8A00;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+[data-toc] a:hover::before,
+[data-toc] a[data-active="true"]::before {
+  opacity: 1;
+}
+
+/* 二级标题 - 短线 */
+[data-toc] a[data-level="2"]::before {
+  height: 40%;
+}
+
+/* 三级标题 - 更短的线 */
+[data-toc] a[data-level="3"]::before {
+  height: 30%;
+}
