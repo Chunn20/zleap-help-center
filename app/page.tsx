@@ -243,26 +243,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Hero */}
-      <section className="relative border-b py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-fd-background via-fd-secondary/10 to-fd-background" />
-        <div className="relative mx-auto max-w-3xl px-6 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-fd-secondary/50 px-4 py-1.5 text-xs font-medium text-fd-muted-foreground">
-            <span>💡</span>
-            <span>快速搜索文档内容</span>
-          </div>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight">
-            需要帮助？快速找到答案
-          </h1>
-          <p className="text-fd-muted-foreground mb-8 text-base">
-            搜索使用指南、功能说明与常见问题
-          </p>
-          <div className="mx-auto max-w-2xl">
-            <FullSearchTrigger className="w-full rounded-xl border-2 bg-white px-5 py-4 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow-md" />
-          </div>
-        </div>
-      </section>
-
       {/* Body: Sidebar + Topics */}
       <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-12">
         {/* Sidebar */}
@@ -332,9 +312,13 @@ export default function HomePage() {
 
           {/* Search Section */}
           <div className="rounded-xl border bg-fd-secondary/30 p-8 text-center">
-            <h3 className="mb-2 text-lg font-bold">搜索文档</h3>
-            <p className="text-fd-muted-foreground mb-4 text-sm">
-              快速查找使用指南、功能说明与常见问题
+            <div className="mb-3 inline-flex items-center gap-2 text-sm text-fd-muted-foreground">
+              <span>💡</span>
+              <span>快速搜索文档内容</span>
+            </div>
+            <h3 className="mb-2 text-2xl font-bold">需要帮助？快速找到答案</h3>
+            <p className="text-fd-muted-foreground mb-5 text-sm">
+              搜索使用指南、功能说明与常见问题
             </p>
             <div className="mx-auto max-w-lg">
               <FullSearchTrigger className="w-full rounded-lg border bg-white px-4 py-3 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow" />
