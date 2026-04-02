@@ -264,7 +264,7 @@ export default function HomePage() {
       </section>
 
       {/* Body: Sidebar + Topics */}
-      <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-16">
+      <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-12">
         {/* Sidebar */}
         <aside className="hidden w-64 shrink-0 lg:block">
           <div className="sticky top-6">
@@ -304,30 +304,41 @@ export default function HomePage() {
 
         {/* Topics */}
         <main className="min-w-0 flex-1">
-          <h2 className="mb-8 text-2xl font-bold">快速入口</h2>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <h2 className="mb-6 text-xl font-bold">快速入口</h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
             {topics.map((topic) => (
               <Link
                 key={topic.href}
                 href={topic.href}
-                className="group relative overflow-hidden rounded-2xl border bg-gradient-to-br from-white to-fd-secondary/20 p-6 transition-all hover:shadow-lg hover:border-[#FF8A00]/30"
+                className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-white to-fd-secondary/20 p-5 transition-all hover:shadow-md hover:border-[#FF8A00]/30"
               >
-                <div className="absolute right-4 top-4 text-4xl opacity-10 transition-opacity group-hover:opacity-20">{topic.icon}</div>
+                <div className="absolute right-3 top-3 text-3xl opacity-10 transition-opacity group-hover:opacity-20">{topic.icon}</div>
                 <div className="relative">
-                  <div className="mb-3 flex items-center gap-3">
-                    <span className="text-3xl">{topic.icon}</span>
-                    <p className="text-lg font-bold">{topic.title}</p>
+                  <div className="mb-2 flex items-center gap-2.5">
+                    <span className="text-2xl">{topic.icon}</span>
+                    <p className="text-base font-bold">{topic.title}</p>
                   </div>
                   <p className="text-fd-muted-foreground text-sm leading-relaxed">
                     {topic.description}
                   </p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF8A00] transition-gap group-hover:gap-2">
+                  <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#FF8A00] transition-gap group-hover:gap-2">
                     <span>了解更多</span>
                     <span>→</span>
                   </div>
                 </div>
               </Link>
             ))}
+          </div>
+
+          {/* Search Section */}
+          <div className="rounded-xl border bg-fd-secondary/30 p-8 text-center">
+            <h3 className="mb-2 text-lg font-bold">搜索文档</h3>
+            <p className="text-fd-muted-foreground mb-4 text-sm">
+              快速查找使用指南、功能说明与常见问题
+            </p>
+            <div className="mx-auto max-w-lg">
+              <FullSearchTrigger className="w-full rounded-lg border bg-white px-4 py-3 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow" />
+            </div>
           </div>
         </main>
       </div>
