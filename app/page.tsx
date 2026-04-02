@@ -163,37 +163,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Navigation Sections - Moved to Top */}
-      <section className="relative border-b py-12 overflow-hidden">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/40 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-200/30 via-transparent to-transparent" />
-
-        <div className="relative mx-auto max-w-6xl px-6">
-          <h2 className="mb-6 text-center text-2xl font-bold text-fd-foreground">📚 文档目录</h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-            {navSections.map((section) => (
-              <div key={section.title} className="rounded-xl border bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:shadow-md">
-                <p className="mb-3 text-sm font-semibold text-fd-foreground">{section.title}</p>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="block text-xs text-fd-muted-foreground transition-colors hover:text-[#FF8A00]"
-                      >
-                        {link.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Product Introduction with Background */}
       <section className="relative border-b py-16 overflow-hidden">
         {/* Background Gradient */}
