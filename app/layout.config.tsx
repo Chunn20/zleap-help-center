@@ -19,4 +19,11 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: Logo,
   },
+  links: [
+    {
+      text: '产品首页',
+      url: 'https://zleap.com',
+      external: true,
+    },
+  ],
 };
