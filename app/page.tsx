@@ -163,73 +163,113 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product Introduction */}
-      <section className="border-b bg-gradient-to-b from-fd-background via-fd-secondary/20 to-fd-background py-16">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#FF8A00]/20 bg-[#FFF7ED] px-4 py-1.5 text-sm font-semibold text-[#FF8A00]">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF8A00] opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF8A00]"></span>
-            </span>
-            AI 驱动的智能内容社区
+      {/* Navigation Sections - Moved to Top */}
+      <section className="relative border-b py-12 overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-200/30 via-transparent to-transparent" />
+
+        <div className="relative mx-auto max-w-6xl px-6">
+          <h2 className="mb-6 text-center text-2xl font-bold text-fd-foreground">📚 文档目录</h2>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+            {navSections.map((section) => (
+              <div key={section.title} className="rounded-xl border bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:shadow-md">
+                <p className="mb-3 text-sm font-semibold text-fd-foreground">{section.title}</p>
+                <ul className="space-y-2">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="block text-xs text-fd-muted-foreground transition-colors hover:text-[#FF8A00]"
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Title */}
-          <h2 className="mb-4 text-4xl font-bold leading-tight text-fd-foreground">
-            让 AI Agent 成为你的<br />智能信息助手
-          </h2>
+      {/* Product Introduction with Background */}
+      <section className="relative border-b py-16 overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-200/30 via-transparent to-transparent" />
 
-          {/* Description */}
-          <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-fd-muted-foreground">
-            Zleap 通过 AI Agent 自动收集、分析和创作内容，帮助你高效管理信息、追踪动态、激发创新。无论是个人知识管理、团队协作，还是企业信息中台，Zleap 都能让关键信息触手可及。
-          </p>
+        <div className="relative mx-auto max-w-6xl px-6">
 
-          {/* Feature Grid */}
-          <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border bg-fd-card p-6 text-center transition-all hover:shadow-lg">
-              <div className="mb-3 text-3xl">⚡</div>
-              <h3 className="mb-2 text-sm font-semibold text-fd-foreground">自动化信息收集</h3>
-              <p className="text-xs leading-relaxed text-fd-muted-foreground">
-                Agent 7×24 小时自动追踪信息源，实时更新内容
-              </p>
+          {/* Product Introduction Content */}
+          <div className="text-center">
+            {/* Badge */}
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#FF8A00]/20 bg-white/80 px-4 py-1.5 text-sm font-semibold text-[#FF8A00] shadow-sm backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF8A00] opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF8A00]"></span>
+              </span>
+              AI 驱动的智能内容社区
             </div>
-            <div className="rounded-2xl border bg-fd-card p-6 text-center transition-all hover:shadow-lg">
-              <div className="mb-3 text-3xl">🧠</div>
-              <h3 className="mb-2 text-sm font-semibold text-fd-foreground">智能分析与创作</h3>
-              <p className="text-xs leading-relaxed text-fd-muted-foreground">
-                AI 深度理解内容，生成报告、总结和洞察
-              </p>
-            </div>
-            <div className="rounded-2xl border bg-fd-card p-6 text-center transition-all hover:shadow-lg">
-              <div className="mb-3 text-3xl">🤝</div>
-              <h3 className="mb-2 text-sm font-semibold text-fd-foreground">人机协作讨论</h3>
-              <p className="text-xs leading-relaxed text-fd-muted-foreground">
-                与 Agent 和团队成员共同讨论，碰撞新想法
-              </p>
-            </div>
-          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/docs/getting-started/quick-start"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#FF8A00] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#FF8A00]/25 transition-all hover:bg-[#E67A00] hover:shadow-xl"
-            >
-              立即开始使用 →
-            </a>
-            <a
-              href="/docs/about-zleap/about"
-              className="inline-flex items-center gap-2 rounded-xl border bg-fd-card px-6 py-3 text-sm font-semibold transition-all hover:bg-fd-accent"
-            >
-              了解 Zleap
-            </a>
-            <a
-              href="/docs/about-zleap/enterprise"
-              className="inline-flex items-center gap-2 rounded-xl border bg-fd-card px-6 py-3 text-sm font-semibold transition-all hover:bg-fd-accent"
-            >
-              企业版方案
-            </a>
+            {/* Title */}
+            <h2 className="mb-4 text-4xl font-bold leading-tight text-fd-foreground">
+              让 AI Agent 成为你的<br />智能信息助手
+            </h2>
+
+            {/* Description */}
+            <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-fd-muted-foreground">
+              Zleap 通过 AI Agent 自动收集、分析和创作内容，帮助你高效管理信息、追踪动态、激发创新。无论是个人知识管理、团队协作，还是企业信息中台，Zleap 都能让关键信息触手可及。
+            </p>
+
+            {/* Feature Grid */}
+            <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border bg-white/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
+                <div className="mb-3 text-3xl">⚡</div>
+                <h3 className="mb-2 text-sm font-semibold text-fd-foreground">自动化信息收集</h3>
+                <p className="text-xs leading-relaxed text-fd-muted-foreground">
+                  Agent 7×24 小时自动追踪信息源，实时更新内容
+                </p>
+              </div>
+              <div className="rounded-2xl border bg-white/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
+                <div className="mb-3 text-3xl">🧠</div>
+                <h3 className="mb-2 text-sm font-semibold text-fd-foreground">智能分析与创作</h3>
+                <p className="text-xs leading-relaxed text-fd-muted-foreground">
+                  AI 深度理解内容，生成报告、总结和洞察
+                </p>
+              </div>
+              <div className="rounded-2xl border bg-white/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
+                <div className="mb-3 text-3xl">🤝</div>
+                <h3 className="mb-2 text-sm font-semibold text-fd-foreground">人机协作讨论</h3>
+                <p className="text-xs leading-relaxed text-fd-muted-foreground">
+                  与 Agent 和团队成员共同讨论，碰撞新想法
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="/docs/getting-started/quick-start"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#FF8A00] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#FF8A00]/25 transition-all hover:bg-[#E67A00] hover:shadow-xl"
+              >
+                立即开始使用 →
+              </a>
+              <a
+                href="/docs/about-zleap/about"
+                className="inline-flex items-center gap-2 rounded-xl border bg-white/80 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:bg-white"
+              >
+                了解 Zleap
+              </a>
+              <a
+                href="/docs/about-zleap/enterprise"
+                className="inline-flex items-center gap-2 rounded-xl border bg-white/80 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:bg-white"
+              >
+                企业版方案
+              </a>
+            </div>
           </div>
         </div>
       </section>
