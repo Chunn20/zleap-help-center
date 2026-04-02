@@ -163,13 +163,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Product Introduction Card */}
+      <section className="border-b bg-gradient-to-br from-fd-background via-fd-secondary/10 to-fd-background py-12">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0D131A] to-[#1E2A38] p-8 text-white shadow-xl">
+            <div className="absolute right-0 top-0 h-40 w-40 translate-x-10 -translate-y-10 rounded-full bg-[#FF8A00] opacity-10 blur-3xl" />
+            <div className="relative">
+              <div className="mb-4 flex items-center gap-3">
+                <span className="text-3xl">🚀</span>
+                <h2 className="text-2xl font-bold">Zleap — AI 驱动的智能内容社区</h2>
+              </div>
+              <p className="mb-6 text-[15px] leading-relaxed text-gray-300">
+                Zleap 让 AI Agent 自动收集、分析信息并生成内容，帮助个人和团队高效管理知识、激发创新。无论是追踪行业动态、整理项目资料，还是协作讨论，Zleap 都能让信息触手可及。
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="/docs/getting-started/quick-start"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#FF8A00] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#E67A00] hover:shadow-lg"
+                >
+                  快速开始 →
+                </a>
+                <a
+                  href="/docs/about-zleap/about"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10"
+                >
+                  了解更多
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Hero */}
-      <section className="border-b py-16 text-center">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight">
-          嗨，请问你需要什么帮助？
+      <section className="border-b py-12 text-center">
+        <h1 className="mb-3 text-3xl font-bold tracking-tight">
+          需要帮助？快速找到答案
         </h1>
-        <p className="text-fd-muted-foreground mb-8 text-base">
-          在这里找到 Zleap 的使用指南、功能说明与常见问题解答
+        <p className="text-fd-muted-foreground mb-6 text-sm">
+          搜索使用指南、功能说明与常见问题
         </p>
         <div className="mx-auto max-w-xl px-4">
           <FullSearchTrigger className="w-full rounded-full border px-4 py-2.5 text-left text-sm" />
@@ -215,7 +247,7 @@ export default function HomePage() {
 
         {/* Topics */}
         <main className="min-w-0 flex-1">
-          <h2 className="mb-6 text-lg font-semibold">热门主题</h2>
+          <h2 className="mb-6 text-lg font-semibold">快速入口</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {topics.map((topic) => (
               <Link
