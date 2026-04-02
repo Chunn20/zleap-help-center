@@ -244,71 +244,87 @@ export default function HomePage() {
       </section>
 
       {/* Hero */}
-      <section className="border-b py-12 text-center">
-        <h1 className="mb-3 text-3xl font-bold tracking-tight">
-          需要帮助？快速找到答案
-        </h1>
-        <p className="text-fd-muted-foreground mb-6 text-sm">
-          搜索使用指南、功能说明与常见问题
-        </p>
-        <div className="mx-auto max-w-xl px-4">
-          <FullSearchTrigger className="w-full rounded-full border px-4 py-2.5 text-left text-sm" />
+      <section className="relative border-b py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-fd-background via-fd-secondary/10 to-fd-background" />
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-fd-secondary/50 px-4 py-1.5 text-xs font-medium text-fd-muted-foreground">
+            <span>💡</span>
+            <span>快速搜索文档内容</span>
+          </div>
+          <h1 className="mb-4 text-4xl font-bold tracking-tight">
+            需要帮助？快速找到答案
+          </h1>
+          <p className="text-fd-muted-foreground mb-8 text-base">
+            搜索使用指南、功能说明与常见问题
+          </p>
+          <div className="mx-auto max-w-2xl">
+            <FullSearchTrigger className="w-full rounded-xl border-2 bg-white px-5 py-4 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow-md" />
+          </div>
         </div>
       </section>
 
       {/* Body: Sidebar + Topics */}
-      <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-10">
+      <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-16">
         {/* Sidebar */}
-        <aside className="hidden w-52 shrink-0 lg:block">
-          <p className="text-fd-foreground mb-3 px-3 text-base font-semibold">
-            参考文档
-          </p>
-          {navSections.map((section) => (
-            <details key={section.title} className="group mb-0.5">
-              <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-[15px] font-medium select-none transition-colors">
-                {section.title}
-                <svg
-                  className="text-fd-muted-foreground size-3.5 shrink-0 transition-transform duration-200 group-open:rotate-90"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </summary>
-              <ul className="mt-0.5 mb-1 space-y-0.5 pl-2">
-                {section.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-fd-muted-foreground hover:text-fd-foreground hover:bg-fd-accent block rounded-md px-3 py-1.5 text-[13px] transition-colors"
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ))}
+        <aside className="hidden w-64 shrink-0 lg:block">
+          <div className="sticky top-6">
+            <p className="text-fd-foreground mb-4 text-lg font-bold">
+              参考文档
+            </p>
+            {navSections.map((section) => (
+              <details key={section.title} className="group mb-1" open>
+                <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold select-none transition-colors">
+                  {section.title}
+                  <svg
+                    className="text-fd-muted-foreground size-4 shrink-0 transition-transform duration-200 group-open:rotate-90"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </summary>
+                <ul className="mt-1 mb-2 space-y-1 pl-3">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-fd-muted-foreground hover:text-[#FF8A00] hover:bg-fd-accent/50 block rounded-md px-3 py-2 text-sm transition-colors"
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+          </div>
         </aside>
 
         {/* Topics */}
         <main className="min-w-0 flex-1">
-          <h2 className="mb-6 text-lg font-semibold">快速入口</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <h2 className="mb-8 text-2xl font-bold">快速入口</h2>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {topics.map((topic) => (
               <Link
                 key={topic.href}
                 href={topic.href}
-                className="bg-fd-card hover:bg-fd-accent group flex items-start gap-4 rounded-xl border p-5 transition-colors"
+                className="group relative overflow-hidden rounded-2xl border bg-gradient-to-br from-white to-fd-secondary/20 p-6 transition-all hover:shadow-lg hover:border-[#FF8A00]/30"
               >
-                <span className="mt-0.5 text-2xl leading-none">{topic.icon}</span>
-                <div>
-                  <p className="font-semibold">{topic.title} →</p>
-                  <p className="text-fd-muted-foreground mt-1 text-sm leading-relaxed">
+                <div className="absolute right-4 top-4 text-4xl opacity-10 transition-opacity group-hover:opacity-20">{topic.icon}</div>
+                <div className="relative">
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="text-3xl">{topic.icon}</span>
+                    <p className="text-lg font-bold">{topic.title}</p>
+                  </div>
+                  <p className="text-fd-muted-foreground text-sm leading-relaxed">
                     {topic.description}
                   </p>
+                  <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF8A00] transition-gap group-hover:gap-2">
+                    <span>了解更多</span>
+                    <span>→</span>
+                  </div>
                 </div>
               </Link>
             ))}
