@@ -30,3 +30,21 @@
   font-size: 28px;
   font-weight: 700;
 }
+
+/* 右侧目录标题波浪线装饰 */
+[data-toc] > p {
+  position: relative;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+[data-toc] > p::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #FF8A00 0%, #FFB84D 50%, #FF8A00 100%);
+  border-radius: 2px;
+}
