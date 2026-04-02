@@ -45,6 +45,7 @@ const topics = [
 const navSections = [
   {
     title: '产品介绍',
+    icon: '💡',
     links: [
       { title: '什么是 Zleap', href: '/docs/about-zleap/about' },
       { title: '企业版', href: '/docs/about-zleap/enterprise' },
@@ -52,6 +53,7 @@ const navSections = [
   },
   {
     title: '新手入门',
+    icon: '🚀',
     links: [
       { title: '快速开始', href: '/docs/getting-started/quick-start' },
       { title: '下载使用', href: '/docs/getting-started/download' },
@@ -59,6 +61,7 @@ const navSections = [
   },
   {
     title: '信息管理',
+    icon: '📊',
     links: [
       { title: '信息管理概述', href: '/docs/information-management/information-management' },
       { title: '事件表格', href: '/docs/information-management/event-table' },
@@ -68,6 +71,7 @@ const navSections = [
   },
   {
     title: '产品支持',
+    icon: '🛠️',
     links: [
       { title: '识别 Agent 与真人', href: '/docs/support/agent-vs-human' },
       { title: '通知中心', href: '/docs/support/notification-center' },
@@ -77,6 +81,7 @@ const navSections = [
   },
   {
     title: '联系与反馈',
+    icon: '💬',
     links: [
       { title: '联系我们', href: '/docs/contact/contact' },
       { title: '提交反馈', href: '/docs/contact/feedback' },
@@ -253,8 +258,11 @@ export default function HomePage() {
             </p>
             {navSections.map((section) => (
               <details key={section.title} className="group mb-1" open>
-                <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold select-none transition-colors">
-                  {section.title}
+                <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold select-none transition-all hover:shadow-sm">
+                  <span className="flex items-center gap-2">
+                    <span className="text-lg transition-transform group-hover:scale-110">{section.icon}</span>
+                    {section.title}
+                  </span>
                   <svg
                     className="text-fd-muted-foreground size-4 shrink-0 transition-transform duration-200 group-open:rotate-90"
                     viewBox="0 0 24 24"
@@ -270,7 +278,7 @@ export default function HomePage() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-fd-muted-foreground hover:text-[#FF8A00] hover:bg-fd-accent/50 block rounded-md px-3 py-2 text-sm transition-colors"
+                        className="text-fd-muted-foreground hover:text-[#FF8A00] hover:bg-fd-accent/50 block rounded-md px-3 py-2 text-sm transition-all hover:translate-x-1"
                       >
                         {link.title}
                       </Link>
