@@ -3,11 +3,15 @@
   "pages": [
     "index",
     "document-upload",
+    "search-engine",
     "browser-extension",
     "api",
     "wecom-bot",
     "feishu-bot",
     "salesmartly",
-    "rss"
+    "rss",
+    "github",
+    "gitlab",
+    "gitee"
   ]
 }
