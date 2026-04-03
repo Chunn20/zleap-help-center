@@ -10,6 +10,15 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
     gap: 12px;
     margin: 20px 0;
   }
+  .info-source-card {
+    border: 1px solid transparent;
+  }
+  .info-source-card:hover {
+    background: #FFF7ED !important;
+    border-color: #FF8A00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
+  }
   .info-scenario {
     border: 1px solid #EDEDED;
     border-radius: 12px;
@@ -36,42 +45,50 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
 </p>
 
 <div className="info-sources-grid">
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  <a href="/docs/information-management/create-private/document-upload" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>📄</span>
-    <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>上传文档</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
-    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>📓</span>
-    <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>笔记本</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+    <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>文档上传</p>
+  </a>
+  <a href="/docs/information-management/create-private/search-engine" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🔍</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>搜索引擎</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  </a>
+  <a href="/docs/information-management/create-private/browser-extension" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🔌</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>浏览器插件</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  </a>
+  <a href="/docs/information-management/create-private/api" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🔗</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>API 接入</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  </a>
+  <a href="/docs/information-management/create-private/wecom-bot" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>💬</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>企微机器人</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  </a>
+  <a href="/docs/information-management/create-private/feishu-bot" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🕊️</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>飞书机器人</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  </a>
+  <a href="/docs/information-management/create-private/salesmartly" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>📊</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>SaleSmartly</p>
-  </div>
-  <div style={{ textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
+  </a>
+  <a href="/docs/information-management/create-private/rss" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
     <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>📡</span>
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>RSS</p>
-  </div>
+  </a>
+  <a href="/docs/information-management/create-private/github" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
+    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🐙</span>
+    <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>GitHub</p>
+  </a>
+  <a href="/docs/information-management/create-private/gitlab" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
+    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🦊</span>
+    <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>GitLab</p>
+  </a>
+  <a href="/docs/information-management/create-private/gitee" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
+    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🌿</span>
+    <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>Gitee</p>
+  </a>
 </div>
 
 <div style={{ background: '#FFF7ED', borderLeft: '3px solid #FF8A00', padding: '16px 20px', borderRadius: '8px', marginTop: '20px' }}>

@@ -14,7 +14,9 @@
       "Bash(mv subscribe-shared-*.* information-management/)",
       "Bash(mv information-management-*.* information-management/)",
       "Bash(mv qr-*.* contact/)",
-      "Bash(mv enterprise-overview.png about-zleap/)"
+      "Bash(mv enterprise-overview.png about-zleap/)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(git add:*)"
     ]
   }
 }
