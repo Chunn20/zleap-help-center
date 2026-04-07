@@ -2,7 +2,9 @@
   "title": "📊 信息管理",
   "pages": [
     "information-management",
-    "event-table",
+    "source-list",
+    "source-logs",
+    "info-search",
     "subscribe-shared",
     "create-private"
   ]
