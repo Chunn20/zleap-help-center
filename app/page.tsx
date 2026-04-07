@@ -91,7 +91,7 @@ const navSections = [
 
 const socialLinks = [
   { label: '小红书', href: '#' },
-  { label: '企业微信', href: '#' },
+  { label: '企业微信', href: '/docs/contact/contact#加入社群' },
   {
     label: 'X',
     href: 'https://x.com/zleapai',
@@ -117,17 +117,17 @@ export default function HomePage() {
     <HomeLayout {...baseOptions}>
       {/* Product Introduction with Background */}
       <section className="relative border-b py-16 overflow-hidden">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/40 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-200/30 via-transparent to-transparent" />
+        {/* Background Gradient - Light Mode */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-[#1a1a1a] dark:via-[#1a1a1a] dark:to-[#1a1a1a]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/40 via-transparent to-transparent dark:from-[#2a2a2a]/60 dark:via-transparent dark:to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-200/30 via-transparent to-transparent dark:from-[#2a2a2a]/40 dark:via-transparent dark:to-transparent" />
 
         <div className="relative mx-auto max-w-6xl px-6">
 
           {/* Product Introduction Content */}
           <div className="text-center">
             {/* Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#FF8A00]/20 bg-white/80 px-4 py-1.5 text-sm font-semibold text-[#FF8A00] shadow-sm backdrop-blur-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#FF8A00]/20 bg-white/80 dark:bg-[#2a2a2a]/80 px-4 py-1.5 text-sm font-semibold text-[#FF8A00] shadow-sm backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF8A00] opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF8A00]"></span>
@@ -147,21 +147,21 @@ export default function HomePage() {
 
             {/* Feature Grid */}
             <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border bg-white/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
+              <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
                 <div className="mb-3 text-3xl">⚡</div>
                 <h3 className="mb-2 text-sm font-semibold text-fd-foreground">自动化信息收集</h3>
                 <p className="text-xs leading-relaxed text-fd-muted-foreground">
                   Agent 7×24 小时自动追踪信息源，实时更新内容
                 </p>
               </div>
-              <div className="rounded-2xl border bg-white/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
+              <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
                 <div className="mb-3 text-3xl">🧠</div>
                 <h3 className="mb-2 text-sm font-semibold text-fd-foreground">智能分析与创作</h3>
                 <p className="text-xs leading-relaxed text-fd-muted-foreground">
                   AI 深度理解内容，生成报告、总结和洞察
                 </p>
               </div>
-              <div className="rounded-2xl border bg-white/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
+              <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
                 <div className="mb-3 text-3xl">🤝</div>
                 <h3 className="mb-2 text-sm font-semibold text-fd-foreground">人机协作讨论</h3>
                 <p className="text-xs leading-relaxed text-fd-muted-foreground">
@@ -245,7 +245,7 @@ export default function HomePage() {
               <Link
                 key={topic.href}
                 href={topic.href}
-                className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-white to-fd-secondary/20 p-5 transition-all hover:shadow-md hover:border-[#FF8A00]/30"
+                className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-white to-fd-secondary/20 dark:from-[#2a2a2a] dark:to-[#1f1f1f] p-5 transition-all hover:shadow-md hover:border-[#FF8A00]/30"
               >
                 <div className="absolute right-3 top-3 text-3xl opacity-10 transition-opacity group-hover:opacity-20">{topic.icon}</div>
                 <div className="relative">
@@ -266,7 +266,7 @@ export default function HomePage() {
           </div>
 
           {/* Search Section */}
-          <div className="rounded-xl border bg-fd-secondary/30 p-8 text-center">
+          <div className="rounded-xl border bg-fd-secondary/30 dark:bg-[#2a2a2a]/50 p-8 text-center">
             <div className="mb-3 inline-flex items-center gap-2 text-sm text-fd-muted-foreground">
               <span>💡</span>
               <span>快速搜索文档内容</span>
@@ -276,7 +276,7 @@ export default function HomePage() {
               搜索使用指南、功能说明与常见问题
             </p>
             <div className="mx-auto max-w-lg">
-              <FullSearchTrigger className="w-full rounded-lg border bg-white px-4 py-3 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow" />
+              <FullSearchTrigger className="w-full rounded-lg border bg-white dark:bg-[#1a1a1a] px-4 py-3 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow" />
             </div>
           </div>
         </main>
@@ -324,11 +324,6 @@ export default function HomePage() {
               <li>
                 <a href="#" className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors">
                   iOS &amp; Android
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors">
-                  Mac &amp; Windows
                 </a>
               </li>
             </ul>

@@ -33,15 +33,6 @@ export function HomeLayout({ children, ...props }: BaseLayoutProps & { children:
           </a>
           <span className="text-fd-muted-foreground/30">·</span>
           <a
-            href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-          >
-            提交反馈
-          </a>
-          <span className="text-fd-muted-foreground/30">·</span>
-          <a
             href="/docs/contact/contact"
             className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
           >
@@ -53,6 +44,15 @@ export function HomeLayout({ children, ...props }: BaseLayoutProps & { children:
             className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
           >
             更新日志
+          </a>
+          <span className="text-fd-muted-foreground/30">·</span>
+          <a
+            href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-[#FF8A00] px-3 py-1 text-white hover:bg-[#FF8A00]/90 transition-colors font-medium"
+          >
+            提交反馈
           </a>
         </div>
       </nav>
