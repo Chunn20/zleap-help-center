@@ -1,4 +1,5 @@
 {
-  "title": "🛠️ 产品支持",
+  "title": "产品支持",
+  "icon": "Wrench",
   "pages": ["agent-vs-human", "notification-center", "language-settings", "changelog"]
 }

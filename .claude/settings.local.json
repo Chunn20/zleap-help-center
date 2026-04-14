@@ -23,7 +23,10 @@
       "Bash(xargs grep:*)",
       "Bash(ls -la *.mdx)",
       "Bash(grep -E \"\\\\.\\(png|gif|jpg|jpeg\\)$\")",
-      "Bash(node replace-emojis.js)"
+      "Bash(node replace-emojis.js)",
+      "WebSearch",
+      "Bash(npm list:*)",
+      "Bash(grep -r \"icon\" node_modules/fumadocs-core/dist/*.d.ts)"
     ]
   }
 }
