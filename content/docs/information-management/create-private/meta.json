@@ -1,15 +1,15 @@
 {
   "title": "创建私有信息源",
   "pages": [
-    "index",
     "document-upload",
-    "search-engine",
     "browser-extension",
+    "search-engine",
     "api",
     "wecom-bot",
     "feishu-bot",
     "salesmartly",
     "rss",
+    "web-crawler",
     "github",
     "gitlab",
     "gitee"

@@ -18,7 +18,11 @@
       "Bash(curl -s http://localhost:3000)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm run:*)",
+      "Bash(xargs grep:*)",
+      "Bash(ls -la *.mdx)",
+      "Bash(grep -E \"\\\\.\\(png|gif|jpg|jpeg\\)$\")"
     ]
   }
 }

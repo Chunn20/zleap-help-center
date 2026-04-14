@@ -1,0 +1,272 @@
+---
+title: 信息搜索
+description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented Generation）技术打造的私有知识库智能搜索入口，是你调用 AI 知识库的核心窗口，能让你在自己搭建的所有信息源（文档、网页、代码库、聊天记录等）里，像用搜索引擎一样精准、高效地找到需要的信息。
+---
+
+<style>{`
+  .info-search-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .info-search-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .info-search-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 24px 0 12px 0;
+    padding-left: 12px;
+    border-left: 3px solid #FF8A00;
+  }
+  .info-search-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .info-search-image img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+  }
+  .info-search-tip {
+    background: var(--tip-bg, #F8F9FA);
+    border-left: 3px solid var(--text-secondary, #5D5D5D);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .info-search-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .info-search-highlight {
+    background: var(--highlight-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%));
+    border-left: 4px solid #FF8A00;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .info-search-section {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .info-search-title,
+    .info-search-subtitle {
+      --text-primary: #e5e5e5;
+    }
+    .info-search-tip {
+      --tip-bg: #2a2a2a;
+      --text-secondary: #a0a0a0;
+    }
+    .info-search-highlight {
+      --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
+    }
+    .info-search-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .info-search-section {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+    --text-primary: #e5e5e5;
+    --text-secondary: #a0a0a0;
+  }
+  [data-theme="dark"] .info-search-tip {
+    --tip-bg: #2a2a2a;
+  }
+  [data-theme="dark"] .info-search-highlight {
+    --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
+  }
+  [data-theme="dark"] .info-search-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    a[href*="/docs/information-management/"] {
+      --card-link-bg: linear-gradient(135deg, #2d2416 0%, #1a1a1a 100%);
+    }
+  }
+  [data-theme="dark"] a[href*="/docs/information-management/"] {
+    --card-link-bg: linear-gradient(135deg, #2d2416 0%, #1a1a1a 100%);
+  }
+`}</style>
+
+<div className="info-search-image">
+  <img src="/images/information-management/info-search/overview.png" alt="信息搜索概览" />
+</div>
+
+<div style={{ background: '#F8F9FA', borderLeft: '3px solid #FF8A00', padding: '12px 16px', borderRadius: '6px', margin: '20px 0' }}>
+  <p style={{ fontSize: '14px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>
+    <strong style={{ color: '#FF8A00' }}>路径说明：</strong>【主页】-【信息管理】-【信息搜索】
+  </p>
+</div>
+
+<div className="info-search-image">
+  <img src="/images/information-management/info-search/interface.gif" alt="信息搜索界面" />
+</div>
+
+## 核心功能
+
+<div className="info-search-section">
+  <h3 className="info-search-title">语义化精准搜索（SAG 技术核心价值）</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    区别于传统关键词匹配，SAG 技术能深度理解你提问的真实意图，而不是只匹配字面文字：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
+    <li>比如你输入「美国如何主导核军控规则？」，系统会自动理解问题的核心逻辑，从你的知识库中精准召回相关的政策、分析、报告</li>
+    <li>哪怕原文没有完全一致的关键词，也能匹配到语义相关的内容</li>
+    <li>解决了传统搜索"搜不全、搜不准、漏结果"的痛点</li>
+  </ul>
+
+  <div className="info-search-tip">
+    <p>💡 用自然语言提问，就能拿到精准的知识结果。</p>
+  </div>
+</div>
+
+<div className="info-search-section">
+  <h3 className="info-search-title">双场景检索，覆盖公私数据</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    页面分「公共」「我的」两个标签，满足不同使用需求：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
+    <li><strong>公共</strong>：检索团队共享的公共知识库内容，适合查公司公开的产品文档、行业资料、共享信息源</li>
+    <li><strong>我的</strong>：检索你个人创建 / 加入的私有信息源，比如个人工作笔记、专属项目资料、私密文档，保障数据安全</li>
+  </ul>
+
+  <div className="info-search-tip">
+    <p>💡 公私分离，既能协作共享，又能保护个人隐私。</p>
+  </div>
+</div>
+
+<div className="info-search-section">
+  <h3 className="info-search-title">智能推荐，降低检索门槛</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    系统会根据你的使用习惯和知识库内容，主动提供智能推荐：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
+    <li><strong>「猜你想搜」板块</strong>：基于你的使用习惯、���识库内容，自动推荐高频 / 相关的搜索问题</li>
+    <li><strong>热点 / 场景化卡片</strong>：展示热门问题、典型场景的知识结果，帮你快速发现有价值的信息</li>
+  </ul>
+
+  <div className="info-search-tip">
+    <p>💡 不用手动输入就能快速获取信息，提升信息获取效率。</p>
+  </div>
+</div>
+
+<div className="info-search-section">
+  <h3 className="info-search-title">全信息源统一检索</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    你在 Zleap 中接入的所有信息源，都会被 SAG 技术统一索引、管理：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
+    <li>文档、飞书、搜索引擎、网页爬虫、Github/Gitlab 等所有信息源</li>
+    <li>一次搜索就能覆盖全部知识库</li>
+    <li>不用在多个平台、多个信息源之间来回切换</li>
+  </ul>
+
+  <div className="info-search-tip">
+    <p>💡 一站式获取所有相关信息，大幅提升工作效率。</p>
+  </div>
+</div>
+
+---
+
+## 两大核心呈现形式详解
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginBottom: '32px' }}>
+  <a href="/docs/information-management/text-results" style={{ display: 'block', border: '2px solid #FF8A00', borderRadius: '12px', padding: '20px', textDecoration: 'none', transition: 'all 0.3s', background: 'var(--card-link-bg, linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%))' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', margin: 0 }}>文本结果页</h4>
+    </div>
+    <p style={{ fontSize: '13px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.6, margin: 0 }}>Zleap 信息搜索「溯源 + 推理路径」功能说明</p>
+  </a>
+
+  <a href="/docs/information-management/knowledge-graph" style={{ display: 'block', border: '2px solid #FF8A00', borderRadius: '12px', padding: '20px', textDecoration: 'none', transition: 'all 0.3s', background: 'var(--card-link-bg, linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%))' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="5" cy="12" r="2"/><line x1="12" y1="8" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="16"/><line x1="15" y1="12" x2="17" y2="12"/><line x1="7" y1="12" x2="9" y2="12"/></svg>
+      </div>
+      <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', margin: 0 }}>知识图谱页</h4>
+    </div>
+    <p style={{ fontSize: '13px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.6, margin: 0 }}>全局可视化的事件关系网络</p>
+  </a>
+</div>
+
+---
+
+## 核心优势（对比传统搜索）
+
+<div style={{ overflowX: 'auto', marginBottom: '32px' }}>
+  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', background: '#fff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)' }}>
+    <thead>
+      <tr style={{ background: 'linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%)', color: '#fff' }}>
+        <th style={{ padding: '16px', textAlign: 'left', fontWeight: 600, borderRight: '1px solid rgba(255,255,255,0.2)' }}>特性</th>
+        <th style={{ padding: '16px', textAlign: 'left', fontWeight: 600, borderRight: '1px solid rgba(255,255,255,0.2)' }}>传统搜索结果</th>
+        <th style={{ padding: '16px', textAlign: 'left', fontWeight: 600 }}>Zleap 搜索结果</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style={{ borderBottom: '1px solid #EDEDED' }}>
+        <td style={{ padding: '16px', fontWeight: 600, color: '#0D131A', background: '#F9F9F9' }}>呈现形式</td>
+        <td style={{ padding: '16px', color: '#5D5D5D', lineHeight: 1.6 }}>零散的原文列表，无总结</td>
+        <td style={{ padding: '16px', color: '#0D131A', lineHeight: 1.6, background: '#FFF7ED' }}>「AI 总结 + 原文溯源 + 知识图谱」三层呈现</td>
+      </tr>
+      <tr style={{ borderBottom: '1px solid #EDEDED' }}>
+        <td style={{ padding: '16px', fontWeight: 600, color: '#0D131A', background: '#F9F9F9' }}>信息效率</td>
+        <td style={{ padding: '16px', color: '#5D5D5D', lineHeight: 1.6 }}>需手动筛选、提炼，耗时久</td>
+        <td style={{ padding: '16px', color: '#0D131A', lineHeight: 1.6, background: '#FFF7ED' }}>AI 自动提炼核心结论，快速获取关键信息</td>
+      </tr>
+      <tr style={{ borderBottom: '1px solid #EDEDED' }}>
+        <td style={{ padding: '16px', fontWeight: 600, color: '#0D131A', background: '#F9F9F9' }}>可追溯性</td>
+        <td style={{ padding: '16px', color: '#5D5D5D', lineHeight: 1.6 }}>仅展示原文，无结论关联</td>
+        <td style={{ padding: '16px', color: '#0D131A', lineHeight: 1.6, background: '#FFF7ED' }}>结论与原文一一对应，全程可溯源</td>
+      </tr>
+      <tr style={{ borderBottom: '1px solid #EDEDED' }}>
+        <td style={{ padding: '16px', fontWeight: 600, color: '#0D131A', background: '#F9F9F9' }}>全局视角</td>
+        <td style={{ padding: '16px', color: '#5D5D5D', lineHeight: 1.6 }}>碎片化信息，无全局关联</td>
+        <td style={{ padding: '16px', color: '#0D131A', lineHeight: 1.6, background: '#FFF7ED' }}>知识图谱直观呈现事件全链路关系</td>
+      </tr>
+      <tr>
+        <td style={{ padding: '16px', fontWeight: 600, color: '#0D131A', background: '#F9F9F9' }}>分析能力</td>
+        <td style={{ padding: '16px', color: '#5D5D5D', lineHeight: 1.6 }}>仅支持关键词检索，无深度分析</td>
+        <td style={{ padding: '16px', color: '#0D131A', lineHeight: 1.6, background: '#FFF7ED' }}>支持事件脉络梳理、关联信息挖掘，辅助深度分析</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
+    💡 对信息搜索功能有疑问或建议？欢迎提交反馈，帮助我们持续优化！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

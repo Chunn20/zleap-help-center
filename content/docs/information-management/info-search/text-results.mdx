@@ -1,0 +1,172 @@
+---
+title: 文本结果页
+description: 这是 Zleap「可溯源、可验证」的 AI 检索核心能力，彻底解决传统 AI 回答"信息来源不明、逻辑不可追溯"的痛点，让每一个结论都有出处、每一步推理都看得见。
+---
+
+<style>{`
+  .text-results-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .text-results-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .text-results-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 24px 0 12px 0;
+    padding-left: 12px;
+    border-left: 3px solid #FF8A00;
+  }
+  .text-results-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .text-results-image img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+  }
+  .text-results-tip {
+    background: var(--tip-bg, #F8F9FA);
+    border-left: 3px solid var(--text-secondary, #5D5D5D);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .text-results-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .text-results-highlight {
+    background: var(--highlight-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%));
+    border-left: 4px solid #FF8A00;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .text-results-section {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .text-results-title,
+    .text-results-subtitle {
+      --text-primary: #e5e5e5;
+    }
+    .text-results-tip {
+      --tip-bg: #2a2a2a;
+      --text-secondary: #a0a0a0;
+    }
+    .text-results-highlight {
+      --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
+    }
+    .text-results-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .text-results-section {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+    --text-primary: #e5e5e5;
+    --text-secondary: #a0a0a0;
+  }
+  [data-theme="dark"] .text-results-tip {
+    --tip-bg: #2a2a2a;
+  }
+  [data-theme="dark"] .text-results-highlight {
+    --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
+  }
+  [data-theme="dark"] .text-results-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<div className="text-results-image">
+  <img src="/images/information-management/info-search/text-results-overview.gif" alt="文本结果页概览" />
+</div>
+
+## 核心功能拆解
+
+<div className="text-results-section">
+  <h3 className="text-results-title">全链路信息溯源，结论 100% 可验证</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    AI 生成的每一条结论，都直接关联对应的原始信息源：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
+    <li><strong>原文锚定</strong>：完整展示原文内容、发布时间、来源账号，点击「查看链接」可直达原始网页 / 文档</li>
+    <li><strong>多源交叉验证</strong>：同一结论可关联多条不同来源的信息，帮你快速交叉验证信息真实性，避免 AI 幻觉、虚假信息</li>
+    <li><strong>标签化分类</strong>：用「时间」「话题」等标签，清晰标注信息维度，让你一眼看懂结论的信息支撑</li>
+  </ul>
+
+  <div className="text-results-tip">
+    <p>💡 所有结论都有可溯源的原文支撑，AI 无法编造信息，回答可信度拉满。</p>
+  </div>
+</div>
+
+<div className="text-results-image">
+  <img src="/images/information-management/info-search/text-results-source.gif" alt="信息溯源功能" />
+</div>
+
+<div className="text-results-section">
+  <h3 className="text-results-title">可视化推理路径，逻辑全程透明</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    右侧「推理路径」面板，直观展示 AI 的完整思考链路：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
+    <li><strong>从问题到结论的完整链路</strong>：以「原始问题」为起点，清晰展示 AI 如何从问题拆解、信息匹配，最终推导得出「最终结果」的全流程</li>
+    <li><strong>逻辑节点可视化</strong>：用连线串联「原始问题→信息维度→最终结论」，让 AI 的思考逻辑完全透明，你可以清晰看到结论的推导依据，彻底告别"黑箱式回答"</li>
+    <li><strong>可追溯、可校验</strong>：每一个推理节点都对应左侧的原文信息，你可以随时回溯、校验 AI 的推理逻辑是否合理，确保结论的准确性</li>
+  </ul>
+
+  <div className="text-results-tip">
+    <p>💡 推理路径可视化，让你不仅知道"结论是什么"，更知道"结论怎么来的"，深度理解事件逻辑。</p>
+  </div>
+</div>
+
+<div className="text-results-image">
+  <img src="/images/information-management/info-search/text-results-reasoning.gif" alt="推理路径展示" />
+</div>
+
+---
+
+## 核心价值
+
+<div className="text-results-highlight">
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: 0, paddingLeft: '20px' }}>
+    <li><strong>彻底解决 AI 幻觉</strong>：所有结论都有可溯源的原文支撑，AI 无法编造信息，回答可信度拉满</li>
+    <li><strong>逻辑全程透明</strong>：推理路径可视化，让你不仅知道"结论是什么"，更知道"结论怎么来的"，深度理解事件逻辑</li>
+    <li><strong>信息高效核验</strong>：不用手动翻找海量资料，AI 帮你提炼结论、关联原文，一键完成信息核验，大幅提升分析效率</li>
+    <li><strong>专业场景适配</strong>：完美适配舆情分析、竞品调研、合规审查等对信息真实性要求极高的场景，满足专业用户的严谨需求</li>
+  </ul>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
+    💡 对文本结果页有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

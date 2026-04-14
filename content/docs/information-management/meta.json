@@ -2,10 +2,10 @@
   "title": "📊 信息管理",
   "pages": [
     "information-management",
+    "subscribe-shared",
+    "create-private",
     "source-list",
     "source-logs",
-    "info-search",
-    "subscribe-shared",
-    "create-private"
+    "info-search"
   ]
 }

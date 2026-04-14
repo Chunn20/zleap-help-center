@@ -1,5 +1,614 @@
 ---
 title: 文档上传
+description: 支持本地文档上传、粘贴链接、知识库导入等多种方式，快速构建您的专属信息源
 ---
 
-# 文档上传
+<style>{`
+  .doc-upload-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .doc-upload-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .doc-upload-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .doc-upload-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .doc-upload-image img {
+    width: 100%;
+    display: block;
+  }
+  .doc-upload-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .doc-upload-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .method-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .method-card {
+    text-decoration: none;
+    border: 2px solid #EDEDED;
+    border-radius: 12px;
+    padding: 20px;
+    background: var(--card-bg, #FAFAFA);
+    transition: all 0.3s;
+    display: block;
+  }
+  .method-card:hover {
+    border-color: #FF8A00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
+  }
+  .method-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 8px 0;
+  }
+  .method-card-desc {
+    font-size: 13px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .kb-links {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .kb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--kb-link-bg, #FFF7ED);
+    border: 1px solid #FF8A00;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FF8A00;
+    transition: all 0.2s;
+  }
+  .kb-link:hover {
+    background: #FF8A00;
+    color: #fff;
+  }
+  .step-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 24px 0 12px 0;
+    padding-left: 12px;
+    border-left: 3px solid #FF8A00;
+  }
+  .code-block {
+    background: var(--code-bg, #F5F5F5);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+  .code-block pre {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-primary, #0D131A);
+  }
+  @media (max-width: 768px) {
+    .method-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .doc-upload-section,
+    .method-card {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .doc-upload-tip {
+      --tip-bg: #2d2416;
+    }
+    .kb-link {
+      --kb-link-bg: #2d2416;
+    }
+    .code-block {
+      --code-bg: #1a1a1a;
+    }
+    .doc-upload-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .doc-upload-section,
+  [data-theme="dark"] .method-card {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .doc-upload-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .kb-link {
+    --kb-link-bg: #2d2416;
+  }
+  [data-theme="dark"] .code-block {
+    --code-bg: #1a1a1a;
+  }
+  [data-theme="dark"] .doc-upload-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<div className="method-cards">
+  <a href="#local-upload" className="method-card">
+    <h3 className="method-card-title">本地文档上传</h3>
+    <p className="method-card-desc">
+      支持 PDF、Word、PPT、Markdown 等多种格式，快速将本地文件转化为知识资产
+    </p>
+  </a>
+
+  <a href="#paste-link" className="method-card">
+    <h3 className="method-card-title">粘贴链接</h3>
+    <p className="method-card-desc">
+      输入 URL 地址，系统自动抓取网页内容，无需手动下载
+    </p>
+  </a>
+
+  <a href="#knowledge-base" className="method-card">
+    <h3 className="method-card-title">知识库导入</h3>
+    <p className="method-card-desc">
+      从语雀、思源笔记、飞书等主流知识管理平台导入内容
+    </p>
+  </a>
+</div>
+
+<div className="kb-links">
+  <a href="#feishu-kb" className="kb-link">
+    🕊️ 飞书知识库
+  </a>
+  <a href="#siyuan-notes" className="kb-link">
+    📝 思源笔记
+  </a>
+  <a href="#yuque-kb" className="kb-link">
+    📚 语雀知识库
+  </a>
+</div>
+
+---
+
+<h2 id="local-upload" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  本地文档上传
+</h2>
+
+<div className="doc-upload-section">
+  <p className="doc-upload-intro">
+    您可以将本地文档上传至 Zleap，构建您的专属信息源。完成上传后，此信息源即可作为 AI 助手创建任务和报告的信息基础，您还可以使用AI工具精准搜索该信息源中的内容。
+  </p>
+
+  <h4 className="step-title">第一步：进入创建页面</h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px' }}>
+    <li>登录 Zleap，点击「创建信息源」，点击「文档上传」。</li>
+  </ul>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/step1.gif" alt="进入创建页面" />
+  </div>
+
+  <h4 className="step-title">第二步：上传并设置文档</h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px' }}>
+    <li>在 "上传信息源" 页面，点击「选择文件」，上传您的文档。目前，Zleap 支持 pdf、txt、md、docx 等格式。</li>
+    <li>文件上传成功后，在「信息名称」字段中，输入信息源名称。</li>
+    <li>打开「启用状态」则后续创建助手和任务的时候可以使用该信息源。</li>
+    <li>确认信息无误后，点击右上角的「提交信息」按钮。</li>
+  </ul>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/step2.gif" alt="上传并设置文档" />
+  </div>
+
+  <h4 className="step-title">第三步：完成创建</h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px' }}>
+    <li>提交成功后，页面会提示 "信息源创建完成"。</li>
+    <li>方式一：可以选择「创建助手」，让助手以该信息源作为背景信息。</li>
+    <li>方式二：可以选择「创建任务」，基于信息源定期发布动态报告。</li>
+  </ul>
+</div>
+
+---
+
+<h2 id="paste-link" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  粘贴链接
+</h2>
+
+<div className="doc-upload-section">
+  <h4 className="step-title">第一步：进入创建页面</h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px' }}>
+    <li>登录 Zleap，点击首页的「信息管理」，进入上传信息源页面。</li>
+    <li>点击「文档上传」。</li>
+  </ul>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/paste-step1.gif" alt="进入创建页面" />
+  </div>
+
+  <h4 className="step-title">第二步：粘贴链接</h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px' }}>
+    <li>在 "上传信息源" 页面，直接在输入框中粘贴以 http:// 或 https:// 开头的 URL 地址。</li>
+    <li>支持换行输入多个链接，系统会自动识别并导入，输入后点击验证。</li>
+    <li>在「信息名称」字段中，输入名称。</li>
+    <li>确认信息无误后，点击右上角的「提交信息」按钮。</li>
+  </ul>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/paste-step2.gif" alt="粘贴链接" />
+  </div>
+
+  <div className="doc-upload-tip">
+    <p>💡 Tips：您可以一次性粘贴多个链接，每行一个链接，系统会批量导入这些网页内容！</p>
+  </div>
+
+  <h4 className="step-title">第三步：完成创建</h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px' }}>
+    <li>提交成功后，页面会提示 "信息源创建完成"。</li>
+    <li>方式一：可以选择「创建助手」，让助手以该信息源作为背景信息。</li>
+    <li>方式二：可以选择「创建任务」，基于信息源定期发布动态报告。</li>
+  </ul>
+</div>
+
+---
+
+<h2 id="feishu-kb" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  飞书知识库操作步骤
+</h2>
+
+<div className="doc-upload-section">
+  <h3 className="doc-upload-title">一、选择飞书知识库</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>1. 按照以下路径打开</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    【信息管理】-【创建信息源】-【文档上传】-【知识库导入】-【飞书知识库】
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-select.gif" alt="选择飞书知识库" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>2. 配置飞书文档参数</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    从飞书文档中导入时，需要配置飞书文档的 App ID、App Secret、User Access Token。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-config.png" alt="配置飞书文档参数" />
+  </div>
+</div>
+
+<div className="doc-upload-section">
+  <h3 className="doc-upload-title">二、获取飞书文档参数</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>3. 进入飞书开放平台创建企业自建应用</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-create-app.png" alt="创建企业自建应用" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>4. 点击创建</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-click-create.png" alt="点击创建" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>5. 创建版本并发布应用</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    点击创建版本，填写应用版本号、更新说明，点击保存，确认发布应用。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-publish.png" alt="创建版本并发布应用" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>6. 配置应用权限</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    为应用配置相应的权限：点击权限管理 - 批量导入 / 导出权限。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-permission.png" alt="配置应用权限" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>7. 导入权限配置</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    复制如下权限，点击下一步，确认新增权限：
+  </p>
+
+  <div className="code-block">
+    <pre>{`{
+  "scopes": {
+    "tenant": [
+      "docs:doc:readonly",
+      "docs:document.content:read",
+      "docx:document:readonly",
+      "drive:drive.metadata:readonly",
+      "drive:file:download",
+      "sheets:spreadsheet.meta:read",
+      "space:document:retrieve",
+      "wiki:wiki:readonly"
+    ],
+    "user": [
+      "docx:document:readonly",
+      "drive:export:readonly",
+      "sheets:spreadsheet",
+      "space:document:retrieve",
+      "wiki:space:retrieve",
+      "wiki:wiki:readonly"
+    ]
+  }
+}`}</pre>
+  </div>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-import-permission.png" alt="导入权限配置" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>8. 创建新版本并发布</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    创建新的版本（此时权限已开通），保存并发布。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-new-version.png" alt="创建新版本并发布" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>9. 获取 App ID 和 App Secret</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    发布应用后，在 "凭证与基础信息" 页面可以找到 App ID 和 App Secret。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-credentials.png" alt="获取 App ID 和 App Secret" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>10. 获取 User Access Token</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    进入 https://open.feishu.cn/api-explorer/ ，选择刚刚创建的应用，然后点击获取 Token。注意：Token 必须是 "u-" 开头的字符串。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-token.png" alt="获取 User Access Token" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>11. 确认添加并授权</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    确认添加并授权后可获取 Token。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-authorize.png" alt="确认添加并授权" />
+  </div>
+</div>
+
+<div className="doc-upload-section">
+  <h3 className="doc-upload-title">三、输入配置参数</h3>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>12. 输入配置信息</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    输入正确的 App ID、App Secret、Token 后，可导入飞书文档。
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-input-config.png" alt="输入配置信息" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>13. 选择要导入的文档</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-select-docs.png" alt="选择要导入的文档" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>14. 导入成功</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-success1.png" alt="导入成功1" />
+  </div>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/feishu-success2.png" alt="导入成功2" />
+  </div>
+</div>
+
+---
+
+<h2 id="siyuan-notes" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  思源笔记
+</h2>
+
+<div className="doc-upload-section">
+  <p className="doc-upload-intro">
+    您可以将思源笔记中的文档导出为 Markdown.zip 格式，然后导入到 Zleap 中，构建您的专属知识库。
+  </p>
+
+  <h4 className="step-title">操作步骤</h4>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>1. 选择要导出的文档，点击更多，选择导出</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/siyuan-export.png" alt="选择导出" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>2. 选择导出为 Markdown.zip</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/siyuan-markdown.png" alt="导出为 Markdown.zip" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>3. Zleap 端导入</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    按照以下路径打开【信息管理】-【创建信息源】-【文档上传】-【知识库导入】-【思源笔记】
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/siyuan-import.gif" alt="Zleap 端导入" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>4. 选择刚刚从思源笔记导出的 Markdown.zip 文档</strong>
+  </p>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>5. 完成导入</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/siyuan-success1.png" alt="导入成功1" />
+  </div>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/siyuan-success2.png" alt="导入成功2" />
+  </div>
+</div>
+
+---
+
+<h2 id="yuque-kb" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  语雀知识库
+</h2>
+
+<div className="doc-upload-section">
+  <p className="doc-upload-intro">
+    您可以将语雀知识库导出为 .lakebook 格式，然后导入到 Zleap 中，构建您的专属知识库。
+  </p>
+
+  <h4 className="step-title">操作步骤</h4>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>1. 语雀中选择要导出的知识库，点击更多设置</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/yuque-settings.png" alt="点击更多设置" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>2. 更多设置里找到导出知识库，选择导出为语雀知识库.lakebook</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/yuque-export.png" alt="导出为 lakebook" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>3. Zleap 端导入</strong>
+  </p>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
+    按照以下路径打开【信息管理】-【创建信息源】-【文档上传】-【知识库导入】-【语雀知识库】
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/yuque-import.gif" alt="Zleap 端导入" />
+  </div>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>4. 点击导入文档，选择语雀</strong>
+  </p>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>5. 选择要导入的文件，并点击导入数据</strong>
+  </p>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>6. 点击获取文档列表</strong>
+  </p>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>7. 选择要导入的文档，点击导入选中的文档</strong>
+  </p>
+
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px', marginTop: '20px' }}>
+    <strong>8. 完成导入</strong>
+  </p>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/yuque-success1.png" alt="导入成功1" />
+  </div>
+
+  <div className="doc-upload-image">
+    <img src="/images/information-management/create-private/document-upload/yuque-success2.png" alt="导入成功2" />
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
+    💡 对文档上传有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

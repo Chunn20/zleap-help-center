@@ -91,7 +91,8 @@ const navSections = [
 
 const socialLinks = [
   { label: '小红书', href: '#' },
-  { label: '企业微信', href: '/docs/contact/contact#加入社群' },
+  { label: '企微客服', qrCode: '/images/qrcodes/wework-customer-service.png' },
+  { label: '公众号', qrCode: '/images/qrcodes/wechat-official.png' },
   {
     label: 'X',
     href: 'https://x.com/zleapai',
@@ -293,16 +294,44 @@ export default function HomePage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  className="text-fd-muted-foreground hover:text-fd-foreground flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {s.icon}
-                  {s.label}
-                </a>
+                s.qrCode ? (
+                  <div key={s.label} className="group relative">
+                    <button
+                      type="button"
+                      className="text-fd-muted-foreground hover:text-fd-foreground flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs transition-colors cursor-pointer"
+                    >
+                      {s.icon}
+                      {s.label}
+                    </button>
+                    {/* QR Code Popup */}
+                    <div className="absolute bottom-full left-1/2 mb-3 hidden -translate-x-1/2 group-hover:block z-50 pointer-events-none">
+                      <div className="rounded-lg border-2 bg-white dark:bg-[#1a1a1a] p-4 shadow-xl min-w-max">
+                        <img
+                          src={s.qrCode}
+                          alt={`${s.label}二维码`}
+                          width={200}
+                          height={200}
+                          className="block"
+                          loading="eager"
+                        />
+                        <p className="text-center text-sm text-fd-muted-foreground mt-3 font-medium whitespace-nowrap">{s.label}</p>
+                      </div>
+                      {/* Arrow */}
+                      <div className="absolute left-1/2 top-full -translate-x-1/2 -mt-px border-8 border-transparent border-t-white dark:border-t-[#1a1a1a]"></div>
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    className="text-fd-muted-foreground hover:text-fd-foreground flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {s.icon}
+                    {s.label}
+                  </a>
+                )
               ))}
             </div>
           </div>

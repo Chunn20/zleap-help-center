@@ -1,5 +1,232 @@
 ---
 title: 创建私有信息源
+description: 您可以通过「创建私有信息源」接入各类私有信息，构建您的专属信息源！
 ---
 
-# 创建私有信息源
+<style>{`
+  .create-private-section {
+    margin-bottom: 48px;
+  }
+  .create-private-intro {
+    font-size: 15px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .upload-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .upload-method-card {
+    border: 2px solid #EDEDED;
+    border-radius: 12px;
+    padding: 24px;
+    background: var(--card-bg, #FAFAFA);
+    transition: all 0.3s;
+  }
+  .upload-method-card:hover {
+    border-color: #FF8A00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
+  }
+  .method-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .method-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 8px 0;
+  }
+  .method-desc {
+    font-size: 13px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .source-card {
+    text-decoration: none;
+    text-align: center;
+    padding: 16px 12px;
+    background: var(--source-card-bg, #F9F9F9);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    display: block;
+  }
+  .source-card:hover {
+    background: var(--source-card-hover, #FFF7ED);
+    border-color: #FF8A00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
+  }
+  .source-icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .source-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary, #0D131A);
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .upload-methods {
+      grid-template-columns: 1fr;
+    }
+    .sources-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .upload-method-card {
+      --card-bg: #1a1a1a;
+      border-color: #3a3a3a;
+    }
+    .source-card {
+      --source-card-bg: #1a1a1a;
+      --source-card-hover: #2d2416;
+    }
+  }
+  [data-theme="dark"] .upload-method-card {
+    --card-bg: #1a1a1a;
+    border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .source-card {
+    --source-card-bg: #1a1a1a;
+    --source-card-hover: #2d2416;
+  }
+`}</style>
+
+<div className="create-private-section">
+  <p className="create-private-intro">
+    您可以通过「创建私有信息源」接入各类私有信息，构建您的专属信息源！
+  </p>
+
+  <h2 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+    文档上传的三种方式
+  </h2>
+
+  <div className="upload-methods">
+    <div className="upload-method-card">
+      <span className="method-number">①</span>
+      <h3 className="method-title">本地文档上传</h3>
+      <p className="method-desc">
+        支持 PDF、Word、PPT、Markdown 等多种格式，快速将本地文件转化为知识资产
+      </p>
+    </div>
+
+    <div className="upload-method-card">
+      <span className="method-number">②</span>
+      <h3 className="method-title">粘贴链接</h3>
+      <p className="method-desc">
+        输入 URL 地址，系统自动抓取网页内容，无需手动下载
+      </p>
+    </div>
+
+    <div className="upload-method-card">
+      <span className="method-number">③</span>
+      <h3 className="method-title">第三方文档导入</h3>
+      <p className="method-desc">
+        从语雀、思源笔记、飞书等主流知识管理平台导入内容
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  更多接入方式
+</h2>
+
+<div className="sources-grid">
+  <a href="/docs/information-management/create-private/document-upload" className="source-card">
+    <span className="source-icon">📄</span>
+    <p className="source-name">文档上传</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/browser-extension" className="source-card">
+    <span className="source-icon">🔌</span>
+    <p className="source-name">浏览器插件</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/search-engine" className="source-card">
+    <span className="source-icon">🔍</span>
+    <p className="source-name">搜索引擎</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/api" className="source-card">
+    <span className="source-icon">🔗</span>
+    <p className="source-name">API</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/wecom-bot" className="source-card">
+    <span className="source-icon">💬</span>
+    <p className="source-name">企微机器人</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/feishu-bot" className="source-card">
+    <span className="source-icon">🤖</span>
+    <p className="source-name">飞书机器人</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/salesmartly" className="source-card">
+    <span className="source-icon">📊</span>
+    <p className="source-name">Salesmartly</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/rss" className="source-card">
+    <span className="source-icon">📡</span>
+    <p className="source-name">RSS</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/web-crawler" className="source-card">
+    <span className="source-icon">🕷️</span>
+    <p className="source-name">网页爬虫</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/github" className="source-card">
+    <span className="source-icon">🐙</span>
+    <p className="source-name">GitHub</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/gitlab" className="source-card">
+    <span className="source-icon">🦊</span>
+    <p className="source-name">GitLab</p>
+  </a>
+
+  <a href="/docs/information-management/create-private/gitee" className="source-card">
+    <span className="source-icon">🌿</span>
+    <p className="source-name">Gitee</p>
+  </a>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
+    💡 对创建私有信息源有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>
