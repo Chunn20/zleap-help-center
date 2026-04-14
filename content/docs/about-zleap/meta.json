@@ -1,5 +1,4 @@
 {
-  "title": "产品介绍",
-  "icon": "Lightbulb",
+  "title": "💡 产品介绍",
   "pages": ["about", "enterprise"]
 }
