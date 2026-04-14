@@ -1,5 +1,6 @@
 {
   "title": "创建私有信息源",
+  "icon": "FolderPlus",
   "pages": [
     "document-upload",
     "browser-extension",

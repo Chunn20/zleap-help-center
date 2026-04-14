@@ -1,6 +1,6 @@
 {
   "title": "信息管理",
-  "icon": "BarChart3",
+  "icon": "Database",
   "pages": [
     "information-management",
     "subscribe-shared",
