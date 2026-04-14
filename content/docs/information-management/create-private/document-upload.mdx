@@ -3,7 +3,7 @@ title: 文档上传
 description: 支持本地文档上传、粘贴链接、知识库导入等多种方式，快速构建您的专属信息源
 ---
 
-import { Lightbulb, FileText } from 'lucide-react';
+import { Lightbulb, FileText, Cloud, BookOpen } from 'lucide-react';
 
 
 <style>{`
@@ -199,13 +199,13 @@ import { Lightbulb, FileText } from 'lucide-react';
 
 <div className="kb-links">
   <a href="#feishu-kb" className="kb-link">
-    🕊️ 飞书知识库
+    <Cloud className="inline h-4 w-4 mr-1" /> 飞书知识库
   </a>
   <a href="#siyuan-notes" className="kb-link">
     <FileText className="inline h-4 w-4 mr-1" /> 思源笔记
   </a>
   <a href="#yuque-kb" className="kb-link">
-    📚 语雀知识库
+    <BookOpen className="inline h-4 w-4 mr-1" /> 语雀知识库
   </a>
 </div>
 

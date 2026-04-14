@@ -3,7 +3,7 @@ title: 快速开始
 description: 只需几步，轻松拥有你的「专属AI博主」！
 ---
 
-import { Lightbulb, Bot, MessageCircle, FileText } from 'lucide-react';
+import { Lightbulb, Bot, MessageCircle, FileText, Smartphone, Mail, Lock, Globe, BookOpen, Sparkles, Users, Palette } from 'lucide-react';
 
 
 <style>{`
@@ -111,11 +111,11 @@ import { Lightbulb, Bot, MessageCircle, FileText } from 'lucide-react';
 
   <div className="quick-start-grid" style={{ marginBottom: '20px' }}>
     <div className="quick-start-card">
-      <span style={{ fontSize: '28px', display: 'block', marginBottom: '8px' }}>📱</span>
+      <Smartphone className="h-7 w-7 text-[#FF8A00]" style={{ display: 'block', margin: '0 auto 8px' }} />
       <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', margin: 0 }}>手机号验证码</p>
     </div>
     <div className="quick-start-card">
-      <span style={{ fontSize: '28px', display: 'block', marginBottom: '8px' }}>📧</span>
+      <Mail className="h-7 w-7 text-[#FF8A00]" style={{ display: 'block', margin: '0 auto 8px' }} />
       <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', margin: 0 }}>邮箱密码登录</p>
     </div>
   </div>
@@ -179,14 +179,14 @@ import { Lightbulb, Bot, MessageCircle, FileText } from 'lucide-react';
 
   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
-      <span style={{ fontSize: '20px', flexShrink: 0 }}>🎭</span>
+      <Users className="h-5 w-5 text-[#FF8A00]" />
       <div>
         <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', marginBottom: '4px', marginTop: 0 }}>方式一：复刻人设</p>
         <p style={{ fontSize: '13px', color: '#898989', margin: 0, lineHeight: 1.6 }}>从「我关注的」或「我创建的」助手列表中选择，一键复制其人格，再按需修改</p>
       </div>
     </div>
     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
-      <span style={{ fontSize: '20px', flexShrink: 0 }}>✍️</span>
+      <Palette className="h-5 w-5 text-[#FF8A00]" />
       <div>
         <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', marginBottom: '4px', marginTop: 0 }}>方式二：手动输入</p>
         <p style={{ fontSize: '13px', color: '#898989', margin: 0, lineHeight: 1.6 }}>输入助手角色定位、性格特点、表达能力和能力边界，也可点击「一键完善」，让 AI 帮你生成草案</p>
@@ -218,12 +218,12 @@ import { Lightbulb, Bot, MessageCircle, FileText } from 'lucide-react';
 
   <div className="quick-start-grid">
     <div className="quick-start-card">
-      <span style={{ fontSize: '28px', display: 'block', marginBottom: '8px' }}>🔒</span>
+      <Lock className="h-7 w-7 text-[#FF8A00]" style={{ display: 'block', margin: '0 auto 8px' }} />
       <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', marginBottom: '6px', marginTop: 0 }}>私密（默认）</p>
       <p style={{ fontSize: '13px', color: '#898989', margin: 0, lineHeight: 1.6 }}>仅自己可见</p>
     </div>
     <div className="quick-start-card">
-      <span style={{ fontSize: '28px', display: 'block', marginBottom: '8px' }}>🌐</span>
+      <Globe className="h-7 w-7 text-[#FF8A00]" style={{ display: 'block', margin: '0 auto 8px' }} />
       <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', marginBottom: '6px', marginTop: 0 }}>公开</p>
       <p style={{ fontSize: '13px', color: '#898989', margin: 0, lineHeight: 1.6 }}>个人用户对所有人开放；企业用户对内部开放</p>
     </div>
@@ -275,7 +275,7 @@ import { Lightbulb, Bot, MessageCircle, FileText } from 'lucide-react';
       </div>
     </div>
     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '12px', background: '#F9F9F9', borderRadius: '8px' }}>
-      <span style={{ fontSize: '18px', flexShrink: 0 }}>✏️</span>
+      <Sparkles className="h-5 w-5 text-[#FF8A00]" />
       <div>
         <p style={{ fontSize: '14px', fontWeight: 600, color: '#0D131A', marginBottom: '4px', marginTop: 0 }}>任务名称</p>
         <p style={{ fontSize: '13px', color: '#898989', margin: 0, lineHeight: 1.6 }}>输入 2-20 个字符的名称</p>

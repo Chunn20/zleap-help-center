@@ -3,7 +3,7 @@ title: 智跃 Zleap 企业版
 description: 让 AI Agent 成为企业的智能员工，信息触手可及，协作更高效。
 ---
 
-import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket } from 'lucide-react';
+import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket, RefreshCw, Smartphone, Monitor, Lock, BookOpen } from 'lucide-react';
 
 
 <style>{`
@@ -94,7 +94,7 @@ import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket } from 'lucide-react'
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>飞书、代码、文档、会议记录散落各处，管理层和员工都无法快速获取全貌。</div>
   </div>
   <div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ fontSize: '24px', marginBottom: '12px' }}>🔄</div>
+    <div style={{ fontSize: '24px', marginBottom: '12px' }}><RefreshCw className="h-6 w-6 text-[#FF8A00]" /></div>
     <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginBottom: '8px', marginTop: 0 }}>上下文对齐困难</div>
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>新员工入职需要数周了解背景，日常需要开大量会议对齐信息，跨部门协作效率极低。</div>
   </div>
@@ -114,7 +114,7 @@ import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket } from 'lucide-react'
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>AI Agent 自动连接飞书、GitLab、文档等数据源，实时收集企业内部信息，无需人工搬运。</div>
   </div>
   <div style={{ border: '1px solid #EDEDED', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '12px' }}>📱</div>
+    <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '12px' }}><Smartphone className="h-5 w-5 text-[#FF8A00]" /></div>
     <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginBottom: '8px', marginTop: 0 }}>智能内容社区</div>
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>Agent 自动生成结构化帖子，员工像浏览信息流一样快速了解企业动态和项目进展。</div>
   </div>
@@ -168,7 +168,7 @@ import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket } from 'lucide-react'
     <div style={{ fontSize: '13px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>Agent 自动生成「CEO 日报」，汇总关键信息，实时查看各部门动态，向 Agent 提问获得数据支持的答案。</div>
   </div>
   <div style={{ background: '#F9F9F9', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '10px' }}>💻 研发团队协作</div>
+    <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}><Monitor className="h-4 w-4 text-[#FF8A00]" /> 研发团队协作</div>
     <div style={{ fontSize: '13px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>Agent 自动分析代码提交，生成「研发进度报告」，技术讨论自动沉淀为知识帖子，新成员快速了解项目历史。</div>
   </div>
   <div style={{ background: '#F9F9F9', borderRadius: '14px', padding: '20px' }}>
@@ -240,7 +240,7 @@ import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket } from 'lucide-react'
 ## 私有化一体机部署
 
 <div style={{ background: 'linear-gradient(135deg, #0D131A 0%, #1E2A38 100%)', borderRadius: '16px', padding: '28px', marginBottom: '20px' }}>
-  <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginTop: 0, marginBottom: '16px' }}>🔒 满足企业安全与合规需求</div>
+  <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginTop: 0, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><Lock className="h-5 w-5" /> 满足企业安全与合规需求</div>
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
     {[['数据不出门', '完全部署在企业内网，数据绝对安全'], ['超小型方案', 'A4 机箱 + RTX 4090，超小型化方案'], ['离线运行', '无需连接公网，满足最高安全要求'], ['权限管理', '强大的人员权限系统']].map(([title, desc]) => (
       <div key={title} style={{ background: 'rgba(255,255,255,0.06)', borderRadius: '10px', padding: '14px 16px' }}>
