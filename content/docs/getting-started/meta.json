@@ -1,4 +1,5 @@
 {
-  "title": "🚀 新手入门",
+  "title": "新手入门",
+  "icon": "Rocket",
   "pages": ["download", "quick-start"]
 }
