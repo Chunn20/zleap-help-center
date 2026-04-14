@@ -3,6 +3,9 @@ title: 信息管理是什么？
 description: 您的数据中枢，接入海量信息，构建专属信息库。
 ---
 
+import { Lightbulb, MessageCircle, BarChart3, Settings, Rocket, ClipboardList, Search } from 'lucide-react';
+
+
 <style>{`
   .info-sources-grid {
     display: grid;
@@ -50,7 +53,7 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>文档上传</p>
   </a>
   <a href="/docs/information-management/create-private/search-engine" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
-    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>🔍</span>
+    <Search className="h-5 w-5 text-[#FF8A00]" />
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>搜索引擎</p>
   </a>
   <a href="/docs/information-management/create-private/browser-extension" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
@@ -62,7 +65,7 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>API 接入</p>
   </a>
   <a href="/docs/information-management/create-private/wecom-bot" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
-    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>💬</span>
+    <MessageCircle className="h-5 w-5 text-[#FF8A00]" />
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>企微机器人</p>
   </a>
   <a href="/docs/information-management/create-private/feishu-bot" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
@@ -70,7 +73,7 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>飞书机器人</p>
   </a>
   <a href="/docs/information-management/create-private/salesmartly" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
-    <span style={{ fontSize: '20px', display: 'block', marginBottom: '6px' }}>📊</span>
+    <BarChart3 className="h-5 w-5 text-[#FF8A00]" />
     <p style={{ fontSize: '13px', fontWeight: 500, color: '#0D131A', margin: 0 }}>SaleSmartly</p>
   </a>
   <a href="/docs/information-management/create-private/rss" style={{ textDecoration: 'none', textAlign: 'center', padding: '12px', background: '#F9F9F9', borderRadius: '8px', transition: 'all 0.2s', display: 'block' }} className="info-source-card">
@@ -119,13 +122,13 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
     </p>
   </div>
   <div style={{ border: '1px solid #EDEDED', borderRadius: '12px', padding: '20px' }}>
-    <p style={{ fontSize: '16px', fontWeight: 600, color: '#0D131A', marginBottom: '10px', marginTop: 0 }}>⚙️ 信息源管理</p>
+    <p style={{ fontSize: '16px', fontWeight: 600, color: '#0D131A', marginBottom: '10px', marginTop: 0 }}><Settings className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 信息源管理</p>
     <p style={{ fontSize: '14px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>
       查看信息源的同步状态、启用状态、关联应用与明细数据
     </p>
   </div>
   <div style={{ border: '1px solid #EDEDED', borderRadius: '12px', padding: '20px' }}>
-    <p style={{ fontSize: '16px', fontWeight: 600, color: '#0D131A', marginBottom: '10px', marginTop: 0 }}>📊 信息源监控</p>
+    <p style={{ fontSize: '16px', fontWeight: 600, color: '#0D131A', marginBottom: '10px', marginTop: 0 }}><BarChart3 className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 信息源监控</p>
     <p style={{ fontSize: '14px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>
       监控每一次同步与处理日志，快速定位问题
     </p>
@@ -142,7 +145,7 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
 
 <div style={{ background: 'linear-gradient(135deg, #0D131A 0%, #1E2A38 100%)', borderRadius: '14px', padding: '28px', color: '#fff', marginBottom: '24px' }}>
   <p style={{ fontSize: '16px', fontWeight: 600, color: '#FF8A00', marginBottom: '12px', marginTop: 0 }}>
-    💡 核心概念
+    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 核心概念
   </p>
   <p style={{ fontSize: '15px', color: '#CFD9DE', lineHeight: 1.8, marginBottom: '16px' }}>
     <strong style={{ color: '#fff' }}>信息源</strong>：原始数据的集合，原始数据既可以是静态数据，也可以是动态数据。
@@ -163,7 +166,7 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
 
 <div className="info-scenario">
   <p style={{ fontSize: '15px', fontWeight: 600, color: '#0D131A', marginBottom: '12px', marginTop: 0 }}>
-    📋 企业内部公告信息源
+    <ClipboardList className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 企业内部公告信息源
   </p>
   <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
     <span style={{ fontSize: '15px', fontWeight: 600, color: '#FF8A00', minWidth: '60px' }}>接什么：</span>
@@ -223,7 +226,7 @@ description: 您的数据中枢，接入海量信息，构建专属信息库。
 
 <div style={{ textAlign: 'center', marginTop: '32px', padding: '24px', background: 'linear-gradient(135deg, #FFF7ED 0%, #FFE9D9 100%)', borderRadius: '14px' }}>
   <p style={{ fontSize: '15px', fontWeight: 600, color: '#0D131A', marginBottom: '16px', marginTop: 0 }}>
-    🚀 接下来，您可以从「创建信息源」开始，逐步构建您的关键信息网络！
+    <Rocket className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 接下来，您可以从「创建信息源」开始，逐步构建您的关键信息网络！
   </p>
   <a href="/docs/information-management/create-private" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FF8A00', color: '#fff', padding: '10px 20px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, textDecoration: 'none' }}>
     开始创建信息源 →

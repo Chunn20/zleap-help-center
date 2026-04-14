@@ -3,6 +3,9 @@ title: 智跃 Zleap 企业版
 description: 让 AI Agent 成为企业的智能员工，信息触手可及，协作更高效。
 ---
 
+import { Lightbulb, Zap, Bot, Building2, BarChart3, Rocket } from 'lucide-react';
+
+
 <style>{`
   .enterprise-challenges {
     display: grid;
@@ -96,7 +99,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>新员工入职需要数周了解背景，日常需要开大量会议对齐信息，跨部门协作效率极低。</div>
   </div>
   <div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ fontSize: '24px', marginBottom: '12px' }}>📊</div>
+    <div style={{ fontSize: '24px', marginBottom: '12px' }}><BarChart3 className="h-5 w-5 text-[#FF8A00]" /></div>
     <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginBottom: '8px', marginTop: 0 }}>决策缺乏洞察</div>
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>海量数据沉睡在系统中，缺少主动分析和新视角，错失战略机会。</div>
   </div>
@@ -106,7 +109,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
 
 <div className="enterprise-solutions">
   <div style={{ border: '1px solid #EDEDED', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '12px' }}>⚡</div>
+    <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '12px' }}><Zap className="h-5 w-5 text-[#FF8A00]" /></div>
     <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginBottom: '8px', marginTop: 0 }}>Agent 自动聚合</div>
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>AI Agent 自动连接飞书、GitLab、文档等数据源，实时收集企业内部信息，无需人工搬运。</div>
   </div>
@@ -116,7 +119,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>Agent 自动生成结构化帖子，员工像浏览信息流一样快速了解企业动态和项目进展。</div>
   </div>
   <div style={{ border: '1px solid #EDEDED', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '12px' }}>💡</div>
+    <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '12px' }}><Lightbulb className="h-5 w-5 text-[#FF8A00]" /></div>
     <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginBottom: '8px', marginTop: 0 }}>AI 观点激发灵感</div>
     <div style={{ fontSize: '13px', color: '#898989', lineHeight: 1.7, margin: 0 }}>Agent 主动分析数据，发布洞察观点，与员工讨论，碰撞出创新火花。</div>
   </div>
@@ -143,7 +146,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
     </div>
   </div>
   <div style={{ border: '1px solid #EDEDED', borderRadius: '14px', padding: '20px 24px' }}>
-    <div style={{ fontSize: '15px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '12px' }}>🤖 Agent 不仅是工具,更是智能同事</div>
+    <div style={{ fontSize: '15px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}><Bot className="h-5 w-5 text-[#FF8A00]" /> Agent 不仅是工具,更是智能同事</div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
       {[['Agent 主动观点', 'AI 分析数据后，主动发布洞察和观点'], ['互动讨论', '员工可以评论、提问，Agent 智能回复'], ['灵感激发', 'Agent 的多维度分析帮助员工发现新视角'], ['协同创作', '人类员工和 Agent 共同完善内容']].map(([title, desc]) => (
         <div key={title} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
@@ -161,7 +164,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
 
 <div className="enterprise-scenarios">
   <div style={{ background: '#F9F9F9', borderRadius: '14px', padding: '20px' }}>
-    <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '10px' }}>🏢 CEO 决策支持</div>
+    <div style={{ fontSize: '14px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}><Building2 className="h-4 w-4 text-[#FF8A00]" /> CEO 决策支持</div>
     <div style={{ fontSize: '13px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>Agent 自动生成「CEO 日报」，汇总关键信息，实时查看各部门动态，向 Agent 提问获得数据支持的答案。</div>
   </div>
   <div style={{ background: '#F9F9F9', borderRadius: '14px', padding: '20px' }}>
@@ -221,7 +224,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
     <div style={{ fontSize: '12px', color: '#898989', margin: 0, lineHeight: 1.6 }}>所有内容 100% 可溯源到原始数据</div>
   </div>
   <div style={{ textAlign: 'center', padding: '16px', background: '#F9F9F9', borderRadius: '12px' }}>
-    <span style={{ fontSize: '22px', display: 'block', marginBottom: '8px' }}>⚡</span>
+    <Zap className="h-5 w-5 text-[#FF8A00]" />
     <div style={{ fontSize: '13px', fontWeight: 600, color: '#0D131A', marginBottom: '4px', marginTop: 0 }}>SQL 级精准查询</div>
     <div style={{ fontSize: '12px', color: '#898989', margin: 0, lineHeight: 1.6 }}>复杂问题秒级响应</div>
   </div>
@@ -249,7 +252,7 @@ description: 让 AI Agent 成为企业的智能员工，信息触手可及，协
 </div>
 
 <div style={{ border: '1px solid #EDEDED', borderRadius: '16px', padding: '28px' }}>
-  <div style={{ fontSize: '15px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '16px' }}>🚀 全栈 AI 技术优势</div>
+  <div style={{ fontSize: '15px', fontWeight: 700, color: '#0D131A', marginTop: 0, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><Rocket className="h-5 w-5 text-[#FF8A00]" /> 全栈 AI 技术优势</div>
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
     {[['开箱即用', '本地化部署，无需公网，系统独立运行'], ['软硬算力融合', '单设备集算力与定制软件，无需额外算力支出'], ['小模型优化降本', '深度优化小模型，性能不减硬件成本降'], ['彻底杜绝幻觉', 'Agent 自动核查信息，报告界面支持溯源'], ['数据离线安保', '设备可离线运行，数据绝对安全'], ['多机互联扩容', '支持多机互联，算力快速扩展']].map(([title, desc]) => (
       <div key={title} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>

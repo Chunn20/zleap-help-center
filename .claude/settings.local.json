@@ -22,7 +22,8 @@
       "Bash(npm run:*)",
       "Bash(xargs grep:*)",
       "Bash(ls -la *.mdx)",
-      "Bash(grep -E \"\\\\.\\(png|gif|jpg|jpeg\\)$\")"
+      "Bash(grep -E \"\\\\.\\(png|gif|jpg|jpeg\\)$\")",
+      "Bash(node replace-emojis.js)"
     ]
   }
 }

@@ -3,6 +3,9 @@ title: 信息搜索
 description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented Generation）技术打造的私有知识库智能搜索入口，是你调用 AI 知识库的核心窗口，能让你在自己搭建的所有信息源（文档、网页、代码库、聊天记录等）里，像用搜索引擎一样精准、高效地找到需要的信息。
 ---
 
+import { Lightbulb } from 'lucide-react';
+
+
 <style>{`
   .info-search-section {
     border: 1px solid var(--border-color, #EDEDED);
@@ -135,7 +138,7 @@ description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented G
   </ul>
 
   <div className="info-search-tip">
-    <p>💡 用自然语言提问，就能拿到精准的知识结果。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 用自然语言提问，就能拿到精准的知识结果。</p>
   </div>
 </div>
 
@@ -152,7 +155,7 @@ description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented G
   </ul>
 
   <div className="info-search-tip">
-    <p>💡 公私分离，既能协作共享，又能保护个人隐私。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 公私分离，既能协作共享，又能保护个人隐私。</p>
   </div>
 </div>
 
@@ -169,7 +172,7 @@ description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented G
   </ul>
 
   <div className="info-search-tip">
-    <p>💡 不用手动输入就能快速获取信息，提升信息获取效率。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 不用手动输入就能快速获取信息，提升信息获取效率。</p>
   </div>
 </div>
 
@@ -187,7 +190,7 @@ description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented G
   </ul>
 
   <div className="info-search-tip">
-    <p>💡 一站式获取所有相关信息，大幅提升工作效率。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 一站式获取所有相关信息，大幅提升工作效率。</p>
   </div>
 </div>
 
@@ -264,7 +267,7 @@ description: 这是 Zleap 基于 SAG（语义增强检索，Semantic-Augmented G
 
 <div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
   <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
-    💡 对信息搜索功能有疑问或建议？欢迎提交反馈，帮助我们持续优化！
+    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 对信息搜索功能有疑问或建议？欢迎提交反馈，帮助我们持续优化！
   </p>
   <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
     提交反馈意见 →

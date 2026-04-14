@@ -3,6 +3,9 @@ title: 信息源列表
 description: 信息源列表是 Zleap 的「数据资产管理中心」，是你管理所有 AI 知识库素材、数据来源的总控制台。
 ---
 
+import { Lightbulb } from 'lucide-react';
+
+
 <style>{`
   .source-list-section {
     border: 1px solid var(--border-color, #EDEDED);
@@ -122,7 +125,7 @@ description: 信息源列表是 Zleap 的「数据资产管理中心」，是你
       </ul>
 
       <div className="source-list-tip">
-        <p>💡 一眼就能看清所有知识库的健康状态、生效情况，不用逐个点进去查。</p>
+        <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 一眼就能看清所有知识库的健康状态、生效情况，不用逐个点进去查。</p>
       </div>
     </div>
 
@@ -139,7 +142,7 @@ description: 信息源列表是 Zleap 的「数据资产管理中心」，是你
       </ul>
 
       <div className="source-list-tip">
-        <p>💡 通过颜色和图标快速识别信息源的工作状态。</p>
+        <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 通过颜色和图标快速识别信息源的工作状态。</p>
       </div>
     </div>
   </div>
@@ -160,7 +163,7 @@ description: 信息源列表是 Zleap 的「数据资产管理中心」，是你
   </ul>
 
   <div className="source-list-tip">
-    <p>💡 当信息源数量多（比如 20+）时，不用翻页，快速找到需要管理的内容，提升效率。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 当信息源数量多（比如 20+）时，不用翻页，快速找到需要管理的内容，提升效率。</p>
   </div>
 </div>
 
@@ -350,7 +353,7 @@ description: 信息源列表是 Zleap 的「数据资产管理中心」，是你
 
 <div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
   <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
-    💡 接下来，您可以从【创建信息源】开始，逐步构建您的关键信息网络！
+    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 接下来，您可以从【创建信息源】开始，逐步构建您的关键信息网络！
   </p>
   <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
     提交反馈意见 →

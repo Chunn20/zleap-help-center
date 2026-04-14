@@ -1,5 +1,372 @@
 ---
 title: 飞书机器人
+description: 通过飞书机器人接入飞书群聊消息，实时获取群组对话内容
 ---
 
-# 飞书机器人
+import { Lightbulb } from 'lucide-react';
+
+<style>{`
+  .feishu-bot-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .feishu-bot-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .feishu-bot-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .feishu-bot-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .feishu-bot-image img {
+    width: 100%;
+    display: block;
+  }
+  .feishu-bot-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .feishu-bot-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .code-block {
+    background: var(--code-bg, #F5F5F5);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+  .code-block pre {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-primary, #0D131A);
+  }
+  @media (prefers-color-scheme: dark) {
+    .feishu-bot-section {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .feishu-bot-tip {
+      --tip-bg: #2d2416;
+    }
+    .code-block {
+      --code-bg: #1a1a1a;
+    }
+    .feishu-bot-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .feishu-bot-section {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .feishu-bot-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .code-block {
+    --code-bg: #1a1a1a;
+  }
+  [data-theme="dark"] .feishu-bot-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<h2 id="feishu-bot-setup" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  一、飞书机器人设置
+</h2>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>1. 打开飞书开放平台</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    访问 https://open.feishu.cn/app，电脑网页端访问，点击【创建企业自建应用】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/create-app.png" alt="创建企业自建应用" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>2. 填写应用信息</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    根据您公司文化需要填写信息，完成相关信息填写设置后，点击【创建】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/fill-info.png" alt="填写应用信息" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>3. 添加机器人能力</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    点击【添加应用能力】，【添加】机器人。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/add-bot.png" alt="添加机器人能力" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>4. 进入权限管理</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    添加完成后，点击【权限管理】，点击【批量导入/导出权限】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/permission-manage.png" alt="权限管理" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>5. 批量导入权限</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    在导入框页面里输入以下我们提供给您的批量导入 JSON，点���【下一步，确认新增权限】
+  </p>
+
+  <div className="code-block">
+    <pre><code>{`{
+  "scopes": {
+    "tenant": [
+      "contact:contact.base:readonly",
+      "contact:user.base:readonly",
+      "drive:drive",
+      "drive:drive:readonly",
+      "drive:file",
+      "drive:file:download",
+      "drive:file:readonly",
+      "im:chat.members:read",
+      "im:chat:read",
+      "im:chat:readonly",
+      "im:message",
+      "im:message.group_msg",
+      "im:message:readonly"
+    ],
+    "user": []
+  }
+}`}</code></pre>
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/import-permission.png" alt="批量导入权限" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>6. 申请开通权限</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    粘贴导入无误后会出现以下页面，点击【申请开通】。如失败检查复制粘贴的 JSON 代码。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/apply-permission.png" alt="申请开通权限" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>7. 配置可用范围</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    开通会自动跳转出此页面，点击【配置】，将范围改成【全部成员】，点击【保存】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/config-range1.png" alt="配置可用范围1" />
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/config-range2.png" alt="配置可用范围2" />
+  </div>
+
+  <div className="feishu-bot-tip">
+    <p>
+      <strong style={{ color: '#FF8A00' }}><Lightbulb className="inline h-4 w-4 mr-1" /> 提示：</strong>如果误操作关闭了自动跳转的页面，点击【权限管理】，图示右方的【配置】，即可设置。
+    </p>
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/config-entry.png" alt="配置入口" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>8. 创建版本</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    设置保存完成后，点击【版本管理与发布】，点击【创建版本】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/create-version.png" alt="创建版本" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>9. 填写版本信息并发布</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    随后根据页面提示，填写完成相关必填信息，点击【保存】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/version-info1.png" alt="填写版本信息1" />
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/version-info2.png" alt="填写版本信息2" />
+  </div>
+
+  <p className="feishu-bot-intro" style={{ marginTop: '20px' }}>
+    根据公司管理需要，设置能够添加此机器人的权限人员，全部或者部分成员。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/set-members.png" alt="设置权限人员" />
+  </div>
+
+  <p className="feishu-bot-intro" style={{ marginTop: '20px' }}>
+    随后保存，等待审核。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/wait-review.png" alt="等待审核" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>10. 审核通过</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    如使用企业飞书管理员账号进行设置，直接免审自行通过即可进行下一步。如不是，找到您的企业飞书管理员，让其通过机器人应用发布。
+  </p>
+
+  <div className="feishu-bot-tip">
+    <p><strong>企业飞书管理员操作说明：</strong></p>
+  </div>
+
+  <p className="feishu-bot-intro">
+    管理员账户登录 https://open.feishu.cn/app，如图所示点击右上角栏目扩展中的【管理后台】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/admin-backend.png" alt="管理后台入口" />
+  </div>
+
+  <p className="feishu-bot-intro">
+    进入后右侧会出现待审核的应用，点击【前往审核】，根据图示进行审核通过即可。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/review-app1.png" alt="前往审核" />
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/review-app2.png" alt="审核应用1" />
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/review-app3.png" alt="审核应用2" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>11. 添加机器人到群聊</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    在需要的飞书群【设置】里中添加刚刚发布的飞书机器人应用，注意：需要群成员权限添加。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/add-to-group1.png" alt="添加机器人到群聊1" />
+  </div>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/add-to-group2.png" alt="添加机器人到群聊2" />
+  </div>
+</div>
+
+---
+
+<h2 id="add-source" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  二、信息源添加
+</h2>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>1. 获取凭证信息</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    回到飞书开放平台，找到添加的飞书机器人应用点击【凭证与基础信息】，复制【APP ID】和【APP Secret】。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/get-credentials.png" alt="获取凭证信息" />
+  </div>
+</div>
+
+<div className="feishu-bot-section">
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
+    <strong>2. 在 Zleap 中配置</strong>
+  </p>
+  <p className="feishu-bot-intro">
+    回到智跃 Zleap，粘贴刚刚复制的相关信息即可完成信息源添加。
+  </p>
+
+  <div className="feishu-bot-image">
+    <img src="/images/information-management/create-private/feishu-bot/zleap-config.png" alt="在 Zleap 中配置" />
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对飞书机器人配置有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

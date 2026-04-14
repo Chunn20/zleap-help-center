@@ -2,50 +2,51 @@ import { HomeLayout } from './components/home-layout';
 import { FullSearchTrigger } from 'fumadocs-ui/layouts/shared/slots/search-trigger';
 import Link from 'next/link';
 import { baseOptions } from '@/app/layout.config';
+import { Rocket, ClipboardList, Lightbulb, Bot, Building2, MessageCircle, BarChart3, Wrench, Zap, Brain, Handshake } from 'lucide-react';
 
 const topics = [
   {
     title: '快速上手',
     description: '下载安装 Zleap，5 分钟完成首次配置',
     href: '/docs/getting-started/quick-start',
-    icon: '🚀',
+    icon: Rocket,
   },
   {
     title: '信息管理',
     description: '订阅共享信息源或创建私有信息源',
     href: '/docs/information-management/information-management',
-    icon: '📋',
+    icon: ClipboardList,
   },
   {
     title: '什么是 Zleap',
     description: 'Zleap 的定位、工作方式与核心价值',
     href: '/docs/about-zleap/about',
-    icon: '💡',
+    icon: Lightbulb,
   },
   {
     title: '识别 Agent 与真人',
     description: '快速识别内容来源，了解 AI 透明度',
     href: '/docs/support/agent-vs-human',
-    icon: '🤖',
+    icon: Bot,
   },
   {
     title: '企业版',
     description: '私有化部署、多 Agent 协作与权限管理',
     href: '/docs/about-zleap/enterprise',
-    icon: '🏢',
+    icon: Building2,
   },
   {
     title: '联系与反馈',
     description: '遇到问题？联系我们或提交反馈建议',
     href: '/docs/contact/contact',
-    icon: '💬',
+    icon: MessageCircle,
   },
 ];
 
 const navSections = [
   {
     title: '产品介绍',
-    icon: '💡',
+    icon: Lightbulb,
     links: [
       { title: '什么是 Zleap', href: '/docs/about-zleap/about' },
       { title: '企业版', href: '/docs/about-zleap/enterprise' },
@@ -53,7 +54,7 @@ const navSections = [
   },
   {
     title: '新手入门',
-    icon: '🚀',
+    icon: Rocket,
     links: [
       { title: '快速开始', href: '/docs/getting-started/quick-start' },
       { title: '下载使用', href: '/docs/getting-started/download' },
@@ -61,7 +62,7 @@ const navSections = [
   },
   {
     title: '信息管理',
-    icon: '📊',
+    icon: BarChart3,
     links: [
       { title: '信息管理概述', href: '/docs/information-management/information-management' },
       { title: '事件表格', href: '/docs/information-management/event-table' },
@@ -71,7 +72,7 @@ const navSections = [
   },
   {
     title: '产品支持',
-    icon: '🛠️',
+    icon: Wrench,
     links: [
       { title: '识别 Agent 与真人', href: '/docs/support/agent-vs-human' },
       { title: '通知中心', href: '/docs/support/notification-center' },
@@ -81,7 +82,7 @@ const navSections = [
   },
   {
     title: '联系与反馈',
-    icon: '💬',
+    icon: MessageCircle,
     links: [
       { title: '联系我们', href: '/docs/contact/contact' },
       { title: '提交反馈', href: '/docs/contact/feedback' },
@@ -149,21 +150,27 @@ export default function HomePage() {
             {/* Feature Grid */}
             <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
-                <div className="mb-3 text-3xl">⚡</div>
+                <div className="mb-3 flex justify-center">
+                  <Zap className="h-8 w-8 text-[#FF8A00]" />
+                </div>
                 <h3 className="mb-2 text-sm font-semibold text-fd-foreground">自动化信息收集</h3>
                 <p className="text-xs leading-relaxed text-fd-muted-foreground">
                   Agent 7×24 小时自动追踪信息源，实时更新内容
                 </p>
               </div>
               <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
-                <div className="mb-3 text-3xl">🧠</div>
+                <div className="mb-3 flex justify-center">
+                  <Brain className="h-8 w-8 text-[#FF8A00]" />
+                </div>
                 <h3 className="mb-2 text-sm font-semibold text-fd-foreground">智能分析与创作</h3>
                 <p className="text-xs leading-relaxed text-fd-muted-foreground">
                   AI 深度理解内容，生成报告、总结和洞察
                 </p>
               </div>
               <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
-                <div className="mb-3 text-3xl">🤝</div>
+                <div className="mb-3 flex justify-center">
+                  <Handshake className="h-8 w-8 text-[#FF8A00]" />
+                </div>
                 <h3 className="mb-2 text-sm font-semibold text-fd-foreground">人机协作讨论</h3>
                 <p className="text-xs leading-relaxed text-fd-muted-foreground">
                   与 Agent 和团队成员共同讨论，碰撞新想法
@@ -204,23 +211,25 @@ export default function HomePage() {
             <p className="text-fd-foreground mb-4 text-lg font-bold">
               参考文档
             </p>
-            {navSections.map((section) => (
-              <details key={section.title} className="group mb-1" open>
-                <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold select-none transition-all hover:shadow-sm">
-                  <span className="flex items-center gap-2">
-                    <span className="text-lg transition-transform group-hover:scale-110">{section.icon}</span>
-                    {section.title}
-                  </span>
-                  <svg
-                    className="text-fd-muted-foreground size-4 shrink-0 transition-transform duration-200 group-open:rotate-90"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </summary>
+            {navSections.map((section) => {
+              const IconComponent = section.icon;
+              return (
+                <details key={section.title} className="group mb-1" open>
+                  <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold select-none transition-all hover:shadow-sm">
+                    <span className="flex items-center gap-2">
+                      <IconComponent className="h-4 w-4 transition-transform group-hover:scale-110" />
+                      {section.title}
+                    </span>
+                    <svg
+                      className="text-fd-muted-foreground size-4 shrink-0 transition-transform duration-200 group-open:rotate-90"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </summary>
                 <ul className="mt-1 mb-2 space-y-1 pl-3">
                   {section.links.map((link) => (
                     <li key={link.href}>
@@ -234,7 +243,8 @@ export default function HomePage() {
                   ))}
                 </ul>
               </details>
-            ))}
+            );
+            })}
           </div>
         </aside>
 
@@ -242,34 +252,39 @@ export default function HomePage() {
         <main className="min-w-0 flex-1">
           <h2 className="mb-6 text-xl font-bold">快速入口</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
-            {topics.map((topic) => (
-              <Link
-                key={topic.href}
-                href={topic.href}
-                className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-white to-fd-secondary/20 dark:from-[#2a2a2a] dark:to-[#1f1f1f] p-5 transition-all hover:shadow-md hover:border-[#FF8A00]/30"
-              >
-                <div className="absolute right-3 top-3 text-3xl opacity-10 transition-opacity group-hover:opacity-20">{topic.icon}</div>
-                <div className="relative">
-                  <div className="mb-2 flex items-center gap-2.5">
-                    <span className="text-2xl">{topic.icon}</span>
-                    <p className="text-base font-bold">{topic.title}</p>
+            {topics.map((topic) => {
+              const IconComponent = topic.icon;
+              return (
+                <Link
+                  key={topic.href}
+                  href={topic.href}
+                  className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-white to-fd-secondary/20 dark:from-[#2a2a2a] dark:to-[#1f1f1f] p-5 transition-all hover:shadow-md hover:border-[#FF8A00]/30"
+                >
+                  <div className="absolute right-3 top-3 opacity-10 transition-opacity group-hover:opacity-20">
+                    <IconComponent className="h-8 w-8" />
                   </div>
-                  <p className="text-fd-muted-foreground text-sm leading-relaxed">
-                    {topic.description}
-                  </p>
-                  <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#FF8A00] transition-gap group-hover:gap-2">
-                    <span>了解更多</span>
-                    <span>→</span>
+                  <div className="relative">
+                    <div className="mb-2 flex items-center gap-2.5">
+                      <IconComponent className="h-6 w-6 text-[#FF8A00]" />
+                      <p className="text-base font-bold">{topic.title}</p>
+                    </div>
+                    <p className="text-fd-muted-foreground text-sm leading-relaxed">
+                      {topic.description}
+                    </p>
+                    <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#FF8A00] transition-gap group-hover:gap-2">
+                      <span>了解更多</span>
+                      <span>→</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Search Section */}
           <div className="rounded-xl border bg-fd-secondary/30 dark:bg-[#2a2a2a]/50 p-8 text-center">
             <div className="mb-3 inline-flex items-center gap-2 text-sm text-fd-muted-foreground">
-              <span>💡</span>
+              <Lightbulb className="h-4 w-4" />
               <span>快速搜索文档内容</span>
             </div>
             <h3 className="mb-2 text-2xl font-bold">需要帮助？快速找到答案</h3>

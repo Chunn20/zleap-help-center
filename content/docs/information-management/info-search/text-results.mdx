@@ -3,6 +3,9 @@ title: 文本结果页
 description: 这是 Zleap「可溯源、可验证」的 AI 检索核心能力，彻底解决传统 AI 回答"信息来源不明、逻辑不可追溯"的痛点，让每一个结论都有出处、每一步推理都看得见。
 ---
 
+import { Lightbulb } from 'lucide-react';
+
+
 <style>{`
   .text-results-section {
     border: 1px solid var(--border-color, #EDEDED);
@@ -117,7 +120,7 @@ description: 这是 Zleap「可溯源、可验证」的 AI 检索核心能力，
   </ul>
 
   <div className="text-results-tip">
-    <p>💡 所有结论都有可溯源的原文支撑，AI 无法编造信息，回答可信度拉满。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 所有结论都有可溯源的原文支撑，AI 无法编造信息，回答可信度拉满。</p>
   </div>
 </div>
 
@@ -139,7 +142,7 @@ description: 这是 Zleap「可溯源、可验证」的 AI 检索核心能力，
   </ul>
 
   <div className="text-results-tip">
-    <p>💡 推理路径可视化，让你不仅知道"结论是什么"，更知道"结论怎么来的"，深度理解事件逻辑。</p>
+    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 推理路径可视化，让你不仅知道"结论是什么"，更知道"结论怎么来的"，深度理解事件逻辑。</p>
   </div>
 </div>
 
@@ -164,7 +167,7 @@ description: 这是 Zleap「可溯源、可验证」的 AI 检索核心能力，
 
 <div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
   <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
-    💡 对文本结果页有疑问或建议？欢迎提交反馈！
+    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 对文本结果页有疑问或建议？欢迎提交反馈！
   </p>
   <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
     提交反馈意见 →

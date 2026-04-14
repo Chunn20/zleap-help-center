@@ -1,5 +1,292 @@
 ---
 title: 企微机器人
+description: 通过企业微信会话存档功能，实时获取企业微信消息内容
 ---
 
-# 企微机器人
+import { AlertTriangle, Lightbulb } from 'lucide-react';
+
+<style>{`
+  .wecom-bot-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .wecom-bot-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .wecom-bot-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .wecom-bot-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .wecom-bot-image img {
+    width: 100%;
+    display: block;
+  }
+  .wecom-bot-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .wecom-bot-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .code-block {
+    background: var(--code-bg, #F5F5F5);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+  .code-block pre {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-primary, #0D131A);
+  }
+  .code-block code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    .wecom-bot-section {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .wecom-bot-tip {
+      --tip-bg: #2d2416;
+    }
+    .code-block {
+      --code-bg: #1a1a1a;
+    }
+    .wecom-bot-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .wecom-bot-section {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .wecom-bot-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .code-block {
+    --code-bg: #1a1a1a;
+  }
+  [data-theme="dark"] .wecom-bot-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<h2 id="pre-setup" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  一、前置功能添加
+</h2>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 1：进入企微管理后台</h4>
+
+  <p className="wecom-bot-intro">
+    <strong>企微管理后台入口</strong>（点击蓝字直接跳转），电脑网页端访问（需要企微管理员权限账号扫码登录），点击【管理工具】，选择【会话内容存档】。
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/management-backend.png" alt="企微管理后台入口" />
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 2：下载并上传确认函</h4>
+
+  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>【下载确认函】</li>
+    <li>填写好后【上传确认函】</li>
+    <li>点击购买（或者免费体验30天）</li>
+  </ol>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/upload-confirmation.png" alt="下载确认函并上传" />
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 3：配置会话内容存档</h4>
+
+  <p className="wecom-bot-intro">
+    配置路径：审核通过后，进入【管理后台】>【会话会话内容存档】> 进行配置。
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/config-archive.png" alt="配置会话内容存档" />
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 4：配置可信 IP</h4>
+
+  <p className="wecom-bot-intro">
+    配置可信 IP，复制 IP 地址。
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/config-ip.png" alt="配置可信IP" />
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 5：生成密钥文件</h4>
+
+  <p className="wecom-bot-intro">
+    根据官方提供的 API 文档，创建 Private_key.pem 和 public_key.pem。
+  </p>
+
+  <div className="wecom-bot-tip">
+    <p>
+      <strong style={{ color: '#FF8A00' }}>提示：</strong>配置消息加密的公钥（public_key.pem），密钥（Private_key.pem）也要保存。
+    </p>
+  </div>
+
+  <p className="wecom-bot-intro" style={{ marginTop: '20px' }}>
+    <strong>企微官方 API 文档命令如下（可直接复制进行自定义配置）</strong>
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/api-docs.png" alt="企微官方API文档" />
+  </div>
+
+  <div className="code-block">
+    <pre><code>{`//step 1：生成2048bit的私钥
+$ openssl genrsa -out private_key.pem 2048
+
+//step 2: 从私钥提取公钥
+$ openssl rsa -in private_key.pem -pubout -out public_key.pem
+
+//step 3: 为了调用接口设置，需要再转义一下换行符
+$ awk '{printf "%s\\\\n", $0}' public_key.pem
+
+// 最终得到的"-----BEGIN PUBLIC KEY-----\\n...\\n-----END PUBLIC KEY-----\\n"即可传入接口public_key字段调用`}</code></pre>
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 6：上传公钥</h4>
+
+  <p className="wecom-bot-intro">
+    上传【public_key.pem】（消息加密公钥）
+  </p>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">步骤 7：添加存档内容</h4>
+
+  <p className="wecom-bot-intro">
+    添加存档内容 - 根据自己或企业需要开启会话存档范围。
+  </p>
+
+  <p className="wecom-bot-intro">
+    在【会话内容存档】-【开启范围】添加成员，即可以获取该成员的会话内容（ps：这个成员必须是自己或自己的员工。）
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/add-members.png" alt="添加成员到存档范围" />
+  </div>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/archive-range.png" alt="存档范围配置" />
+  </div>
+</div>
+
+---
+
+<h2 id="config-info" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  二、前置工作已完成，配置相关信息
+</h2>
+
+<div className="wecom-bot-image">
+  <img src="/images/information-management/create-private/wecom-bot/zleap-config.png" alt="Zleap 配置界面" />
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">配置 1：企业 ID</h4>
+
+  <p className="wecom-bot-intro">
+    依旧在企微管理后台入口页面。
+  </p>
+
+  <p className="wecom-bot-intro">
+    <strong>查询路径：</strong>企业微信 -> 我的企业 -> 企业ID
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/company-id.png" alt="查询企业ID" />
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">配置 2：Secret 配置</h4>
+
+  <p className="wecom-bot-intro">
+    <strong>查询路径 1（发送 secret 至企业微信）：</strong>企业微信 -> 企微会话存档配置 -> Secret【查看】-> 点击【发送】-> 等待系统发送到企业微信
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/secret-send.png" alt="发送Secret到企业微信" />
+  </div>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/secret-view.png" alt="查看Secret" />
+  </div>
+
+  <p className="wecom-bot-intro" style={{ marginTop: '20px' }}>
+    <strong>查询路径 2（企业微信查看）：</strong>企业微信团队查看 secret 信息并复制
+  </p>
+
+  <div className="wecom-bot-image">
+    <img src="/images/information-management/create-private/wecom-bot/secret-copy.png" alt="在企业微信中查看并复制Secret" />
+  </div>
+</div>
+
+<div className="wecom-bot-section">
+  <h4 className="wecom-bot-title">配置 3：密钥文件</h4>
+
+  <p className="wecom-bot-intro">
+    参考本文档「消息加密公钥配置」，上传【private_key.pem】文件至 Zleap 配置表单。
+  </p>
+
+  <div className="wecom-bot-tip">
+    <p>
+      <strong style={{ color: '#FF8A00' }}><AlertTriangle className="inline h-4 w-4 mr-1" /> 重要提示：</strong>请妥善保管 private_key.pem 文件，不要泄露给他人。该文件是解密会话内容的关键。
+    </p>
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对企微机器人配置有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>
