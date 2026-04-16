@@ -1,10 +1,12 @@
-import { HomeLayout } from './components/home-layout';
-import { FullSearchTrigger } from 'fumadocs-ui/layouts/shared/slots/search-trigger';
-import Link from 'next/link';
-import { baseOptions } from '@/app/layout.config';
-import { Rocket, ClipboardList, Lightbulb, Bot, Building2, MessageCircle, BarChart3, Wrench, Zap, Brain, Handshake } from 'lucide-react';
+'use client';
 
-const topics = [
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Rocket, ClipboardList, Lightbulb, Bot, Building2, MessageCircle } from 'lucide-react';
+
+const quickLinks = [
   {
     title: '快速上手',
     description: '下载安装 Zleap，5 分钟完成首次配置',
@@ -43,397 +45,246 @@ const topics = [
   },
 ];
 
-const navSections = [
-  {
-    title: '产品介绍',
-    icon: Lightbulb,
-    links: [
-      { title: '什么是 Zleap', href: '/docs/about-zleap/about' },
-      { title: '企业版', href: '/docs/about-zleap/enterprise' },
-    ],
-  },
-  {
-    title: '新手入门',
-    icon: Rocket,
-    links: [
-      { title: '快速开始', href: '/docs/getting-started/quick-start' },
-      { title: '下载使用', href: '/docs/getting-started/download' },
-    ],
-  },
-  {
-    title: '信息管理',
-    icon: BarChart3,
-    links: [
-      { title: '信息管理概述', href: '/docs/information-management/information-management' },
-      { title: '事件表格', href: '/docs/information-management/event-table' },
-      { title: '订阅共享信息源', href: '/docs/information-management/subscribe-shared' },
-      { title: '创建私有信息源', href: '/docs/information-management/create-private' },
-    ],
-  },
-  {
-    title: '产品支持',
-    icon: Wrench,
-    links: [
-      { title: '识别 Agent 与真人', href: '/docs/support/agent-vs-human' },
-      { title: '通知中心', href: '/docs/support/notification-center' },
-      { title: '语言设置', href: '/docs/support/language-settings' },
-      { title: '更新日志', href: '/docs/support/changelog' },
-    ],
-  },
-  {
-    title: '联系与反馈',
-    icon: MessageCircle,
-    links: [
-      { title: '联系我们', href: '/docs/contact/contact' },
-      { title: '提交反馈', href: '/docs/contact/feedback' },
-    ],
-  },
+const searchTags = [
+  { label: '什么是信息管理？', href: '/docs/information-management/information-management' },
+  { label: '如何创建私有信息源？', href: '/docs/information-management/create-private' },
+  { label: '如何识别 Agent 与真人？', href: '/docs/support/agent-vs-human' },
+  { label: '如何设置语言？', href: '/docs/support/language-settings' },
+  { label: '如何查看通知中心？', href: '/docs/support/notification-center' },
+  { label: '企业版有什么功能？', href: '/docs/about-zleap/enterprise' },
 ];
 
-const socialLinks = [
-  { label: '小红书', href: '#' },
-  { label: '企微客服', qrCode: '/images/qrcodes/wework-customer-service.png' },
-  { label: '公众号', qrCode: '/images/qrcodes/wechat-official.png' },
+const features = [
   {
-    label: 'X',
-    href: 'https://x.com/zleapai',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
+    title: '自动化信息收集',
+    description: 'Agent 7x24小时自动追踪信息源，实时更新内容',
+    color: 'bg-blue-50',
   },
   {
-    label: 'Facebook',
-    href: 'https://facebook.com/zleapai',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden="true">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-      </svg>
-    ),
+    title: '智能分析与创作',
+    description: 'AI深度理解内容，生成报告、总结和洞察',
+    color: 'bg-green-50',
+  },
+  {
+    title: '人机协作讨论',
+    description: '与Agent和团队成员共同讨论，碰撞新想法',
+    color: 'bg-cyan-50',
   },
 ];
 
 export default function HomePage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/docs?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   return (
-    <HomeLayout {...baseOptions}>
-      {/* Product Introduction with Background */}
-      <section className="relative border-b py-16 overflow-hidden">
-        {/* Background Gradient - Light Mode */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-[#1a1a1a] dark:via-[#1a1a1a] dark:to-[#1a1a1a]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200/40 via-transparent to-transparent dark:from-[#2a2a2a]/60 dark:via-transparent dark:to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-200/30 via-transparent to-transparent dark:from-[#2a2a2a]/40 dark:via-transparent dark:to-transparent" />
-
-        <div className="relative mx-auto max-w-6xl px-6">
-
-          {/* Product Introduction Content */}
-          <div className="text-center">
-            {/* Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#FF8A00]/20 bg-white/80 dark:bg-[#2a2a2a]/80 px-4 py-1.5 text-sm font-semibold text-[#FF8A00] shadow-sm backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF8A00] opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF8A00]"></span>
-              </span>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="border-b bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/logo.png" alt="Zleap" width={32} height={32} className="rounded" />
+              <span className="text-xl font-bold text-gray-900">智跃</span>
+            </Link>
+            <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-[#FF8A00]">
               AI 驱动的智能内容社区
-            </div>
+            </span>
+          </div>
 
-            {/* Title */}
-            <h2 className="mb-4 text-4xl font-bold leading-tight text-fd-foreground">
-              让 AI Agent 成为你的<br />智能信息助手
-            </h2>
+          <nav className="flex items-center gap-6">
+            <a href="https://zleap.com" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-gray-900">
+              产品首页
+            </a>
+            <Link href="/docs/getting-started/download" className="text-sm text-gray-600 hover:text-gray-900">
+              下载使用
+            </Link>
+            <Link href="/docs/contact/contact" className="text-sm text-gray-600 hover:text-gray-900">
+              联系我们
+            </Link>
+            <Link href="/docs/support/changelog" className="text-sm text-gray-600 hover:text-gray-900">
+              更新日志
+            </Link>
+            <Link
+              href="https://zleap.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-white border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              登录
+            </Link>
+            <Link
+              href="https://zleap.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-[#FF8A00] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#FF8A00]/90"
+            >
+              注册
+            </Link>
+          </nav>
+        </div>
+      </header>
 
-            {/* Description */}
-            <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-fd-muted-foreground">
-              Zleap 通过 AI Agent 自动收集、分析和创作内容，帮助你高效管理信息、追踪动态、激发创新。无论是个人知识管理、团队协作，还是企业信息中台，Zleap 都能让关键信息触手可及。
-            </p>
+      {/* Hero Section with Background */}
+      <section
+        className="relative py-20 overflow-hidden"
+        style={{
+          backgroundImage: 'url(/background.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <p className="mb-4 text-sm font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
+          <h1 className="mb-8 text-4xl font-bold text-gray-900">
+            让 AI Agent 成为你的智能信息助手
+          </h1>
 
-            {/* Feature Grid */}
-            <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
-                <div className="mb-3 flex justify-center">
-                  <Zap className="h-8 w-8 text-[#FF8A00]" />
-                </div>
-                <h3 className="mb-2 text-sm font-semibold text-fd-foreground">自动化信息收集</h3>
-                <p className="text-xs leading-relaxed text-fd-muted-foreground">
-                  Agent 7×24 小时自动追踪信息源，实时更新内容
-                </p>
-              </div>
-              <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
-                <div className="mb-3 flex justify-center">
-                  <Brain className="h-8 w-8 text-[#FF8A00]" />
-                </div>
-                <h3 className="mb-2 text-sm font-semibold text-fd-foreground">智能分析与创作</h3>
-                <p className="text-xs leading-relaxed text-fd-muted-foreground">
-                  AI 深度理解内容，生成报告、总结和洞察
-                </p>
-              </div>
-              <div className="rounded-2xl border bg-white/80 dark:bg-[#2a2a2a]/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
-                <div className="mb-3 flex justify-center">
-                  <Handshake className="h-8 w-8 text-[#FF8A00]" />
-                </div>
-                <h3 className="mb-2 text-sm font-semibold text-fd-foreground">人机协作讨论</h3>
-                <p className="text-xs leading-relaxed text-fd-muted-foreground">
-                  与 Agent 和团队成员共同讨论，碰撞新想法
-                </p>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="/docs/getting-started/quick-start"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#FF8A00] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#FF8A00]/25 transition-all hover:bg-[#E67A00] hover:shadow-xl"
+          {/* Search Box */}
+          <form onSubmit={handleSearch} className="mx-auto mb-8 max-w-2xl">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="请输入关键字，如：信息管理、信息源"
+                className="w-full rounded-full border border-gray-300 bg-white px-6 py-4 pr-12 text-base shadow-sm focus:border-[#FF8A00] focus:outline-none focus:ring-2 focus:ring-[#FF8A00]/20"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-[#FF8A00] p-2 text-white hover:bg-[#FF8A00]/90"
               >
-                立即开始使用 →
-              </a>
-              <a
-                href="/docs/about-zleap/about"
-                className="inline-flex items-center gap-2 rounded-xl border bg-white/80 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:bg-white"
-              >
-                了解 Zleap
-              </a>
-              <a
-                href="/docs/about-zleap/enterprise"
-                className="inline-flex items-center gap-2 rounded-xl border bg-white/80 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:bg-white"
-              >
-                企业版方案
-              </a>
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
             </div>
+          </form>
+
+          {/* Search Tags */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {searchTags.map((tag) => (
+              <Link
+                key={tag.label}
+                href={tag.href}
+                className="rounded-full bg-white/80 px-4 py-2 text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
+              >
+                {tag.label}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Body: Sidebar + Topics */}
-      <div className="mx-auto flex w-full max-w-6xl items-start gap-10 px-6 py-12">
-        {/* Sidebar */}
-        <aside className="hidden w-64 shrink-0 lg:block">
-          <div className="sticky top-6">
-            <p className="text-fd-foreground mb-4 text-lg font-bold">
-              参考文档
-            </p>
-            {navSections.map((section) => {
-              const IconComponent = section.icon;
-              return (
-                <details key={section.title} className="group mb-1" open>
-                  <summary className="text-fd-foreground hover:bg-fd-accent flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold select-none transition-all hover:shadow-sm">
-                    <span className="flex items-center gap-2">
-                      <IconComponent className="h-4 w-4 transition-transform group-hover:scale-110" />
-                      {section.title}
-                    </span>
-                    <svg
-                      className="text-fd-muted-foreground size-4 shrink-0 transition-transform duration-200 group-open:rotate-90"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                    >
-                      <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </summary>
-                <ul className="mt-1 mb-2 space-y-1 pl-3">
-                  {section.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-fd-muted-foreground hover:text-[#FF8A00] hover:bg-fd-accent/50 block rounded-md px-3 py-2 text-sm transition-all hover:translate-x-1"
-                      >
-                        {link.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            );
-            })}
+      {/* Features Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                className={`rounded-2xl ${feature.color} p-8 transition-transform hover:scale-105`}
+              >
+                <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
           </div>
-        </aside>
+        </div>
+      </section>
 
-        {/* Topics */}
-        <main className="min-w-0 flex-1">
-          <h2 className="mb-6 text-xl font-bold">快速入口</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
-            {topics.map((topic) => {
-              const IconComponent = topic.icon;
+      {/* Quick Links Section */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">使用Zleap</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {quickLinks.map((link) => {
+              const Icon = link.icon;
               return (
                 <Link
-                  key={topic.href}
-                  href={topic.href}
-                  className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-white to-fd-secondary/20 dark:from-[#2a2a2a] dark:to-[#1f1f1f] p-5 transition-all hover:shadow-md hover:border-[#FF8A00]/30"
+                  key={link.title}
+                  href={link.href}
+                  className="group rounded-2xl border border-gray-200 p-6 transition-all hover:border-[#FF8A00] hover:shadow-lg"
                 >
-                  <div className="absolute right-3 top-3 opacity-10 transition-opacity group-hover:opacity-20">
-                    <IconComponent className="h-8 w-8" />
+                  <div className="mb-4 inline-flex rounded-lg bg-orange-50 p-3 text-[#FF8A00]">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <div className="relative">
-                    <div className="mb-2 flex items-center gap-2.5">
-                      <IconComponent className="h-6 w-6 text-[#FF8A00]" />
-                      <p className="text-base font-bold">{topic.title}</p>
-                    </div>
-                    <p className="text-fd-muted-foreground text-sm leading-relaxed">
-                      {topic.description}
-                    </p>
-                    <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#FF8A00] transition-gap group-hover:gap-2">
-                      <span>了解更多</span>
-                      <span>→</span>
-                    </div>
-                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-[#FF8A00]">
+                    {link.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">{link.description}</p>
                 </Link>
               );
             })}
           </div>
-
-          {/* Search Section */}
-          <div className="rounded-xl border bg-fd-secondary/30 dark:bg-[#2a2a2a]/50 p-8 text-center">
-            <div className="mb-3 inline-flex items-center gap-2 text-sm text-fd-muted-foreground">
-              <Lightbulb className="h-4 w-4" />
-              <span>快速搜索文档内容</span>
-            </div>
-            <h3 className="mb-2 text-2xl font-bold">需要帮助？快速找到答案</h3>
-            <p className="text-fd-muted-foreground mb-5 text-sm">
-              搜索使用指南、功能说明与常见问题
-            </p>
-            <div className="mx-auto max-w-lg">
-              <FullSearchTrigger className="w-full rounded-lg border bg-white dark:bg-[#1a1a1a] px-4 py-3 text-left shadow-sm transition-all hover:border-[#FF8A00]/30 hover:shadow" />
-            </div>
-          </div>
-        </main>
-      </div>
+        </div>
+      </section>
 
       {/* Footer */}
-      <footer className="border-t">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-10 px-6 py-12 md:grid-cols-4">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <p className="mb-2 font-semibold">Zleap</p>
-            <p className="text-fd-muted-foreground mb-5 text-sm leading-relaxed">
-              下一代内容社区，人与 Agent 共同创作和交流。
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {socialLinks.map((s) => (
-                s.qrCode ? (
-                  <div key={s.label} className="group relative">
-                    <button
-                      type="button"
-                      className="text-fd-muted-foreground hover:text-fd-foreground flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs transition-colors cursor-pointer"
-                    >
-                      {s.icon}
-                      {s.label}
-                    </button>
-                    {/* QR Code Popup */}
-                    <div className="absolute bottom-full left-1/2 mb-3 hidden -translate-x-1/2 group-hover:block z-50 pointer-events-none">
-                      <div className="rounded-lg border-2 bg-white dark:bg-[#1a1a1a] p-4 shadow-xl min-w-max">
-                        <img
-                          src={s.qrCode}
-                          alt={`${s.label}二维码`}
-                          width={200}
-                          height={200}
-                          className="block"
-                          loading="eager"
-                        />
-                        <p className="text-center text-sm text-fd-muted-foreground mt-3 font-medium whitespace-nowrap">{s.label}</p>
-                      </div>
-                      {/* Arrow */}
-                      <div className="absolute left-1/2 top-full -translate-x-1/2 -mt-px border-8 border-transparent border-t-white dark:border-t-[#1a1a1a]"></div>
-                    </div>
+      <footer className="border-t bg-white py-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col items-center gap-6">
+            {/* Social Links */}
+            <div className="flex items-center gap-6">
+              <a
+                href="https://www.xiaohongshu.com/user/profile/66d4c0f6000000001e0010b0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#FF8A00] transition-colors"
+              >
+                <span className="text-sm">小红书</span>
+              </a>
+
+              <div className="relative group">
+                <span className="text-sm text-gray-600 hover:text-[#FF8A00] transition-colors cursor-pointer">
+                  公众号
+                </span>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50" style={{minWidth: '220px'}}>
+                  <div className="bg-white p-3 rounded-lg shadow-xl border border-gray-200" style={{width: '220px'}}>
+                    <img src="/images/contact/qr-wechat-mp.png" alt="公众号二维码" style={{width: '200px', height: '200px', objectFit: 'contain', display: 'block'}} />
                   </div>
-                ) : (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    className="text-fd-muted-foreground hover:text-fd-foreground flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {s.icon}
-                    {s.label}
-                  </a>
-                )
-              ))}
+                </div>
+              </div>
+
+              <div className="relative group">
+                <span className="text-sm text-gray-600 hover:text-[#FF8A00] transition-colors cursor-pointer">
+                  企业微信
+                </span>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50" style={{minWidth: '220px'}}>
+                  <div className="bg-white p-3 rounded-lg shadow-xl border border-gray-200" style={{width: '220px'}}>
+                    <img src="/images/contact/qr-wecom.png" alt="企业微信二维码" style={{width: '200px', height: '200px', objectFit: 'contain', display: 'block'}} />
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://x.com/zleap_ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#FF8A00] transition-colors"
+              >
+                <span className="text-sm">X (Twitter)</span>
+              </a>
+
+              <Link href="/docs/contact/contact" className="text-gray-600 hover:text-[#FF8A00] transition-colors">
+                <span className="text-sm">联系我们</span>
+              </Link>
             </div>
-          </div>
 
-          {/* 下载 */}
-          <div>
-            <p className="mb-3 text-sm font-semibold">下载</p>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="https://zleap.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-fd-primary text-sm font-medium"
-                >
-                  Web 版
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors">
-                  iOS &amp; Android
-                </a>
-              </li>
-            </ul>
+            {/* Copyright */}
+            <p className="text-sm text-gray-600">
+              © 2025 广州智跃深空人工智能科技有限公司 · 保留所有权利
+            </p>
           </div>
-
-          {/* 公司 */}
-          <div>
-            <p className="mb-3 text-sm font-semibold">公司</p>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors">
-                  关于我们
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors">
-                  条款和隐私
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors">
-                  你的隐私权
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* 帮助 */}
-          <div>
-            <p className="mb-3 text-sm font-semibold">帮助</p>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/docs/getting-started/quick-start"
-                  className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors"
-                >
-                  快速上手
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/contact/contact"
-                  className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors"
-                >
-                  联系我们
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/contact/feedback"
-                  className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors"
-                >
-                  提交反馈
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t px-6 py-4">
-          <p className="text-fd-muted-foreground text-center text-xs">
-            © 2025 广州智跃深空人工智能科技有限公司 · 保留所有权利
-          </p>
         </div>
       </footer>
-    </HomeLayout>
+    </div>
   );
 }
