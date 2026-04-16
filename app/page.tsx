@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -89,8 +88,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="Zleap" width={32} height={32} className="rounded" />
-              <span className="text-xl font-bold text-gray-900">智跃</span>
+              <img src="/图标/logo.png" alt="Zleap" className="h-8" />
             </Link>
             <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-[#FF8A00]">
               AI 驱动的智能内容社区
@@ -98,8 +96,8 @@ export default function HomePage() {
           </div>
 
           <nav className="flex items-center gap-6">
-            <a href="https://zleap.com" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-gray-900">
-              产品首页
+            <a href="https://intro.zleap.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-gray-900">
+              企业版
             </a>
             <Link href="/docs/getting-started/download" className="text-sm text-gray-600 hover:text-gray-900">
               下载使用
@@ -140,7 +138,7 @@ export default function HomePage() {
         }}
       >
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="mb-4 text-sm font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
+          <p className="mb-4 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
           <h1 className="mb-8 text-4xl font-bold text-gray-900">
             让 AI Agent 成为你的智能信息助手
           </h1>
