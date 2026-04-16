@@ -4,44 +4,43 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Rocket, ClipboardList, Lightbulb, Bot, Building2, MessageCircle } from 'lucide-react';
 
 const quickLinks = [
   {
     title: '快速上手',
     description: '下载安装 Zleap，5 分钟完成首次配置',
     href: '/docs/getting-started/quick-start',
-    icon: Rocket,
+    iconPath: '/图标/快速上手.png',
   },
   {
     title: '信息管理',
     description: '订阅共享信息源或创建私有信息源',
     href: '/docs/information-management/information-management',
-    icon: ClipboardList,
+    iconPath: '/图标/信息管理.png',
   },
   {
     title: '什么是 Zleap',
     description: 'Zleap 的定位、工作方式与核心价值',
     href: '/docs/about-zleap/about',
-    icon: Lightbulb,
+    iconPath: '/图标/什么是Zleap.png',
   },
   {
     title: '识别 Agent 与真人',
     description: '快速识别内容来源，了解 AI 透明度',
     href: '/docs/support/agent-vs-human',
-    icon: Bot,
+    iconPath: '/图标/识别Agent与真人.png',
   },
   {
     title: '企业版',
     description: '私有化部署、多 Agent 协作与权限管理',
     href: '/docs/about-zleap/enterprise',
-    icon: Building2,
+    iconPath: '/图标/企业版.png',
   },
   {
     title: '联系与反馈',
     description: '遇到问题？联系我们或提交反馈建议',
     href: '/docs/contact/contact',
-    icon: MessageCircle,
+    iconPath: '/图标/联系与反馈.png',
   },
 ];
 
@@ -149,21 +148,18 @@ export default function HomePage() {
           {/* Search Box */}
           <form onSubmit={handleSearch} className="mx-auto mb-8 max-w-2xl">
             <div className="relative">
+              <img
+                src="/图标/搜索图标.png"
+                alt="搜索"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5"
+              />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="请输入关键字，如：信息管理、信息源"
-                className="w-full rounded-full border border-gray-300 bg-white px-6 py-4 pr-12 text-base shadow-sm focus:border-[#FF8A00] focus:outline-none focus:ring-2 focus:ring-[#FF8A00]/20"
+                className="w-full rounded-full border-2 border-[#FF8A00] bg-white pl-12 pr-6 py-4 text-base shadow-sm focus:outline-none focus:border-[3px] focus:border-[#FF8A00] transition-all"
               />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-[#FF8A00] p-2 text-white hover:bg-[#FF8A00]/90"
-              >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
             </div>
           </form>
 
@@ -183,7 +179,14 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-gray-50">
+      <section
+        className="py-16 relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(/background.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -206,15 +209,14 @@ export default function HomePage() {
           <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">使用Zleap</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {quickLinks.map((link) => {
-              const Icon = link.icon;
               return (
                 <Link
                   key={link.title}
                   href={link.href}
                   className="group rounded-2xl border border-gray-200 p-6 transition-all hover:border-[#FF8A00] hover:shadow-lg"
                 >
-                  <div className="mb-4 inline-flex rounded-lg bg-orange-50 p-3 text-[#FF8A00]">
-                    <Icon className="h-6 w-6" />
+                  <div className="mb-4 inline-flex rounded-lg bg-orange-50 p-3">
+                    <img src={link.iconPath} alt={link.title} className="h-6 w-6" />
                   </div>
                   <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-[#FF8A00]">
                     {link.title}
