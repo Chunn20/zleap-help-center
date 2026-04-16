@@ -40,6 +40,11 @@ body {
   color: #1d1d1f;
   letter-spacing: -0.01em;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  background-color: #FFFFFF;
 }
 
 /* Navbar - 纯白通透 */

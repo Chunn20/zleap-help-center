@@ -26,7 +26,11 @@
       "Bash(node replace-emojis.js)",
       "WebSearch",
       "Bash(npm list:*)",
-      "Bash(grep -r \"icon\" node_modules/fumadocs-core/dist/*.d.ts)"
+      "Bash(grep -r \"icon\" node_modules/fumadocs-core/dist/*.d.ts)",
+      "Bash(find content/docs -name \"meta.json\" -exec echo \"=== {} ===\" \\\\; -exec cat {} \\\\;)",
+      "WebFetch(domain:www.feishu.cn)",
+      "Bash(git checkout *)",
+      "Bash(git remote *)"
     ]
   }
 }

@@ -24,4 +24,5 @@ export const baseOptions: BaseLayoutProps = {
     defaultOpenLevel: 1,
     collapsible: true,
   },
+  enableToc: true,
 };
