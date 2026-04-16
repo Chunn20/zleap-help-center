@@ -56,7 +56,7 @@ const searchTags = [
 const features = [
   {
     title: '自动化信息收集',
-    description: 'Agent 7x24小时自动追踪信息源，实时更新内容',
+    description: '7x24小时自动追踪信息源，实时更新内容',
     color: 'bg-blue-50',
   },
   {
@@ -158,7 +158,7 @@ export default function HomePage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="请输入关键字，如：信息管理、信息源"
-                className="w-full rounded-full border-2 border-[#FF8A00] bg-white pl-12 pr-6 py-4 text-base shadow-sm focus:outline-none focus:border-[3px] focus:border-[#FF8A00] transition-all"
+                className="w-full rounded-full border-2 border-[#FF8A00] bg-white pl-12 pr-6 py-4 text-base shadow-sm focus:outline-none focus:border-[#FF8A00] focus:shadow-[0_0_0_3px_rgba(255,138,0,0.1)] transition-shadow"
               />
             </div>
           </form>
@@ -184,7 +184,7 @@ export default function HomePage() {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className={`rounded-2xl ${feature.color} p-8 transition-transform hover:scale-105`}
+                className={`rounded-2xl ${feature.color} p-8 text-center transition-transform hover:scale-105`}
               >
                 <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
