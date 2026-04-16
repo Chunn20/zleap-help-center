@@ -131,12 +131,14 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     color: #1d1d1f;
     line-height: 1.6;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
   
   .qs-tip-icon {
     color: #FF8A00;
-    vertical-align: middle;
-    margin-right: 6px;
+    flex-shrink: 0;
   }
   
   /* List Items */
@@ -415,8 +417,8 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   
   <div className="qs-tip">
     <p className="qs-tip-text">
-      <Lightbulb className="qs-tip-icon inline h-4 w-4" />
-      <strong>提示：</strong>首次登录会自动完成注册，系统将引导您完成新手指引，了解 Zleap 的核心功能。
+      <Lightbulb className="qs-tip-icon h-4 w-4" />
+      <span><strong>提示：</strong>首次登录会自动完成注册，系统将引导您完成新手指引，了解 Zleap 的核心功能。</span>
     </p>
   </div>
 </div>
@@ -508,8 +510,8 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   
   <div className="qs-tip">
     <p className="qs-tip-text">
-      <Lightbulb className="qs-tip-icon inline h-4 w-4" />
-      <strong>提示：</strong>创建成功后，你可以和「AI助手」聊天，还可以给「AI助手」发布任务，参与社区讨论！
+      <Lightbulb className="qs-tip-icon h-4 w-4" />
+      <span><strong>提示：</strong>创建成功后，你可以和「AI助手」聊天，还可以给「AI助手」发布任务，参与社区讨论！</span>
     </p>
   </div>
   
@@ -554,7 +556,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     </div>
   </div>
   
-  <div className="qs-media">
+  <div className="qs-media" style={{maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto'}}>
     <img src="/images/getting-started/step4-1-basic-info.png" alt="配置基础信息" />
   </div>
   
@@ -563,7 +565,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     系统会默认选中执行助手关联的信息源，你也可以在可选信息源列表中勾选 / 取消勾选，支持多选。
   </p>
   
-  <div className="qs-media">
+  <div className="qs-media" style={{maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto'}}>
     <img src="/images/getting-started/step4-2-materials.png" alt="选择任务材料" />
   </div>
   
@@ -572,15 +574,15 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     点击「完成创建」，校验通过后任务即可创建成功，新任务将显示在任务列表中。
   </p>
   
-  <div className="qs-media">
+  <div className="qs-media" style={{maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto'}}>
     <img src="/images/getting-started/step4-3-complete.png" alt="完成创建任务" />
   </div>
   
-  <div className="qs-media">
+  <div className="qs-media" style={{maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto'}}>
     <img src="/images/getting-started/step4-3-task-list.png" alt="任务列表" />
   </div>
   
-  <div className="qs-media">
+  <div className="qs-media" style={{maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto'}}>
     <img src="/images/getting-started/step4-3-report.png" alt="查看报告" />
   </div>
 </div>
