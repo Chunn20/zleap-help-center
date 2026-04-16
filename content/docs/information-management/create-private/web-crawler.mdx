@@ -1,8 +1,351 @@
 ---
 title: 网页爬虫
-description: 通过网页爬虫自动抓取网站内容，构建您的信息源
+description: 通过输入网页链接，自动抓取网页内容作为信息源
 ---
 
-# 网页爬虫
+import { Globe, Link2, CheckCircle, AlertCircle, Lightbulb, HelpCircle } from 'lucide-react';
 
-通过网页爬虫功能，您可以自动抓取指定网站的内容，将其转化为结构化的知识资产。
+<style>{`
+  .crawler-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .crawler-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .crawler-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .crawler-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .crawler-image img {
+    width: 100%;
+    display: block;
+  }
+  .crawler-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .crawler-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .crawler-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25);
+  }
+  .crawler-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .crawler-table th,
+  .crawler-table td {
+    border: 1px solid var(--border-color, #EDEDED);
+    padding: 12px;
+    text-align: left;
+  }
+  .crawler-table th {
+    background: var(--table-header-bg, #FAFAFA);
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+  }
+  .crawler-table td {
+    color: var(--text-secondary, #5D5D5D);
+  }
+  .crawler-faq {
+    background: var(--faq-bg, #F9F9F9);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .crawler-faq h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 8px 0;
+  }
+  .crawler-faq p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .crawler-section,
+    .crawler-faq {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --faq-bg: #1a1a1a;
+      --border-color: #3a3a3a;
+      --table-header-bg: #2a2a2a;
+    }
+    .crawler-tip {
+      --tip-bg: #2d2416;
+    }
+    .crawler-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .crawler-section,
+  [data-theme="dark"] .crawler-faq {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --faq-bg: #1a1a1a;
+    --border-color: #3a3a3a;
+    --table-header-bg: #2a2a2a;
+  }
+  [data-theme="dark"] .crawler-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .crawler-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<h2 id="what-is-crawler" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  一、什么是网页爬虫
+</h2>
+
+<div className="crawler-section">
+  <p className="crawler-intro">
+    网页爬虫支持用户通过输入网页链接，自动抓取网页内容作为信息源；系统将对链接格式、合法性、连通性、重复性、数量进行全自动校验，确保链接有效后再提交入库。
+  </p>
+</div>
+
+---
+
+<h2 id="how-to-use" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  二、操作步骤
+</h2>
+
+<h3 id="step1" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="crawler-step-number">1</span>选择信息源类型
+</h3>
+
+<div className="crawler-section">
+  <p className="crawler-intro">
+    <strong>【信息管理】</strong> - <strong>【创建信息源】</strong> - <strong>【网页爬虫】</strong>
+  </p>
+
+  <div className="crawler-image">
+    <img src="/images/information-management/create-private/web-crawler/select-type.gif" alt="选择网页爬虫" />
+  </div>
+</div>
+
+---
+
+<h3 id="step2" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="crawler-step-number">2</span>填写基础表单
+</h3>
+
+<div className="crawler-section">
+  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>在<strong>【上传信息源】</strong>中粘贴所需爬取的网页，完成粘贴后点击<strong>【验证链接】</strong></li>
+    <li>在<strong>【信息要点】</strong>给信息源命名，可在<strong>【信息要点】</strong>添加说明，便于之后管理信息源</li>
+    <li>打开<strong>【启用状态】</strong>，该信息源则可以提供给<strong>【创建助手】</strong>/<strong>【创建任务】</strong></li>
+    <li>按需选择爬取网页的开始时间<strong>【首次同步】</strong>和间隔时间<strong>【同步频率】</strong>以及爬取网页的范围<strong>【爬取范围】</strong></li>
+  </ol>
+
+  <div className="crawler-image">
+    <img src="/images/information-management/create-private/web-crawler/form.gif" alt="填写表单" />
+  </div>
+</div>
+
+---
+
+<h2 id="rules" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  规则说明
+</h2>
+
+<h3 id="link-input" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  1. 链接输入框
+</h3>
+
+<div className="crawler-section">
+  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px' }}>
+    （1）输入规则
+  </h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '20px' }}>
+    <li>输入框默认占位提示：输入 http:// 或 https:// 开头的 URL 地址，可换行输入多个链接</li>
+    <li>支持换行输入多条链接</li>
+    <li>链接必须以 http:// 或 https:// 开头</li>
+  </ul>
+
+  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px' }}>
+    （2）链接验证功能
+  </h4>
+  <p className="crawler-intro">
+    点击<strong>「验证链接」</strong>后，系统自动执行以下 5 项校验：
+  </p>
+
+  <table className="crawler-table">
+    <thead>
+      <tr>
+        <th>校验类型</th>
+        <th>校验规则</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>空输入校验</td>
+        <td>至少输入 1 条链接</td>
+      </tr>
+      <tr>
+        <td>重复校验</td>
+        <td>未提交 / 已提交链接全局去重</td>
+      </tr>
+      <tr>
+        <td>数量校验</td>
+        <td>最多支持 5 条链接</td>
+      </tr>
+      <tr>
+        <td>格式校验</td>
+        <td>必须为合法 URL，以 http/https 开头</td>
+      </tr>
+      <tr>
+        <td>连通性校验</td>
+        <td>HTTP 状态码 200~399，超时≤5 秒</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table className="crawler-table">
+    <thead>
+      <tr>
+        <th>校验规则</th>
+        <th>校验失败提示</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>至少输入 1 条链接</td>
+        <td>请输入至少 1 条链接</td>
+      </tr>
+      <tr>
+        <td>未提交 / 已提交链接全局去重</td>
+        <td>第 X 行与第 Y 行链接重复 / 第 X 行链接已存在</td>
+      </tr>
+      <tr>
+        <td>最多支持 5 条链接</td>
+        <td>最多支持 5 条链接</td>
+      </tr>
+      <tr>
+        <td>必须为合法 URL，以 http/https 开头</td>
+        <td>第 X 行：格式错误</td>
+      </tr>
+      <tr>
+        <td>HTTP 状态码 200~399，超时≤5 秒</td>
+        <td>链接失效</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: '20px' }}>
+    （3）提交按钮状态规则
+  </h4>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '0' }}>
+    <li><strong>验证不通过：</strong>按钮保持灰色，文字为「提交链接」，不可点击</li>
+    <li><strong>所有链接格式正确 + 均可正常访问：</strong>按钮自动变为「提交信息」，可点击提交</li>
+  </ul>
+</div>
+
+---
+
+<h3 id="submitted-links" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  2. 已提交链接列表
+</h3>
+
+<div className="crawler-section">
+  <p className="crawler-intro">
+    提交后的链接将实时展示在列表中，用于查看总数量、各链接状态、解析结果。
+  </p>
+
+  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px' }}>
+    列表字段说明
+  </h4>
+  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li><strong>提交链接总数 & 总体状态（实时更新）</strong><br />示例：共5条（2条验证成功，1条提交中，2条验证失败）</li>
+    <li><strong>链接解析后名称 / 原始链接</strong></li>
+  </ol>
+  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '8px' }}>
+    <strong>3. 验证状态</strong>，共 4 种：
+  </p>
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '40px', marginBottom: '0' }}>
+    <li>提交中</li>
+    <li>验证成功</li>
+    <li>链接失效</li>
+    <li>格式错误</li>
+  </ul>
+</div>
+
+---
+
+<h2 id="faq" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  三、常见问题（FAQ）
+</h2>
+
+<div className="crawler-faq">
+  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q1：为什么「提交链接」按钮是灰色的？</h4>
+  <p><strong>A：</strong>至少有 1 条链接未通过格式 / 连通性 / 重复 / 数量校验，请根据红色提示修正后再提交。</p>
+</div>
+
+<div className="crawler-faq">
+  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q2：提示 "链接已存在" 是什么意思？</h4>
+  <p><strong>A：</strong>该链接在系统中已提交过（未提交或已提交均会判断），不支持重复提交。</p>
+</div>
+
+<div className="crawler-faq">
+  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q3：最多能提交几条链接？</h4>
+  <p><strong>A：</strong>单次最多支持 5 条。</p>
+</div>
+
+<div className="crawler-faq">
+  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q4：提示 "链接失效" 怎么办？</h4>
+  <p><strong>A：</strong>请检查链接是否可在浏览器正常打开；若可打开仍提示失效，可能是网络超时或目标网站限制访问。</p>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对网页爬虫功能有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

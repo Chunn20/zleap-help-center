@@ -18,5 +18,10 @@ const Logo: ReactNode = (
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: Logo,
+    transparentMode: 'top',
+  },
+  sidebar: {
+    defaultOpenLevel: 1,
+    collapsible: true,
   },
 };

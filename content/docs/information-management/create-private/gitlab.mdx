@@ -1,32 +1,427 @@
 ---
 title: GitLab
-description: 接入 GitLab 仓库作为信息源
+description: 通过 OAuth 授权接入 GitLab，获取仓库信息作为信息源
 ---
 
-import { Lightbulb, FileText, Bug, GitPullRequest, BookOpen } from 'lucide-react';
+import { GitBranch, Shield, CheckCircle, Lightbulb, AlertCircle, Settings, Key } from 'lucide-react';
 
+<style>{`
+  .gitlab-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .gitlab-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .gitlab-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .gitlab-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .gitlab-image img {
+    width: 100%;
+    display: block;
+  }
+  .gitlab-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .gitlab-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .gitlab-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25);
+  }
+  .gitlab-highlight {
+    background: var(--highlight-bg, #F9F9F9);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .gitlab-warning {
+    background: var(--warning-bg, #FFF4E6);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .gitlab-section,
+    .gitlab-highlight,
+    .gitlab-warning {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --highlight-bg: #1a1a1a;
+      --warning-bg: #2d2416;
+      --border-color: #3a3a3a;
+    }
+    .gitlab-tip {
+      --tip-bg: #2d2416;
+    }
+    .gitlab-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .gitlab-section,
+  [data-theme="dark"] .gitlab-highlight,
+  [data-theme="dark"] .gitlab-warning {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --highlight-bg: #1a1a1a;
+    --warning-bg: #2d2416;
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .gitlab-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .gitlab-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
 
-## 什么是 GitLab 信息源？
+<h2 id="what-is-gitlab" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  一、GitLab 是什么？
+</h2>
 
-通过 GitLab 信息源，您可以将 GitLab 仓库中的代码、文档、Issue、MR 等内容接入到 Zleap，让助手基于这些内容进行分析和创作。
-
-## 使用场景
-
-- <FileText className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 跟踪项目开发进度和代码变更
-- <Bug className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 监控 Issue 和 Bug 报告
-- <GitPullRequest className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 分析 Merge Request 和代码审查
-- <BookOpen className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 整理项目文档和 Wiki
-
-## 如何配置
-
-<div style={{ background: '#FFF7ED', borderLeft: '3px solid #FF8A00', padding: '16px 20px', borderRadius: '8px', margin: '20px 0' }}>
-  <p style={{ fontSize: '14px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>
-    <strong style={{ color: '#FF8A00' }}><Lightbulb className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 提示：</strong>GitLab 信息源功能正在开发中，敬请期待！
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    GitLab 是一个基于 Git 的代码托管与 DevOps 平台，简单理解就是：
   </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>开发团队用来存放、管理、协作开发代码的平台</li>
+    <li>支持 CI/CD、Issue 跟踪、代码审查等完整的 DevOps 工作流</li>
+    <li>可以自托管部署，也可以使用 GitLab.com 云服务</li>
+  </ul>
+
+  <p className="gitlab-intro">
+    很多企业和开源项目使用 GitLab 管理代码仓库，它也支持 OAuth 授权登录。
+  </p>
+
+  <div className="gitlab-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <Shield className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      GitLab 接入 Zleap 的逻辑（概念）
+    </h4>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '8px' }}>
+      Zleap 接入 GitLab，用的是<strong>第三方授权登录（OAuth）</strong>：
+    </p>
+    <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '0' }}>
+      <li>你不需要把 GitLab 密码告诉 Zleap</li>
+      <li>只需在 GitLab 官方页面授权，Zleap 就能获取你的仓库信息（代码、Issue、MR 等）完成对接</li>
+    </ul>
+  </div>
 </div>
 
-## 注意事项
+---
 
-- 需要提供 GitLab 访问权限
-- 私有仓库需要配置访问令牌
-- 支持自托管 GitLab 实例
+<h2 id="how-to-connect" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  二、操作步骤
+</h2>
+
+<h3 id="prerequisites" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  前置条件：在 GitLab 中创建 OAuth 应用
+</h3>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    在 Zleap 中配置 GitLab 之前，需要先在 GitLab 中创建一个 OAuth 应用程序。
+  </p>
+
+  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>登录您的 GitLab 账号（GitLab.com 或自托管实例）</li>
+    <li>进入<strong>【User Settings】</strong> - <strong>【Applications】</strong></li>
+    <li>点击<strong>【Add new application】</strong>创建新应用</li>
+  </ol>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/create-app.gif" alt="创建GitLab OAuth应用" />
+  </div>
+
+  <p className="gitlab-intro" style={{ marginTop: '20px' }}>
+    <strong>填写应用信息：</strong>
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li><strong>Name：</strong>应用名称，例如 "Zleap Integration"</li>
+    <li><strong>Redirect URI：</strong>回调地址，从 Zleap 配置页面复制</li>
+    <li><strong>Scopes：</strong>勾选所需权限（至少需要 <code>read_user</code>、<code>read_repository</code>）</li>
+  </ul>
+
+  <div className="gitlab-tip">
+    <p>
+      <CheckCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      创建成功后，GitLab 会生成 <strong>Application ID</strong> 和 <strong>Secret</strong>，请妥善保存这两个值。
+    </p>
+  </div>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/app-credentials.png" alt="获取应用凭证" />
+  </div>
+</div>
+
+---
+
+<h3 id="zleap-config" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  在 Zleap 中配置 GitLab
+</h3>
+
+<h4 id="step1" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitlab-step-number">1</span>进入 GitLab 配置页面
+</h4>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    在 Zleap 中进入<strong>【信息管理】</strong> - <strong>【创建信息源】</strong> - <strong>【GitLab】</strong>
+  </p>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/select-gitlab.png" alt="选择GitLab接入" />
+  </div>
+</div>
+
+---
+
+<h4 id="step2" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitlab-step-number">2</span>选择 GitLab 实例类型
+</h4>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    根据您使用的 GitLab 类型选择：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li><strong>GitLab.com：</strong>使用官方云服务</li>
+    <li><strong>Self-hosted GitLab：</strong>使用企业自托管实例</li>
+  </ul>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/select-type.png" alt="选择GitLab类型" />
+  </div>
+</div>
+
+---
+
+<h4 id="step3" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitlab-step-number">3</span>填写 GitLab 实例地址（仅自托管）
+</h4>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    如果选择了 Self-hosted GitLab，需要填写您的 GitLab 实例地址：
+  </p>
+
+  <div className="gitlab-tip">
+    <p>
+      <strong>示例：</strong><code>https://gitlab.yourcompany.com</code>
+    </p>
+  </div>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/instance-url.png" alt="填写实例地址" />
+  </div>
+</div>
+
+---
+
+<h4 id="step4" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitlab-step-number">4</span>复制回调地址
+</h4>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    在 Zleap 配置页面中，复制显示的<strong>【Redirect URI】</strong>（回调地址）
+  </p>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/copy-redirect-uri.png" alt="复制回调地址" />
+  </div>
+
+  <div className="gitlab-tip">
+    <p>
+      <AlertCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      这个回调地址需要在 GitLab OAuth 应用配置中使用（见前置条件步骤）
+    </p>
+  </div>
+</div>
+
+---
+
+<h4 id="step5" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitlab-step-number">5</span>填写 Application ID 和 Secret
+</h4>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    将从 GitLab OAuth 应用中获取的凭证填入 Zleap：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li><strong>Application ID：</strong>粘贴 GitLab 生成的 Application ID</li>
+    <li><strong>Secret：</strong>粘贴 GitLab 生成的 Secret</li>
+  </ul>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/fill-credentials.png" alt="填写凭证信息" />
+  </div>
+</div>
+
+---
+
+<h4 id="step6" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitlab-step-number">6</span>完成授权
+</h4>
+
+<div className="gitlab-section">
+  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>点击<strong>【去授权】</strong>按钮</li>
+    <li>页面会自动跳转到 GitLab 授权页面</li>
+    <li>确认授权 Zleap 访问您的 GitLab 数据</li>
+    <li>授权成功后自动返回 Zleap，即完成 GitLab 接入</li>
+  </ol>
+
+  <div className="gitlab-image">
+    <img src="/images/information-management/create-private/gitlab/authorization.png" alt="GitLab授权流程" />
+  </div>
+
+  <div className="gitlab-tip">
+    <p>
+      <CheckCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      配置完成后，Zleap 就可以访问您授权的 GitLab 仓库信息了！
+    </p>
+  </div>
+</div>
+
+---
+
+<h2 id="key-notes" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  三、关键说明 & 常见问题
+</h2>
+
+<h3 id="permissions" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  关于权限范围（Scopes）
+</h3>
+
+<div className="gitlab-section">
+  <p className="gitlab-intro">
+    在 GitLab 中创建 OAuth 应用时，需要选择合适的权限范围：
+  </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li><strong>read_user：</strong>读取用户基本信息（必需）</li>
+    <li><strong>read_repository：</strong>读取仓库代码和文件（推荐）</li>
+    <li><strong>read_api：</strong>读取 API 数据，包括 Issue、MR 等（推荐）</li>
+  </ul>
+
+  <div className="gitlab-warning">
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.7, margin: 0 }}>
+      <AlertCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      <strong>安全提示：</strong>只授予 Zleap 必要的权限，避免授予写入权限（如 <code>write_repository</code>、<code>api</code>）
+    </p>
+  </div>
+</div>
+
+---
+
+<h3 id="troubleshooting" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  常见错误排查
+</h3>
+
+<div className="gitlab-section">
+  <div className="gitlab-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <AlertCircle className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      错误 1：Redirect URI mismatch
+    </h4>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '8px' }}>
+      <strong>原因：</strong>GitLab OAuth 应用中配置的回调地址与 Zleap 提供的不一致
+    </p>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '0' }}>
+      <strong>解决：</strong>检查并确保 GitLab 应用配置中的 Redirect URI 与 Zleap 显示的完全一致（包括协议、域名、路径）
+    </p>
+  </div>
+
+  <div className="gitlab-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <AlertCircle className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      错误 2：Invalid client credentials
+    </h4>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '8px' }}>
+      <strong>原因：</strong>Application ID 或 Secret 填写错误
+    </p>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '0' }}>
+      <strong>解决：</strong>重新从 GitLab OAuth 应用页面复制 Application ID 和 Secret，确保没有多余的空格或字符
+    </p>
+  </div>
+
+  <div className="gitlab-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <AlertCircle className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      错误 3：Connection timeout（自托管实例）
+    </h4>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '8px' }}>
+      <strong>原因：</strong>GitLab 实例地址无法访问或网络不通
+    </p>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '0' }}>
+      <strong>解决：</strong>确认 GitLab 实例地址正确，且 Zleap 服务器可以访问该地址（检查防火墙、VPN 等网络配置）
+    </p>
+  </div>
+
+  <div className="gitlab-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <AlertCircle className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      错误 4：Insufficient permissions
+    </h4>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '8px' }}>
+      <strong>原因：</strong>OAuth 应用的权限范围不足
+    </p>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '0' }}>
+      <strong>解决：</strong>返回 GitLab OAuth 应用配置，勾选必要的 Scopes（至少需要 <code>read_user</code> 和 <code>read_repository</code>）
+    </p>
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对 GitLab 接入有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

@@ -1,32 +1,180 @@
 ---
 title: GitHub
-description: 接入 GitHub 仓库作为信息源
+description: 通过 OAuth 授权接入 GitHub，获取仓库信息作为信息源
 ---
 
-import { Lightbulb, FileText, Bug, GitPullRequest, BookOpen } from 'lucide-react';
+import { Github, Shield, CheckCircle, Lightbulb } from 'lucide-react';
 
+<style>{`
+  .github-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .github-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .github-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .github-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .github-image img {
+    width: 100%;
+    display: block;
+  }
+  .github-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .github-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .github-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25);
+  }
+  .github-highlight {
+    background: var(--highlight-bg, #F9F9F9);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .github-section,
+    .github-highlight {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --highlight-bg: #1a1a1a;
+      --border-color: #3a3a3a;
+    }
+    .github-tip {
+      --tip-bg: #2d2416;
+    }
+    .github-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .github-section,
+  [data-theme="dark"] .github-highlight {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --highlight-bg: #1a1a1a;
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .github-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .github-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
 
-## 什么是 GitHub 信息源？
+<h2 id="what-is-github" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  一、GitHub 是什么？
+</h2>
 
-通过 GitHub 信息源，您可以将 GitHub 仓库中的代码、文档、Issue、PR 等内容接入到 Zleap，让助手基于这些内容进行分析和创作。
-
-## 使用场景
-
-- <FileText className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 跟踪项目开发进度和代码变更
-- <Bug className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 监控 Issue 和 Bug 报告
-- <GitPullRequest className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 分析 Pull Request 和代码审查
-- <BookOpen className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 整理项目文档和 README
-
-## 如何配置
-
-<div style={{ background: '#FFF7ED', borderLeft: '3px solid #FF8A00', padding: '16px 20px', borderRadius: '8px', margin: '20px 0' }}>
-  <p style={{ fontSize: '14px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>
-    <strong style={{ color: '#FF8A00' }}><Lightbulb className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 提示：</strong>GitHub 信息源功能正在开发中，敬请期待！
+<div className="github-section">
+  <p className="github-intro">
+    GitHub 是全球最大的代码托管与开发者社区，简单理解就是：
   </p>
+
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>程序员用来存放、管理、协作写代码的平台</li>
+    <li>也是很多互联网产品用来快捷登录、验证身份的常用账号</li>
+  </ul>
+
+  <p className="github-intro">
+    很多工具、社区、AI 产品都支持用 GitHub 一键登录，方便又安全。
+  </p>
+
+  <div className="github-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <Shield className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      GitHub 接入 Zleap 的逻辑（概念）
+    </h4>
+    <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '8px' }}>
+      Zleap 接入 GitHub，用的是<strong>第三方授权登录（OAuth）</strong>：
+    </p>
+    <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '0' }}>
+      <li>你不需要把 GitHub 密码告诉 Zleap</li>
+      <li>只需在 GitHub 官方页面授权，Zleap 就能获取你的公开信息（头像、昵称等）完成登录 / 绑定</li>
+    </ul>
+  </div>
 </div>
 
-## 注意事项
+---
 
-- 需要提供 GitHub 访问权限
-- 私有仓库需要配置访问令牌
-- 建议定期同步以获取最新内容
+<h2 id="how-to-connect" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  二、接入方法
+</h2>
+
+<div className="github-section">
+  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>在 Zleap 中进入<strong>【信息管理】</strong>-<strong>【创建信息源】</strong>-<strong>【GitHub】</strong>，选择 GitHub 接入方式</li>
+  </ol>
+
+  <div className="github-image">
+    <img src="/images/information-management/create-private/github/select-github.gif" alt="选择GitHub接入" />
+  </div>
+
+  <ol start="2" style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>点击<strong>【去授权】</strong>页面会自动跳转到 GitHub 官方登录授权页</li>
+    <li>输入您的 GitHub 账号密码完成登录</li>
+    <li>确认授权 Zleap 访问您的 GitHub 相关数据</li>
+    <li>授权成功后自动返回 Zleap，即完成 GitHub 接入</li>
+  </ol>
+
+  <div className="github-tip">
+    <p>
+      <CheckCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      整个过程仅需登录 + 授权确认，无需配置密钥、地址等复杂信息，一键完成对接。
+    </p>
+  </div>
+
+  <div className="github-image">
+    <img src="/images/information-management/create-private/github/authorization.gif" alt="GitHub授权流程" />
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对 GitHub 接入有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

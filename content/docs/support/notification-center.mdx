@@ -1,5 +1,179 @@
 ---
 title: 通知中心
+description: 集中管理所有系统消息、团队动态和产品变更的信息中枢
 ---
 
-# 通知中心
+import { Bell, Mail, Calendar, FileText, Lightbulb } from 'lucide-react';
+
+<style>{`
+  .notification-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .notification-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .notification-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .notification-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .notification-image img {
+    width: 100%;
+    display: block;
+  }
+  .notification-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .notification-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .notification-card {
+    background: var(--card-bg, #FAFAFA);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .notification-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .notification-card p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin: 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .notification-section,
+    .notification-card {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .notification-tip {
+      --tip-bg: #2d2416;
+    }
+    .notification-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .notification-section,
+  [data-theme="dark"] .notification-card {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .notification-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .notification-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<h2 id="overview" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  功能概述
+</h2>
+
+<div className="notification-section">
+  <p className="notification-intro">
+    通知中心是您获取 Zleap 动态的信息中枢，集中管理所有与您相关的系统消息、团队动态和产品变更。点击界面右上角的通知铃铛图标可随时访问。
+  </p>
+</div>
+
+---
+
+<h2 id="access" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  访问入口
+</h2>
+
+<h3 id="web" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  网页版
+</h3>
+
+<div className="notification-section">
+  <p className="notification-intro">
+    登录您的 Zleap 账号，点击界面右上角<strong>「通知铃铛」</strong>图标，即可查看相关的<strong>「通知」</strong>、<strong>「活动」</strong>和<strong>「更新日志」</strong>。
+  </p>
+
+  <div className="notification-image">
+    <img src="/images/support/notification-center/notification-icon.gif" alt="通知铃铛入口" />
+  </div>
+</div>
+
+---
+
+<h2 id="sections" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  板块介绍
+</h2>
+
+<div className="notification-card">
+  <h3><Bell className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> 通知</h3>
+  <p>
+    这是您的个人消息收件箱，用于接收需要您关注或处理的即时信息，包括新报告生成/失败、订阅报告生成等系统提醒。点击相关通知，可查看详情并跳转至相关内容。
+  </p>
+</div>
+
+<div className="notification-image">
+  <img src="/images/support/notification-center/notifications.gif" alt="通知列表" />
+</div>
+
+<div className="notification-card">
+  <h3><Calendar className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> 活动</h3>
+  <p>
+    Zleap 官方发布的最新的线上/线下活动、社区互动及重要计划等通知。
+  </p>
+</div>
+
+<div className="notification-image">
+  <img src="/images/support/notification-center/activities.gif" alt="活动列表" />
+</div>
+
+<div className="notification-card">
+  <h3><FileText className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> 更新日志</h3>
+  <p>
+    Zleap 产品功能的最新优化与升级，点击可查看详细的优化与升级信息。
+  </p>
+</div>
+
+<div className="notification-image">
+  <img src="/images/support/notification-center/changelog.gif" alt="更新日志" />
+</div>
+
+---
+
+<div className="notification-section">
+  <p className="notification-intro" style={{ marginBottom: 0 }}>
+    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+    通过合理利用通知中心，您可以在高效处理信息的同时，随时了解 Zleap 的官方动态和产品进化。
+  </p>
+</div>

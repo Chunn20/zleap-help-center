@@ -1,5 +1,220 @@
 ---
-title: Salesmartly（客服系统对接）
+title: SaleSmartly（客服系统对接）
+description: 将 SaleSmartly 客服系统数据接入智跃 Zleap，实现客服对话智能分析
 ---
 
-# Salesmartly（客服系统对接）
+import { Settings, Key, Hash, Lightbulb, AlertCircle } from 'lucide-react';
+
+<style>{`
+  .salesmartly-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .salesmartly-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .salesmartly-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .salesmartly-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .salesmartly-image img {
+    width: 100%;
+    display: block;
+  }
+  .salesmartly-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .salesmartly-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .salesmartly-warning {
+    background: var(--warning-bg, #FFF4E6);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .salesmartly-warning p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .salesmartly-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    .salesmartly-section {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --border-color: #3a3a3a;
+    }
+    .salesmartly-tip,
+    .salesmartly-warning {
+      --tip-bg: #2d2416;
+      --warning-bg: #2d2416;
+    }
+    .salesmartly-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .salesmartly-section {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .salesmartly-tip,
+  [data-theme="dark"] .salesmartly-warning {
+    --tip-bg: #2d2416;
+    --warning-bg: #2d2416;
+  }
+  [data-theme="dark"] .salesmartly-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
+
+<h2 id="step1" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  <span className="salesmartly-step-number">1</span>登录 SaleSmartly 企业账号
+</h2>
+
+<div className="salesmartly-section">
+  <p className="salesmartly-intro">
+    打开 SaleSmartly 官方网站进行企业账号登录：
+  </p>
+
+  <div className="salesmartly-tip">
+    <p>
+      <strong>官方网站：</strong> 
+      <a href="https://www.salesmartly.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#FF8A00', fontWeight: 600, marginLeft: '8px' }}>
+        https://www.salesmartly.com/
+      </a>
+    </p>
+  </div>
+
+  <div className="salesmartly-image">
+    <img src="/images/information-management/create-private/salesmartly/login.png" alt="登录 SaleSmartly" />
+  </div>
+</div>
+
+---
+
+<h2 id="step2" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  <span className="salesmartly-step-number">2</span>进入项目管理
+</h2>
+
+<div className="salesmartly-section">
+  <p className="salesmartly-intro">
+    在右侧点击<strong>【设置】</strong>，然后点击<strong>【项目管理】</strong>。
+  </p>
+
+  <div className="salesmartly-image">
+    <img src="/images/information-management/create-private/salesmartly/project-management.png" alt="进入项目管理" />
+  </div>
+</div>
+
+---
+
+<h2 id="step3" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  <span className="salesmartly-step-number">3</span>生成或复制密钥
+</h2>
+
+<div className="salesmartly-section">
+  <p className="salesmartly-intro">
+    点击<strong>【企业开发配置】</strong>，点击<strong>【生成密钥】</strong>。如果已有密钥，直接进行复制即可。
+  </p>
+
+  <div className="salesmartly-warning">
+    <p>
+      <AlertCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      <strong>注意：</strong>此功能需要企业拥有 MAX 以上版本账户。
+    </p>
+  </div>
+
+  <div className="salesmartly-image">
+    <img src="/images/information-management/create-private/salesmartly/generate-key.png" alt="生成密钥" />
+  </div>
+</div>
+
+---
+
+<h2 id="step4" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  <span className="salesmartly-step-number">4</span>复制项目 ID
+</h2>
+
+<div className="salesmartly-section">
+  <p className="salesmartly-intro">
+    点击<strong>【项目设置】</strong>，找到<strong>【项目ID】</strong>进行复制。
+  </p>
+
+  <div className="salesmartly-image">
+    <img src="/images/information-management/create-private/salesmartly/project-id.png" alt="复制项目ID" />
+  </div>
+</div>
+
+---
+
+<h2 id="step5" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  <span className="salesmartly-step-number">5</span>在智跃 Zleap 中配置
+</h2>
+
+<div className="salesmartly-section">
+  <p className="salesmartly-intro">
+    回到<strong>智跃 Zleap</strong>，粘贴刚才复制的密钥和项目 ID 信息。
+  </p>
+
+  <div className="salesmartly-image">
+    <img src="/images/information-management/create-private/salesmartly/zleap-config.png" alt="在智跃Zleap中配置" />
+  </div>
+
+  <div className="salesmartly-tip">
+    <p>
+      <Lightbulb className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      配置完成后，SaleSmartly 的客服对话数据将自动同步到智跃 Zleap，您可以使用 AI 助手对客服数据进行智能分析和总结！
+    </p>
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对 SaleSmartly 对接有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>

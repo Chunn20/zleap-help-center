@@ -1,32 +1,296 @@
 ---
 title: Gitee
-description: 接入 Gitee 仓库作为信息源
+description: 通过 OAuth 授权接入 Gitee，获取仓库信息作为信息源
 ---
 
-import { Lightbulb, FileText, Bug, GitPullRequest, BookOpen } from 'lucide-react';
+import { GitBranch, Shield, CheckCircle, Lightbulb, AlertCircle, Settings } from 'lucide-react';
 
+<style>{`
+  .gitee-section {
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  }
+  .gitee-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 16px 0;
+    padding-left: 12px;
+    border-left: 4px solid #FF8A00;
+  }
+  .gitee-intro {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .gitee-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border-color, #EDEDED);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+  }
+  .gitee-image img {
+    width: 100%;
+    display: block;
+  }
+  .gitee-tip {
+    background: var(--tip-bg, #FFF7ED);
+    border-left: 3px solid #FF8A00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .gitee-tip p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .gitee-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25);
+  }
+  .gitee-highlight {
+    background: var(--highlight-bg, #F9F9F9);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .gitee-faq {
+    background: var(--faq-bg, #F9F9F9);
+    border: 1px solid var(--border-color, #EDEDED);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .gitee-faq h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #0D131A);
+    margin: 0 0 8px 0;
+  }
+  .gitee-faq p {
+    font-size: 14px;
+    color: var(--text-secondary, #5D5D5D);
+    line-height: 1.7;
+    margin: 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .gitee-section,
+    .gitee-highlight,
+    .gitee-faq {
+      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+      --highlight-bg: #1a1a1a;
+      --faq-bg: #1a1a1a;
+      --border-color: #3a3a3a;
+    }
+    .gitee-tip {
+      --tip-bg: #2d2416;
+    }
+    .gitee-image {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+    }
+  }
+  [data-theme="dark"] .gitee-section,
+  [data-theme="dark"] .gitee-highlight,
+  [data-theme="dark"] .gitee-faq {
+    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
+    --highlight-bg: #1a1a1a;
+    --faq-bg: #1a1a1a;
+    --border-color: #3a3a3a;
+  }
+  [data-theme="dark"] .gitee-tip {
+    --tip-bg: #2d2416;
+  }
+  [data-theme="dark"] .gitee-image {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  }
+`}</style>
 
-## 什么是 Gitee 信息源？
+<h2 id="what-is-gitee" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  一、Gitee 是什么？
+</h2>
 
-通过 Gitee 信息源，您可以将 Gitee 仓库中的代码、文档、Issue、PR 等内容接入到 Zleap，让助手基于这些内容进行分析和创作。
-
-## 使用场景
-
-- <FileText className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 跟踪项目开发进度和代码变更
-- <Bug className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 监控 Issue 和 Bug 报告
-- <GitPullRequest className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 分析 Pull Request 和代码审查
-- <BookOpen className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 整理项目文档和 README
-
-## 如何配置
-
-<div style={{ background: '#FFF7ED', borderLeft: '3px solid #FF8A00', padding: '16px 20px', borderRadius: '8px', margin: '20px 0' }}>
-  <p style={{ fontSize: '14px', color: '#5D5D5D', lineHeight: 1.7, margin: 0 }}>
-    <strong style={{ color: '#FF8A00' }}><Lightbulb className="inline h-4 w-4 mr-1 text-[#FF8A00]" /> 提示：</strong>Gitee 信息源功能正在开发中，敬请期待！
+<div className="gitee-section">
+  <p className="gitee-intro">
+    Gitee（码云）是国内主流的代码托管与开发者协作平台，和 GitHub 功能类似，是国内企业 / 开发者存放、管理代码的常用工具。
   </p>
+
+  <div className="gitee-highlight">
+    <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: 0 }}>
+      <Shield className="inline h-5 w-5 mr-2 text-[#FF8A00]" />
+      Zleap 接入 Gitee 用的是 OAuth 2.0 第三方授权机制
+    </h4>
+    <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '0' }}>
+      <li>无需手动创建应用、填写复杂参数，直接一键跳转 Gitee 官方页面授权</li>
+      <li>不用把 Gitee 账号密码告诉 Zleap，仅通过授权获取有限的只读权限</li>
+      <li>可随时在 Gitee 后台撤销授权，安全可控</li>
+    </ul>
+  </div>
 </div>
 
-## 注意事项
+---
 
-- 需要提供 Gitee 访问权限
-- 私有仓库需要配置访问令牌
-- 建议定期同步以获取最新内容
+<h2 id="how-to-connect" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  二、完整操作步骤
+</h2>
+
+<h3 id="step1" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitee-step-number">1</span>进入创建页面
+</h3>
+
+<div className="gitee-section">
+  <p className="gitee-intro">
+    在 Zleap 中进入<strong>【信息管理】</strong> - <strong>【创建信息源】</strong> - <strong>【Gitee】</strong>，选择 Gitee 接入方式
+  </p>
+
+  <div className="gitee-image">
+    <img src="/images/information-management/create-private/gitee/select-gitee.gif" alt="选择Gitee接入" />
+  </div>
+</div>
+
+---
+
+<h3 id="step2" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitee-step-number">2</span>一键授权连接
+</h3>
+
+<div className="gitee-section">
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>页面会自动跳转到 Gitee 官方授权页</li>
+    <li>若未登录，先输入 Gitee 账号密码完成登录</li>
+    <li>确认授权给 Zleap（仅授予读取仓库、用户信息的只读权限），点击<strong>「授权」</strong></li>
+    <li>授权成功后自动跳回 Zleap，页面状态从<strong>「待授权」</strong>变为<strong>「已授权」</strong></li>
+  </ul>
+
+  <div className="gitee-image">
+    <img src="/images/information-management/create-private/gitee/authorization.png" alt="Gitee授权流程" />
+  </div>
+</div>
+
+---
+
+<h3 id="step3" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitee-step-number">3</span>补充信息源配置
+</h3>
+
+<div className="gitee-section">
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li><strong>信息名称：</strong>给信息源起一个辨识度高的名字，比如「公司 Gitee 代码库」</li>
+    <li><strong>信息要点：</strong>填写用途说明，比如「同步公司前端代码仓库，用于 AI 代码问答」</li>
+    <li><strong>启用状态：</strong>默认开启（开启后才能被 AI 应用关联使用）</li>
+    <li><strong>首次同步：</strong>可自定义首次同步时间，默认是当前时间</li>
+    <li><strong>同步频率：</strong>设置数据自动同步的间隔（例：3 小时，即每 3 小时拉取一次 Gitee 最新数据）</li>
+  </ul>
+
+  <div className="gitee-image">
+    <img src="/images/information-management/create-private/gitee/config-form.png" alt="填写信息源配置" />
+  </div>
+</div>
+
+---
+
+<h3 id="step4" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitee-step-number">4</span>选择同步仓库 / 分支
+</h3>
+
+<div className="gitee-section">
+  <p className="gitee-intro">
+    授权成功后，页面会加载你 Gitee 下的所有仓库，勾选需要同步给 Zleap 的仓库、指定分支，避免同步无关数据。
+  </p>
+
+  <div className="gitee-image">
+    <img src="/images/information-management/create-private/gitee/select-repos.png" alt="选择同步仓库" />
+  </div>
+</div>
+
+---
+
+<h3 id="step5" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  <span className="gitee-step-number">5</span>提交完成接入
+</h3>
+
+<div className="gitee-section">
+  <p className="gitee-intro">
+    确认所有配置无误后，点击右上角<strong>「提交信息」</strong>，完成 Gitee 信息源的接入。
+  </p>
+
+  <div className="gitee-tip">
+    <p>
+      <CheckCircle className="inline h-4 w-4 mr-1 text-[#FF8A00]" />
+      后续可在<strong>「信息源列表」</strong>查看同步状态，在<strong>「信息源日志」</strong>排查同步问题。
+    </p>
+  </div>
+
+  <div className="gitee-image">
+    <img src="/images/information-management/create-private/gitee/submit.png" alt="提交完成" />
+  </div>
+</div>
+
+---
+
+<h2 id="key-notes" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
+  三、关键说明 & 常见问题
+</h2>
+
+<h3 id="permissions" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  1. 权限说明
+</h3>
+
+<div className="gitee-section">
+  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+    <li>授权后 Zleap 仅拥有只读权限，只能读取代码 / 文档数据，无法修改、删除你的 Gitee 内容</li>
+    <li>可随时在 Gitee<strong>「设置 → 第三方应用」</strong>中找到 Zleap 应用，点击<strong>「撤销」</strong>终止授权</li>
+  </ul>
+</div>
+
+---
+
+<h3 id="troubleshooting" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
+  2. 常见报错排查
+</h3>
+
+<div className="gitee-section">
+  <div className="gitee-faq">
+    <h4><AlertCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> 授权失败</h4>
+    <p>检查 Gitee 账号是否正常、网络是否通畅，重新点击授权即可</p>
+  </div>
+
+  <div className="gitee-faq">
+    <h4><AlertCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> 同步失败</h4>
+    <p>检查仓库权限是否正常、Zleap 服务器网络是否连通</p>
+  </div>
+
+  <div className="gitee-faq">
+    <h4><AlertCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> 仓库不显示</h4>
+    <p>确认授权时已勾选对应仓库的读取权限，重新授权即可</p>
+  </div>
+</div>
+
+---
+
+<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
+  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对 Gitee 接入有疑问或建议？欢迎提交反馈！
+  </p>
+  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
+    提交反馈意见 →
+  </a>
+</div>
