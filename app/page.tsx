@@ -176,18 +176,9 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section
-        className="py-16 relative overflow-hidden"
-        style={{
-          backgroundImage: 'url(/background.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="mx-auto max-w-7xl px-6">
+        {/* Features Section - 在同一个背景图内 */}
+        <div className="mx-auto max-w-7xl px-6 mt-16">
           <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature) => (
@@ -213,15 +204,15 @@ export default function HomePage() {
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="group rounded-2xl border border-gray-200 p-6 transition-all hover:border-[#FF8A00] hover:shadow-lg"
+                  className="group rounded-2xl border border-gray-200 bg-gray-50 p-6 transition-all hover:border-[#FF8A00] hover:shadow-lg"
                 >
-                  <div className="mb-4 inline-flex rounded-lg bg-orange-50 p-3">
-                    <img src={link.iconPath} alt={link.title} className="h-6 w-6" />
+                  <div className="mb-4 flex justify-center">
+                    <img src={link.iconPath} alt={link.title} className="h-12 w-12" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-[#FF8A00]">
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-[#FF8A00] text-center">
                     {link.title}
                   </h3>
-                  <p className="text-sm text-gray-600">{link.description}</p>
+                  <p className="text-sm text-gray-600 text-center">{link.description}</p>
                 </Link>
               );
             })}
