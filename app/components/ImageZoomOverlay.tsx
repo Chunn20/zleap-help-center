@@ -37,11 +37,12 @@ export default function ImageZoomOverlay() {
       const images = document.querySelectorAll('.qs-media img');
 
       images.forEach(img => {
-        (img as HTMLElement).style.cursor = 'zoom-in';
-        img.addEventListener('click', function(e) {
+        const imgElement = img as HTMLImageElement;
+        imgElement.style.cursor = 'zoom-in';
+        imgElement.addEventListener('click', (e) => {
           e.stopPropagation();
-          overlayImage.src = (this as HTMLImageElement).src;
-          overlayImage.alt = (this as HTMLImageElement).alt;
+          overlayImage.src = imgElement.src;
+          overlayImage.alt = imgElement.alt;
           overlay.style.display = 'flex';
           document.body.style.overflow = 'hidden';
         });

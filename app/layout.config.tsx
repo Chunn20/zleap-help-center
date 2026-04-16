@@ -20,9 +20,4 @@ export const baseOptions: BaseLayoutProps = {
     title: Logo,
     transparentMode: 'top',
   },
-  sidebar: {
-    defaultOpenLevel: 1,
-    collapsible: true,
-  },
-  enableToc: true,
 };
