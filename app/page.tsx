@@ -86,9 +86,10 @@ export default function HomePage() {
       {/* Header */}
       <header className="border-b bg-white">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2">
               <img src="/图标/logo.png" alt="Zleap" className="h-9" />
+              <span className="text-xl font-bold text-gray-900">智跃</span>
             </Link>
             <img src="/图标/AI 驱动的智能内容社区.png" alt="AI 驱动的智能内容社区" className="h-6" />
           </div>
