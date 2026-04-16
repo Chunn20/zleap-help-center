@@ -88,7 +88,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center">
-              <img src="/图标/logo.png" alt="Zleap" className="h-7" />
+              <img src="/图标/logo.png" alt="Zleap" className="h-9" />
             </Link>
             <img src="/图标/AI 驱动的智能内容社区.png" alt="AI 驱动的智能内容社区" className="h-6" />
           </div>
