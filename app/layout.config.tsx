@@ -7,8 +7,8 @@ const Logo: ReactNode = (
     <Image
       src="/logo.png"
       alt="Zleap"
-      width={24}
-      height={24}
+      width={32}
+      height={32}
       className="rounded"
     />
     Zleap 帮助中心
