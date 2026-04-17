@@ -20,4 +20,7 @@ export const baseOptions: BaseLayoutProps = {
     title: Logo,
     transparentMode: 'top',
   },
+  themeSwitch: {
+    enabled: false,
+  },
 };

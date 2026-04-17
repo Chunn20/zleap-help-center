@@ -1,8 +1,34 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+
+// 所有可搜索的文档页面
+const allDocs = [
+  { title: '快速开始', keywords: ['快速', '开始', '入门', '新手'], href: '/docs/getting-started/quick-start' },
+  { title: '下载使用', keywords: ['下载', '安装', '使用'], href: '/docs/getting-started/download' },
+  { title: '什么是 Zleap', keywords: ['什么', 'Zleap', '介绍', '关于'], href: '/docs/about-zleap/about' },
+  { title: '企业版', keywords: ['企业', '企业版', '私有化', '部署'], href: '/docs/about-zleap/enterprise' },
+  { title: '信息管理', keywords: ['信息', '管理', '信息源'], href: '/docs/information-management/information-management' },
+  { title: '事件表格', keywords: ['事件', '表格'], href: '/docs/information-management/event-table' },
+  { title: '订阅共享信息源', keywords: ['订阅', '共享', '信息源'], href: '/docs/information-management/subscribe-shared' },
+  { title: '创建私有信息源', keywords: ['创建', '私有', '信息源'], href: '/docs/information-management/create-private' },
+  { title: 'GitHub', keywords: ['GitHub', 'git'], href: '/docs/information-management/create-private/github' },
+  { title: 'GitLab', keywords: ['GitLab', 'git'], href: '/docs/information-management/create-private/gitlab' },
+  { title: 'Gitee', keywords: ['Gitee', 'git'], href: '/docs/information-management/create-private/gitee' },
+  { title: 'RSS', keywords: ['RSS', '订阅'], href: '/docs/information-management/create-private/rss' },
+  { title: '网页爬虫', keywords: ['网页', '爬虫', 'crawler'], href: '/docs/information-management/create-private/web-crawler' },
+  { title: '浏览器插件', keywords: ['浏览器', '插件', 'extension'], href: '/docs/information-management/create-private/browser-extension' },
+  { title: '飞书机器人', keywords: ['飞书', '机器人', 'bot'], href: '/docs/information-management/create-private/feishu-bot' },
+  { title: 'SaleSmartly', keywords: ['SaleSmartly', '客服'], href: '/docs/information-management/create-private/salesmartly' },
+  { title: '识别 Agent 与真人', keywords: ['识别', 'Agent', '真人', 'AI'], href: '/docs/support/agent-vs-human' },
+  { title: '通知中心', keywords: ['通知', '中心', '消息'], href: '/docs/support/notification-center' },
+  { title: '语言设置', keywords: ['语言', '设置', 'language'], href: '/docs/support/language-settings' },
+  { title: '更新日志', keywords: ['更新', '日志', 'changelog'], href: '/docs/support/changelog' },
+  { title: '联系我们', keywords: ['联系', '反馈', '帮助'], href: '/docs/contact/contact' },
+  { title: '提交反馈', keywords: ['提交', '反馈', '建议'], href: '/docs/contact/feedback' },
+];
 
 const quickLinks = [
   {
@@ -72,13 +98,55 @@ const features = [
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<typeof allDocs>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  // 处理搜索输入变化
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      // 模糊搜索：匹配标题或关键词
+      const filtered = allDocs.filter(doc =>
+        doc.title.toLowerCase().includes(query.toLowerCase()) ||
+        doc.keywords.some(keyword => keyword.toLowerCase().includes(query.toLowerCase()))
+      ).slice(0, 8); // 最多显示8条建议
+
+      setSuggestions(filtered);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  // 点击外部关闭建议框
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      setShowSuggestions(false);
       router.push(`/docs?search=${encodeURIComponent(searchQuery)}`);
     }
+  };
+
+  const handleSuggestionClick = (href: string) => {
+    setShowSuggestions(false);
+    setSearchQuery('');
+    router.push(href);
   };
 
   return (
@@ -88,7 +156,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-full px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="Zleap" className="h-8 rounded" />
+              <img src="/logo.png" alt="Zleap" className="h-10 rounded" />
               <span className="text-xl font-bold text-gray-900">智跃</span>
             </Link>
             <img src="/图标/AI 驱动的智能内容社区.png" alt="AI 驱动的智能内容社区" className="h-6" />
@@ -111,17 +179,9 @@ export default function HomePage() {
               href="https://zleap.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-white border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              登录
-            </Link>
-            <Link
-              href="https://zleap.com"
-              target="_blank"
-              rel="noopener noreferrer"
               className="rounded-full bg-[#FF8A00] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#FF8A00]/90"
             >
-              注册
+              登录
             </Link>
           </nav>
         </div>
@@ -129,39 +189,59 @@ export default function HomePage() {
 
       {/* Hero Section with Background */}
       <section
-        className="relative py-20 overflow-hidden"
+        className="relative py-32 overflow-hidden min-h-screen flex items-center"
         style={{
           backgroundImage: 'url(/background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="mb-4 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
-          <h1 className="mb-8 text-4xl font-bold text-gray-900">
+        <div className="mx-auto max-w-4xl px-6 text-center w-full">
+          <p className="mb-10 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
+          <h1 className="mb-16 text-5xl font-bold text-gray-900">
             让 AI Agent 成为你的智能信息助手
           </h1>
 
           {/* Search Box */}
-          <form onSubmit={handleSearch} className="mx-auto mb-8 max-w-2xl">
-            <div className="relative">
+          <form onSubmit={handleSearch} className="mx-auto mb-8 max-w-4xl">
+            <div className="relative" ref={searchRef}>
               <img
                 src="/图标/搜索图标.png"
                 alt="搜索"
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 z-10"
               />
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
+                onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
                 placeholder="请输入关键字，如：信息管理、信息源"
                 className="w-full rounded-full border-2 border-[#FF8A00] bg-white pl-12 pr-6 py-4 text-base shadow-sm focus:outline-none focus:border-[#FF8A00] focus:shadow-[0_0_0_3px_rgba(255,138,0,0.1)] transition-shadow"
               />
+
+              {/* 搜索建议下拉框 */}
+              {showSuggestions && suggestions.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl border border-gray-200 shadow-lg max-h-96 overflow-y-auto z-50">
+                  {suggestions.map((doc, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => handleSuggestionClick(doc.href)}
+                      className="w-full text-left px-6 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl"
+                    >
+                      <div className="flex items-center gap-3">
+                        <img src="/图标/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
+                        <span className="text-sm text-gray-900">{doc.title}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </form>
 
           {/* Search Tags */}
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3 mb-16">
             {searchTags.map((tag) => (
               <Link
                 key={tag.label}
@@ -172,21 +252,21 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-        </div>
 
-        {/* Features Section - 在同一个背景图内 */}
-        <div className="mx-auto max-w-7xl px-6 mt-16">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                className={`rounded-2xl ${feature.color} p-8 text-center transition-transform hover:scale-105`}
-              >
-                <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
+          {/* Features Section - 认识Zleap */}
+          <div className="mt-20">
+            <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {features.map((feature) => (
+                <div
+                  key={feature.title}
+                  className={`rounded-2xl ${feature.color} p-8 text-center transition-transform hover:scale-105`}
+                >
+                  <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
