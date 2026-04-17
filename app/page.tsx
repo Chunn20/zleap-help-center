@@ -85,7 +85,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+        <div className="mx-auto max-w-full px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2">
               <img src="/logo.png" alt="Zleap" className="h-8 rounded" />
