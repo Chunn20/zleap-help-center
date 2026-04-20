@@ -57,13 +57,14 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     transform: scale(1.01);
   }
   
-  /* 概述卡片 - 强调卡片 */
+  /* 概述卡片 - 深色强调卡片 */
   .enterprise-overview {
-    background: #FFF7ED;
-    border: 1px solid #FED7AA;
+    background: #0D131A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 32px;
     margin: 32px 0;
+    box-shadow: 0 4px 20px rgba(13, 19, 26, 0.3);
   }
   
   .enterprise-overview-badge {
@@ -85,20 +86,20 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   
   .enterprise-overview-badge-text {
     font-size: 13px;
-    color: #92400e;
+    color: rgba(255, 255, 255, 0.7);
   }
   
   .enterprise-overview h2 {
     font-size: 22px;
     font-weight: 700;
-    color: #1d1d1f;
+    color: #FFFFFF;
     margin: 0 0 16px 0;
     line-height: 1.4;
   }
   
   .enterprise-overview p {
     font-size: 14px;
-    color: #1d1d1f;
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.8;
     margin: 12px 0;
   }
@@ -399,6 +400,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     font-size: 20px;
     line-height: 1;
     font-weight: 700;
+    transition: transform 0.2s;
+  }
+  
+  .enterprise-cta-card:hover .enterprise-cta-arrow {
+    transform: translateX(4px);
   }
   
   /* 响应式 */

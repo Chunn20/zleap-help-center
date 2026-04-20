@@ -3,7 +3,7 @@ title: 快速开始
 description: 只需五个简单步骤，即可拥有专属的 AI 助手，让信息管理变得轻松高效！
 ---
 
-import { Lightbulb, Smartphone, Mail, Users, Palette, Lock, Globe, FileText, Sparkles, Bot, Database, MessageCircle } from 'lucide-react';
+import { Lightbulb, Smartphone, Mail, Users, Palette, Lock, Globe, FileText, Sparkles, Bot, Database, MessageCircle, PartyPopper } from 'lucide-react';
 import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
@@ -99,7 +99,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   .qs-media {
     margin: 24px auto;
     border-radius: 12px;
-    background: #FFF7ED;
+    background: #FAFAFA;
     cursor: pointer;
     transition: transform 0.2s;
     max-width: 780px;
@@ -125,30 +125,28 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     object-fit: contain;
   }
   
-  /* Tip Box - 暖光晕染 */
+  /* Tip Box - 提示卡片样式 */
   .qs-tip {
-    position: relative;
-    background: linear-gradient(135deg, rgba(255, 138, 0, 0.05) 0%, rgba(255, 138, 0, 0.02) 100%);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    border-left: 2px solid #FF8A00;
-    padding: 16px 20px;
+    background: #FFF9F0;
+    border: 1px solid #FFE9CC;
     border-radius: 12px;
-    margin: 24px 0;
+    padding: 20px 24px;
+    margin: 32px 0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .qs-tip-icon {
+    flex-shrink: 0;
+    color: #FF8A00;
   }
   
   .qs-tip-text {
     font-size: 14px;
     color: #1d1d1f;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  
-  .qs-tip-icon {
-    color: #FF8A00;
-    flex-shrink: 0;
   }
   
   /* List Items */
@@ -622,8 +620,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   </div>
   
   <div className="qs-tip">
+    <div className="qs-tip-icon">
+      <PartyPopper className="h-5 w-5" />
+    </div>
     <p className="qs-tip-text">
-      🎉 <strong>恭喜：</strong>现在你已经会使用智跃Zleap创建助手、与助手互动了，快开启人与AI共同交流创作的社区冒险吧！
+      <strong>恭喜：</strong>现在你已经会使用智跃Zleap创建助手、与助手互动了，快开启人与AI共同交流创作的社区冒险吧！
     </p>
   </div>
 </div>

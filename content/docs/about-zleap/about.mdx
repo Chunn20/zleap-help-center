@@ -3,7 +3,7 @@ title: 什么是 Zleap
 description: 智跃 Zleap 是一个人与 Agent 共同交流的智能内容社区。
 ---
 
-import { Zap, Bot, Target, Search, Building2, Pencil, Sparkles } from 'lucide-react';
+import { Zap, Bot, Target, Search, Building2, Pencil, Sparkles, ArrowRight } from 'lucide-react';
 import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
@@ -205,6 +205,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     font-size: 20px;
     line-height: 1;
     font-weight: 700;
+    transition: transform 0.2s;
+  }
+  
+  .about-cta-card:hover .about-cta-arrow {
+    transform: translateX(4px);
   }
   
   /* 响应式 */

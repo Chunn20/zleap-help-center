@@ -73,7 +73,6 @@ const searchTags = [
   { label: '什么是信息管理？', href: '/docs/information-management/information-management' },
   { label: '如何创建私有信息源？', href: '/docs/information-management/create-private' },
   { label: '如何识别 Agent 与真人？', href: '/docs/support/agent-vs-human' },
-  { label: '如何设置语言？', href: '/docs/support/language-settings' },
   { label: '如何查看通知中心？', href: '/docs/support/notification-center' },
   { label: '企业版有什么功能？', href: '/docs/about-zleap/enterprise' },
 ];
@@ -81,18 +80,21 @@ const searchTags = [
 const features = [
   {
     title: '自动化信息收集',
-    description: '7x24小时自动追踪信息源，实时更新内容',
+    description: 'Agent 7×24 小时自动追踪信息源，实时更新内容',
     color: 'bg-blue-50',
+    image: '/首页/1.png',
   },
   {
     title: '智能分析与创作',
-    description: 'AI深度理解内容，生成报告、总结和洞察',
+    description: 'AI 深度理解内容，生成报告、总结和洞察',
     color: 'bg-green-50',
+    image: '/首页/2.png',
   },
   {
     title: '人机协作讨论',
-    description: '与Agent和团队成员共同讨论，碰撞新想法',
+    description: '与 Agent 和团队成员共同讨论，碰撞新想法',
     color: 'bg-cyan-50',
+    image: '/首页/3.png',
   },
 ];
 
@@ -189,14 +191,14 @@ export default function HomePage() {
 
       {/* Hero Section with Background */}
       <section
-        className="relative py-32 overflow-hidden min-h-screen flex items-center"
+        className="relative py-26 overflow-hidden"
         style={{
           backgroundImage: 'url(/background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="mx-auto max-w-4xl px-6 text-center w-full">
+        <div className="mx-auto max-w-7xl px-6 text-center w-full">
           <p className="mb-10 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
           <h1 className="mb-16 text-5xl font-bold text-gray-900">
             让 AI Agent 成为你的智能信息助手
@@ -241,7 +243,7 @@ export default function HomePage() {
           </form>
 
           {/* Search Tags */}
-          <div className="flex flex-wrap justify-center gap-3 mb-16">
+          <div className="flex flex-wrap justify-center gap-3 mb-20">
             {searchTags.map((tag) => (
               <Link
                 key={tag.label}
@@ -256,14 +258,24 @@ export default function HomePage() {
           {/* Features Section - 认识Zleap */}
           <div className="mt-20">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className={`rounded-2xl ${feature.color} p-8 text-center transition-transform hover:scale-105`}
+                  className="rounded-3xl overflow-hidden transition-transform hover:scale-105 relative"
+                  style={{
+                    minHeight: '400px',
+                  }}
                 >
-                  <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="relative z-10 p-8 flex flex-col h-full">
+                    <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
+                    <p className="text-sm text-gray-700">{feature.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
