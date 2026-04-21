@@ -3,359 +3,342 @@ title: 信息源列表
 description: 信息源列表是 Zleap 的「数据资产管理中心」，是你管理所有 AI 知识库素材、数据来源的总控制台。
 ---
 
-import { Lightbulb } from 'lucide-react';
-
+import { Lightbulb, Send } from 'lucide-react';
+import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
-  .source-list-section {
-    border: 1px solid var(--border-color, #EDEDED);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 32px;
-    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  /* 调整页面标题（H1）和描述文字的距离 */
+  #nd-page > h1 {
+    margin-bottom: 0px !important;
   }
-  .source-list-title {
-    font-size: 20px;
+  
+  /* 调整描述文字的上边距 */
+  #nd-page > h1 + p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* H2 标题样式 */
+  #nd-page h2 {
+    font-size: 24px;
     font-weight: 700;
-    color: var(--text-primary, #0D131A);
-    margin: 0 0 16px 0;
-    padding-left: 12px;
-    border-left: 4px solid #FF8A00;
+    color: #1d1d1f;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin-top: 40px;
+    margin-bottom: 24px;
   }
-  .source-list-subtitle {
-    font-size: 16px;
+  
+  /* H3 标题样式 */
+  #nd-page h3 {
+    font-size: 19px;
     font-weight: 600;
-    color: var(--text-primary, #0D131A);
-    margin: 24px 0 12px 0;
-    padding-left: 12px;
-    border-left: 3px solid #FF8A00;
+    color: #1d1d1f;
+    letter-spacing: -0.01em;
+    margin-top: 40px;
+    margin-bottom: 20px;
   }
-  .source-list-image {
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 20px 0;
-    border: 1px solid var(--border-color, #EDEDED);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    max-width: 800px;
+  
+  /* H4 标题样式 */
+  #nd-page h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-top: 32px;
+    margin-bottom: 16px;
   }
-  .source-list-image img {
-    width: 100%;
-    display: block;
-    cursor: pointer;
+  
+  /* 移除分隔线 */
+  #nd-page hr {
+    display: none;
   }
-  .source-list-tip {
-    background: var(--tip-bg, #F8F9FA);
-    border-left: 3px solid var(--text-secondary, #5D5D5D);
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin: 16px 0;
-  }
-  .source-list-tip p {
-    font-size: 14px;
-    color: var(--text-secondary, #5D5D5D);
-    line-height: 1.7;
-    margin: 0;
-  }
-  .source-list-highlight {
-    background: var(--highlight-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%));
-    border-left: 4px solid #FF8A00;
-    padding: 16px 20px;
-    border-radius: 10px;
-    margin: 20px 0;
-  }
-  .source-list-highlight p {
-    font-size: 14px;
-    color: var(--text-secondary, #5D5D5D);
-    line-height: 1.7;
-    margin: 0;
-  }
-  @media (prefers-color-scheme: dark) {
-    .source-list-section {
-      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
-      --border-color: #3a3a3a;
+  
+  /* 响应式 */
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
     }
-    .source-list-title,
-    .source-list-subtitle {
-      --text-primary: #e5e5e5;
-    }
-    .source-list-tip,
-    .source-list-highlight {
-      --tip-bg: #2a2a2a;
-      --text-secondary: #a0a0a0;
-    }
-    .source-list-highlight {
-      --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
-    }
-    .source-list-image {
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
-    }
-  }
-  [data-theme="dark"] .source-list-section {
-    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
-    --border-color: #3a3a3a;
-    --text-primary: #e5e5e5;
-    --text-secondary: #a0a0a0;
-  }
-  [data-theme="dark"] .source-list-tip {
-    --tip-bg: #2a2a2a;
-  }
-  [data-theme="dark"] .source-list-highlight {
-    --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
-  }
-  [data-theme="dark"] .source-list-image {
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
   }
 `}</style>
 
-## 核心功能
-
-<div className="source-list-section">
-  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'start' }}>
-    <div>
-      <h3 className="source-list-title">总览所有信息源</h3>
-
-      <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-        页面会集中展示你创建 / 加入的全部信息源，每个卡片都清晰标注：
-      </p>
-
-      <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-        <li>信息源名称</li>
-        <li>用途描述</li>
-        <li>数据来源类型（文档、搜索引擎、网页爬虫、飞书机器人、笔记本、Github/Gitlab 等）</li>
-      </ul>
-
-      <div className="source-list-tip">
-        <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 一眼就能看清所有知识库的健康状态、生效情况，不用逐个点进去查。</p>
-      </div>
-    </div>
-
-    <div>
-      <h3 className="source-list-title">状态标识</h3>
-
-      <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-        每个信息源卡片都会显示实时状态：
-      </p>
-
-      <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-        <li>启用状态（黄色开关 = 已启用，可随时关闭）</li>
-        <li>同步状态（绿色对勾 = 同步完成，加载图标 = 同步中）</li>
-      </ul>
-
-      <div className="source-list-tip">
-        <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 通过颜色和图标快速识别信息源的工作状态。</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div className="source-list-section">
-  <h3 className="source-list-title">多维度筛选</h3>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    界面提供了丰富的筛选工具，帮你精准找到需要的信息源：
-  </p>
-
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-    <li><strong>分类筛选</strong>：按数据类型筛选（文档、飞书机器人、搜索引擎、网页爬虫、Github 等），比如只看所有「网页爬虫」类的信息源</li>
-    <li><strong>状态筛选</strong>：按同步状态（成功 / 失败 / 进行中）、启用状态（开启 / 关闭）筛选，快速排查同步异常的信息源</li>
-    <li><strong>时间筛选</strong>：按同步时间范围筛选，查看近期更新的知识库</li>
-    <li><strong>搜索筛选</strong>：直接输入信息源名称 / 来源关键词，秒级定位目标</li>
-  </ul>
-
-  <div className="source-list-tip">
-    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 当信息源数量多（比如 20+）时，不用翻页，快速找到需要管理的内容，提升效率。</p>
-  </div>
-</div>
-
-<div className="source-list-section">
-  <h3 className="source-list-title">全生命周期管理</h3>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '20px' }}>
-    每个信息源卡片都支持完整的管理操作：
-  </p>
-
-  <h4 className="source-list-subtitle">点击卡片：进入信息源详情页</h4>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/source-detail.png" alt="信息源详情页" />
-  </div>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '12px' }}>
-    <strong>信息列表模式</strong>：可查看每一条原始文件/原始信息
-  </p>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/info-list-mode.png" alt="信息列表模式" />
-  </div>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '20px' }}>
-    <strong>事件表格模式</strong>：「事件表格」视图功能 - 将杂乱的信息有序呈现（详见下文"事件表格功能"章节）
-  </p>
-
-  <h4 className="source-list-subtitle">信息概览</h4>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    点击「详情」，可查看该信息源的基本属性和信息源启用状态，以及信息源的信息列表
-  </p>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/info-overview.png" alt="信息概览" />
-  </div>
-
-  <h4 className="source-list-subtitle">启用 / 停用</h4>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    一键开关，停用后该信息源不再同步、不再给 AI 提供上下文，适合临时不用的知识库
-  </p>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/enable-disable.png" alt="启用停用" />
-  </div>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '20px' }}>
-    查看信息源下的单条信息以及其同步状态。
-  </p>
-
-  <h4 className="source-list-subtitle">点击【...】</h4>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, margin: 0 }}>
-    支持编辑、删除，灵活管理数据资产
-  </p>
-</div>
-
-<div className="source-list-section">
-  <h3 className="source-list-title">权限与协作管理</h3>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    分「我创建的」「我加入的」两个标签：
-  </p>
-
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: 0, paddingLeft: '20px' }}>
-    <li><strong>「我创建的」</strong>：你自己搭建的信息源，拥有完全管理权限</li>
-    <li><strong>「我加入的」</strong>：你选择加入的信息源，可查看、使用</li>
-  </ul>
-</div>
-
----
-
 ## 核心价值
 
-<div className="source-list-highlight">
-  <p style={{ marginBottom: '16px' }}>
-    <strong style={{ color: '#FF8A00' }}>Zleap 的核心</strong>是「用 AI 理解你的私有数据，生成精准回答」，而信息源列表就是这个能力的「地基」：
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0' }}>
+  <strong style={{ color: '#FF8A00' }}>Zleap 的核心</strong>是「用 AI 理解你的私有数据，生成精准回答」，而信息源列表就是这个能力的「地基」：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 60px 0', paddingLeft: '20px' }}>
+  <li><strong>数据统一入口</strong>：把分散在飞书、文档、网页、代码库、企业微信等各处的数据，统一归集、管理，让 AI 能一站式读取</li>
+  <li><strong>知识 freshness 保障</strong>：通过同步状态、同步频率配置，保证 AI 的知识库永远是最新的，不会用过时信息回答</li>
+  <li><strong>权限与安全管控</strong>：通过启用 / 停用、权限划分，严格控制 AI 能访问的数据范围，避免敏感信息泄露</li>
+  <li><strong>效率提升</strong>：一站式管理所有数据，不用在多个平台之间切换，大幅降低 AI 知识库的维护成本</li>
+</ul>
+
+## 核心功能
+
+### 功能一：总览所有信息源
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  页面会集中展示你创建 / 加入的全部信息源，每个卡片都清晰标注：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li>信息源名称</li>
+  <li>用途描述</li>
+  <li>数据来源类型（文档、搜索引擎、网页爬虫、飞书机器人、笔记本、Github/Gitlab 等）</li>
+</ul>
+
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+  </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>一眼就能看清所有知识库的健康状态、生效情况，不用逐个点进去查。
   </p>
-  
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: 0, paddingLeft: '20px' }}>
-    <li><strong>数据统一入口</strong>：把分散在飞书、文档、网页、代码库、企业微信等各处的数据，统一归集、管理，让 AI 能一站式读取</li>
-    <li><strong>知识 freshness 保障</strong>：通过同步状态、同步频率配置，保证 AI 的知识库永远是最新的，不会用过时信息回答</li>
-    <li><strong>权限与安全管控</strong>：通过启用 / 停用、权限划分，严格控制 AI 能访问的数据范围，避免敏感信息泄露</li>
-    <li><strong>效率提升</strong>：一站式管理所有数据，不用在多个平台之间切换，大幅降低 AI 知识库的维护成本</li>
-  </ul>
 </div>
 
----
+### 功能二：状态标识
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  每个信息源卡片都会显示实时状态：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li>启用状态（黄色开关 = 已启用，可随时关闭）</li>
+  <li>同步状态（绿色对勾 = 同步完成，加载图标 = 同步中）</li>
+</ul>
+
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+  </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>通过颜色和图标快速识别信息源的工作状态。
+  </p>
+</div>
+
+### 功能三：多维度筛选
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  界面提供了丰富的筛选工具，帮你精准找到需要的信息源：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li><strong>分类筛选</strong>：按数据类型筛选（文档、飞书机器人、搜索引擎、网页爬虫、Github 等），比如只看所有「网页爬虫」类的信息源</li>
+  <li><strong>状态筛选</strong>：按同步状态（成功 / 失败 / 进行中）、启用状态（开启 / 关闭）筛选，快速排查同步异常的信息源</li>
+  <li><strong>时间筛选</strong>：按同步时间范围筛选，查看近期更新的知识库</li>
+  <li><strong>搜索筛选</strong>：直接输入信息源名称 / 来源关键词，秒级定位目标</li>
+</ul>
+
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+  </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>当信息源数量多（比如 20+）时，不用翻页，快速找到需要管理的内容，提升效率。
+  </p>
+</div>
+
+### 功能四：全生命周期管理
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 20px 0' }}>
+  每个信息源卡片都支持完整的管理操作：
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
+  <strong>点击卡片：进入信息源详情页</strong>
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/source-detail.png" alt="信息源详情页" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  <strong>信息列表模式</strong>：可查看每一条原始文件/原始信息
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/info-list-mode.png" alt="信息列表模式" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 20px 0' }}>
+  <strong>事件表格模式</strong>：「事件表格」视图功能 - 将杂乱的信息有序呈现（详见下文"事件表格功能"章节）
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
+  <strong>信息概览</strong>
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  点击「详情」，可查看该信息源的基本属性和信息源启用状态，以及信息源的信息列表
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/info-overview.png" alt="信息概览" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
+  <strong>一键启用 / 停用</strong>
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  一键开关，停用后该信息源不再同步、不再给 AI 提供上下文，适合临时不用的知识库
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/enable-disable.png" alt="启用停用" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
+  查看信息源下的单条信息以及其同步状态。
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
+  <strong>点击【...】</strong>
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 40px 0' }}>
+  支持编辑、删除，灵活管理数据资产
+</p>
+
+### 功能五：权限与协作管理
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  分「我创建的」「我加入的」两个标签：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 60px 0', paddingLeft: '20px' }}>
+  <li><strong>「我创建的」</strong>：你自己搭建的信息源，拥有完全管理权限</li>
+  <li><strong>「我加入的」</strong>：你选择加入的信息源，可查看、使用</li>
+</ul>
 
 ## 事件表格功能
 
-<div className="source-list-section">
-  <h3 className="source-list-title">什么是「事件表格」？</h3>
+### 什么是「事件表格」？
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    事件表格是 SAG（SQL 驱动的 RAG 引擎）将非结构化数据（如文档、聊天记录）通过 AI 预处理后，转化而成的结构化数据库（关系型的表单数据），后续 SAG 可以根据此数据库构建事件之间的联系。
-  </p>
+### 什么是「事件表格」？
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '20px' }}>
-    该模式支持用户以事件为主视角快速浏览、筛选和定位信息来源下的所有事件的功能，以提升排查与分析效率。在同一页面内串联「事件—信息来源（源文档）—原文内容」三层信息，减少页面跳转和心智切换成本，保证查看路径清晰、一致。
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  事件表格是 SAG（SQL 驱动的 RAG 引擎）将非结构化数据（如文档、聊天记录）通过 AI 预处理后，转化而成的结构化数据库（关系型的表单数据），后续 SAG 可以根据此数据库构建事件之间的联系。
+</p>
 
-  <h4 className="source-list-subtitle">「事件表格」提取前 - 原始零散的信息</h4>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 20px 0' }}>
+  该模式支持用户以事件为主视角快速浏览、筛选和定位信息来源下的所有事件的功能，以提升排查与分析效率。在同一页面内串联「事件—信息来源（源文档）—原文内容」三层信息，减少页面跳转和心智切换成本，保证查看路径清晰、一致。
+</p>
 
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/before-extraction.png" alt="事件表格提取前" />
-  </div>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
+  <strong>提取前 - 原始零散的信息</strong>
+</p>
 
-  <h4 className="source-list-subtitle">「事件表格」提取后 - 清晰有条理和逻辑且可以按需求呈现的信息</h4>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/after-extraction.png" alt="事件表格提取后" />
-  </div>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/before-extraction.png" alt="事件表格提取前" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div className="source-list-section">
-  <h3 className="source-list-title">「事件表格」模式在哪里</h3>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
+  <strong>提取后 - 清晰有条理和逻辑且可以按需求呈现的信息</strong>
+</p>
 
-  <h4 className="source-list-subtitle">点击进入单个信息源</h4>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    在「信息管理」的「信息源列表」中，选择一个需要查阅的信息源。
-  </p>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/enter-source.png" alt="点击进入单个信息源" />
-  </div>
-
-  <h4 className="source-list-subtitle">切换信息展现模式</h4>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    将右上角的「信息列表」切换为「事件表格」
-  </p>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/switch-mode.png" alt="切换信息展现模式" />
-  </div>
-
-  <h4 className="source-list-subtitle">信息以表格的形式清晰地拆解呈现</h4>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    获得多信息源重新整合后的事件列表，每个事件被拆分成多个维度的内容可供浏览。
-  </p>
-
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/table-view.png" alt="表格视图" />
-  </div>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/after-extraction.png" alt="事件表格提取后" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div className="source-list-section">
-  <h3 className="source-list-title">使用「事件表格」</h3>
+### 如何使用「事件表格」？
 
-  <h4 className="source-list-subtitle">字段配置</h4>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 12px 0' }}>
+  <strong>步骤一：点击进入单个信息源</strong>
+</p>
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    点击「字段配置」，勾选要展示的字段（如事件、内容、# 行为等），表格将只显示勾选的列
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  在「信息管理」的「信息源列表」中，选择一个需要查阅的信息源。
+</p>
 
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/field-config.gif" alt="字段配置" />
-  </div>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/enter-source.png" alt="点击进入单个信息源" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
 
-  <h4 className="source-list-subtitle">筛选事件</h4>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
+  <strong>步骤二：切换信息展现模式</strong>
+</p>
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    点击「筛选」，选择维度、条件和值，确认后只显示符合条件的事件；可清空筛选条件。
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  将右上角的「信息列表」切换为「事件表格」
+</p>
 
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/filter-events.gif" alt="筛选事件" />
-  </div>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/switch-mode.png" alt="切换信息展现模式" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
 
-  <h4 className="source-list-subtitle">查找事件</h4>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
+  <strong>步骤三：查看表格形式的事件信息</strong>
+</p>
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    点击「查找」，输入关键词，系统高亮匹配内容，可切换上一个 / 下一个匹配项。
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  获得多信息源重新整合后的事件列表，每个事件被拆分成多个维度的内容可供浏览。
+</p>
 
-  <div className="source-list-image">
-    <img src="/images/information-management/source-list/search-events.png" alt="查找事件" />
-  </div>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/table-view.png" alt="表格视图" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+### 事件表格的操作功能
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 12px 0' }}>
+  <strong>字段配置</strong>
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  点击「字段配置」，勾选要展示的字段（如事件、内容、# 行为等），表格将只显示勾选的列
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/field-config.gif" alt="字段配置" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
+  <strong>筛选事件</strong>
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  点击「筛选」，选择维度、条件和值，确认后只显示符合条件的事件；可清空筛选条件。
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/filter-events.gif" alt="筛选事件" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
+  <strong>查找事件</strong>
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  点击「查找」，输入关键词，系统高亮匹配内容，可切换上一个 / 下一个匹配项。
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-list/search-events.png" alt="查找事件" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
 ---
 
-<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
-  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
-    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 接下来，您可以从【创建信息源】开始，逐步构建您的关键信息网络！
-  </p>
-  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
-    提交反馈意见 →
+<div style={{ margin: '90px 0 0 0', display: 'flex', justifyContent: 'center' }}>
+  <a
+    href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
+  >
+    <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+      <Send className="h-5 w-5" />
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#FFFFFF', margin: 0, lineHeight: 1.2 }}>提交反馈意见</p>
+      <span style={{ color: '#FFFFFF', fontSize: '20px', lineHeight: 1, fontWeight: 700 }}>›</span>
+    </div>
   </a>
 </div>
+
+<p style={{ fontSize: '17px', color: '#86868b', textAlign: 'center', margin: '12px 0 90px 0' }}>
+  遇到问题或需要帮助？欢迎提交反馈，我们会及时为您解答！
+</p>
+
+<ImageZoomOverlay />
