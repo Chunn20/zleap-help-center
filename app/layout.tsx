@@ -9,11 +9,6 @@ export const metadata: Metadata = {
     default: 'Zleap 帮助中心',
   },
   description: '智跃 Zleap 产品帮助文档',
-  icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
-  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
