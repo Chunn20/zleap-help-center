@@ -4,15 +4,17 @@ import { useSearchParams } from 'next/navigation';
 import { useState, useEffect, Suspense } from 'react';
 import { SearchBox } from './components/SearchBox';
 import { SearchResults } from './components/SearchResults';
-import Link from 'next/link';
-import Image from 'next/image';
+import type { SearchResult } from './components/types';
+import type { SearchResultPathSegment } from './components/types';
+import { HelpCenterHeader } from '@/app/components/HelpCenterHeader';
+import { HelpCenterFooter } from '@/app/components/HelpCenterFooter';
 
-interface SearchResult {
+interface RawSearchResult {
   id: string;
-  title: string;
+  type: 'page' | 'heading' | 'text';
   url: string;
   content: string;
-  breadcrumb?: string[];
+  breadcrumbs?: string[];
 }
 
 function SearchPageContent() {
@@ -26,11 +28,92 @@ function SearchPageContent() {
   useEffect(() => {
     setQuery(queryParam);
     if (queryParam) {
-      performSearch(queryParam);
+      void performSearch(queryParam);
     } else {
       setResults([]);
     }
   }, [queryParam]);
+
+  const stripHtml = (value: string) => value.replace(/<[^>]*>/g, '').trim();
+
+  const escapeRegExp = (value: string) =>
+    value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const highlightPlainText = (text: string, keyword: string) => {
+    const normalized = keyword.trim();
+    if (!normalized) return text;
+
+    const terms = Array.from(
+      new Set(
+        normalized
+          .split(/\s+/)
+          .map((term) => term.trim())
+          .filter(Boolean)
+      )
+    );
+
+    if (terms.length === 0) return text;
+
+    return text.replace(
+      new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi'),
+      '<mark>$1</mark>'
+    );
+  };
+
+  const normalizeResults = (items: RawSearchResult[], currentQuery: string) => {
+    const output: SearchResult[] = [];
+    let currentPage: RawSearchResult | null = null;
+    let currentDescription: RawSearchResult | null = null;
+
+    const pushCurrentPage = () => {
+      if (!currentPage) return;
+
+      const baseUrl = currentPage.url.split('#')[0];
+      const pageTitleHtml =
+        currentPage.content ||
+        highlightPlainText(
+          baseUrl.split('/').filter(Boolean).at(-1) ?? '无标题',
+          currentQuery
+        );
+
+      const breadcrumbLabels = currentPage.breadcrumbs ?? [];
+      const pathSegments: SearchResultPathSegment[] = [
+        ...breadcrumbLabels.map((label) => ({
+          label,
+        })),
+        {
+          label: stripHtml(pageTitleHtml),
+          href: baseUrl,
+        },
+      ];
+
+      output.push({
+        id: currentPage.id || baseUrl,
+        titleHtml: pageTitleHtml,
+        url: baseUrl,
+        contentHtml: currentDescription?.content || '',
+        contentUrl: currentDescription?.url || baseUrl,
+        pathSegments,
+      });
+    };
+
+    items.forEach((item) => {
+      if (item.type === 'page') {
+        pushCurrentPage();
+        currentPage = item;
+        currentDescription = null;
+        return;
+      }
+
+      if (currentPage && !currentDescription) {
+        currentDescription = item;
+      }
+    });
+
+    pushCurrentPage();
+
+    return output;
+  };
 
   const performSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) {
@@ -44,44 +127,11 @@ function SearchPageContent() {
         `/api/search?query=${encodeURIComponent(searchQuery)}`
       );
       const data = await response.json();
+      const resultsArray: RawSearchResult[] = Array.isArray(data)
+        ? data
+        : (data.data ?? []);
 
-      // API 直接返回数组，不是 { data: [...] } 格式
-      const resultsArray = Array.isArray(data) ? data : (data.data || []);
-
-      // 按页面分组，每个页面只保留最相关的一条结果
-      const pageMap = new Map<string, any>();
-
-      resultsArray.forEach((item: any) => {
-        const pageUrl = item.url?.split('#')[0] || item.url; // 移除锚点
-
-        // 优先保留 type="page" 的结果，其次是 heading，最后是 text
-        const existing = pageMap.get(pageUrl);
-        if (!existing ||
-            (item.type === 'page' && existing.type !== 'page') ||
-            (item.type === 'heading' && existing.type === 'text')) {
-          pageMap.set(pageUrl, item);
-        }
-      });
-
-      // 转换搜索结果格式
-      const formattedResults: SearchResult[] = Array.from(pageMap.values()).map((item: any) => {
-        // 从 URL 中提取页面标题作为 breadcrumb
-        const urlParts = item.url?.split('/').filter(Boolean) || [];
-        const breadcrumb = urlParts.slice(1).map((part: string) => {
-          // 移除锚点
-          return part.split('#')[0];
-        }).filter(Boolean);
-
-        return {
-          id: item.id || item.url,
-          title: item.content || '无标题',
-          url: item.url || '#',
-          content: item.content || '暂无描述',
-          breadcrumb: breadcrumb,
-        };
-      });
-
-      setResults(formattedResults);
+      setResults(normalizeResults(resultsArray, searchQuery));
     } catch (error) {
       console.error('搜索失败:', error);
       setResults([]);
@@ -100,50 +150,29 @@ function SearchPageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 顶部背景区域 */}
-      <div className="relative bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-        {/* 背景图 */}
-        <div className="absolute inset-0 opacity-30">
-          <Image
-            src="/background.png"
-            alt="Background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+    <div className="relative flex min-h-screen flex-col bg-[#f8f8ff]">
+      <div
+        className="relative z-10 flex flex-1 flex-col overflow-hidden"
+        style={{
+          backgroundImage: 'url(/background.png)',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'top center',
+          backgroundSize: '100% 100%',
+        }}
+      >
+        <HelpCenterHeader />
 
-        {/* 渐变遮罩 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 to-white"></div>
-
-        {/* 导航栏 */}
-        <div className="relative z-10 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Zleap"
-                width={32}
-                height={32}
-                className="rounded"
-              />
-              <span className="text-xl font-semibold text-gray-900">智跃</span>
-              <span className="text-xl text-gray-400">|</span>
-              <span className="text-base text-gray-900">帮助中心</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* 搜索区域 */}
-        <div className="relative z-10 px-6 py-16">
+        <div className="relative z-10 px-6 pt-16 pb-4">
           <SearchBox initialQuery={query} onSearch={handleSearch} />
+        </div>
+
+        <div className="relative z-10 flex-1 px-6 pb-24">
+          <SearchResults results={results} query={query} isLoading={isLoading} />
         </div>
       </div>
 
-      {/* 搜索结果区域 */}
-      <div className="px-6 pb-20">
-        <SearchResults results={results} query={query} isLoading={isLoading} />
+      <div className="relative z-10 mt-auto bg-white">
+        <HelpCenterFooter />
       </div>
     </div>
   );
