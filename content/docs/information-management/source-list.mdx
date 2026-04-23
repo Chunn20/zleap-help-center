@@ -61,14 +61,17 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   }
 `}</style>
 
-## 核心价值
+## 核心价值：统一数据入口
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0' }}>
-  <strong style={{ color: '#FF8A00' }}>Zleap 的核心</strong>是「用 AI 理解你的私有数据，生成精准回答」，而信息源列表就是这个能力的「地基」：
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 24px 0' }}>
+  Zleap 的核心是「用 AI 理解你的私有数据，生成精准回答」，而信息源列表的首要价值就是<strong style={{ color: '#FF8A00', fontWeight: 600 }}>「统一数据入口」</strong>——把分散在飞书、文档、网页、代码库、企业微信等各处的数据，统一归集到一个平台管理，让 AI 能一站式读取所有信息，不再需要在多个系统间反复切换。
 </p>
 
-<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 60px 0', paddingLeft: '20px' }}>
-  <li><strong>数据统一入口</strong>：把分散在飞书、文档、网页、代码库、企业微信等各处的数据，统一归集、管理，让 AI 能一站式读取</li>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0' }}>
+  基于这个统一入口，信息源列表还提供了三大关键能力：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 40px 0', paddingLeft: '20px' }}>
   <li><strong>知识 freshness 保障</strong>：通过同步状态、同步频率配置，保证 AI 的知识库永远是最新的，不会用过时信息回答</li>
   <li><strong>权限与安全管控</strong>：通过启用 / 停用、权限划分，严格控制 AI 能访问的数据范围，避免敏感信息泄露</li>
   <li><strong>效率提升</strong>：一站式管理所有数据，不用在多个平台之间切换，大幅降低 AI 知识库的维护成本</li>
@@ -76,7 +79,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 核心功能
 
-### 功能一：总览所有信息源
+### 功能一：总览所有信息源，一目了然
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
   页面会集中展示你创建 / 加入的全部信息源，每个卡片都清晰标注：
@@ -86,9 +89,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <li>信息源名称</li>
   <li>用途描述</li>
   <li>数据来源类型（文档、搜索引擎、网页爬虫、飞书机器人、笔记本、Github/Gitlab 等）</li>
+  <li>启用状态（黄色开关 = 已启用，可随时关闭）</li>
+  <li>同步状态（绿色对勾 = 同步完成，加载图标 = 同步中）</li>
 </ul>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '16px 20px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
   <div style={{ flexShrink: 0 }}>
     <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
@@ -97,27 +102,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   </p>
 </div>
 
-### 功能二：状态标识
-
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  每个信息源卡片都会显示实时状态：
-</p>
-
-<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
-  <li>启用状态（黄色开关 = 已启用，可随时关闭）</li>
-  <li>同步状态（绿色对勾 = 同步完成，加载图标 = 同步中）</li>
-</ul>
-
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
-  <div style={{ flexShrink: 0 }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
-  </div>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
-    <strong>提示：</strong>通过颜色和图标快速识别信息源的工作状态。
-  </p>
-</div>
-
-### 功能三：多维度筛选
+### 功能二：多维度筛选，快速定位目标
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
   界面提供了丰富的筛选工具，帮你精准找到需要的信息源：
@@ -130,7 +115,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <li><strong>搜索筛选</strong>：直接输入信息源名称 / 来源关键词，秒级定位目标</li>
 </ul>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '16px 20px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
   <div style={{ flexShrink: 0 }}>
     <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
@@ -139,7 +124,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   </p>
 </div>
 
-### 功能四：全生命周期管理
+### 功能三：全生命周期管理，灵活可控
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 20px 0' }}>
   每个信息源卡片都支持完整的管理操作：
@@ -166,11 +151,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </p>
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
-  <strong>信息概览</strong>
-</p>
-
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  点击「详情」，可查看该信息源的基本属性和信息源启用状态，以及信息源的信息列表
+  <strong>信息概览</strong>：点击「详情」，可查看该信息源的基本属性和信息源启用状态，以及信息源的信息列表
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
@@ -178,11 +159,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </div>
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
-  <strong>一键启用 / 停用</strong>
-</p>
-
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  一键开关，停用后该信息源不再同步、不再给 AI 提供上下文，适合临时不用的知识库
+  <strong>一键启用 / 停用</strong>：一键开关，停用后该信息源不再同步、不再给 AI 提供上下文，适合临时不用的知识库
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
@@ -194,14 +171,10 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </p>
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
-  <strong>点击【...】</strong>
+  <strong>点击【...】</strong>：支持编辑、删除，灵活管理数据资产
 </p>
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 40px 0' }}>
-  支持编辑、删除，灵活管理数据资产
-</p>
-
-### 功能五：权限与协作管理
+### 功能四：权限与协作管理
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
   分「我创建的」「我加入的」两个标签：
@@ -214,7 +187,6 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 事件表格功能
 
-### 什么是「事件表格」？
 
 ### 什么是「事件表格」？
 
@@ -283,11 +255,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 ### 事件表格的操作功能
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 12px 0' }}>
-  <strong>字段配置</strong>
-</p>
-
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  点击「字段配置」，勾选要展示的字段（如事件、内容、# 行为等），表格将只显示勾选的列
+  <strong>字段配置</strong>：点击「字段配置」，勾选要展示的字段（如事件、内容、# 行为等），表格将只显示勾选的列
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
@@ -295,11 +263,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </div>
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
-  <strong>筛选事件</strong>
-</p>
-
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  点击「筛选」，选择维度、条件和值，确认后只显示符合条件的事件；可清空筛选条件。
+  <strong>筛选事件</strong>：点击「筛选」，选择维度、条件和值，确认后只显示符合条件的事件；可清空筛选条件。
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
@@ -307,11 +271,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </div>
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 12px 0' }}>
-  <strong>查找事件</strong>
-</p>
-
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  点击「查找」，输入关键词，系统高亮匹配内容，可切换上一个 / 下一个匹配项。
+  <strong>查找事件</strong>：点击「查找」，输入关键词，系统高亮匹配内容，可切换上一个 / 下一个匹配项。
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>

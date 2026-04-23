@@ -3,188 +3,161 @@ title: 信息源日志
 description: 信息源日志是 Zleap 信息源的「体检报告与运行记录」。所有信息源（文档、网页、爬虫、API 等）的同步、解析、抓取情况，都会被自动记录在这里。
 ---
 
-import { Lightbulb } from 'lucide-react';
-
+import { Lightbulb, Send } from 'lucide-react';
+import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
-  .source-logs-section {
-    border: 1px solid var(--border-color, #EDEDED);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 32px;
-    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  /* 调整页面标题（H1）和描述文字的距离 */
+  #nd-page > h1 {
+    margin-bottom: 0px !important;
   }
-  .source-logs-title {
-    font-size: 20px;
+  
+  /* 调整描述文字的上边距 */
+  #nd-page > h1 + p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* H2 标题样式 */
+  #nd-page h2 {
+    font-size: 24px;
     font-weight: 700;
-    color: var(--text-primary, #0D131A);
-    margin: 0 0 16px 0;
-    padding-left: 12px;
-    border-left: 4px solid #FF8A00;
+    color: #1d1d1f;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin-top: 40px;
+    margin-bottom: 24px;
   }
-  .source-logs-subtitle {
-    font-size: 16px;
+  
+  /* H3 标题样式 */
+  #nd-page h3 {
+    font-size: 19px;
     font-weight: 600;
-    color: var(--text-primary, #0D131A);
-    margin: 24px 0 12px 0;
-    padding-left: 12px;
-    border-left: 3px solid #FF8A00;
+    color: #1d1d1f;
+    letter-spacing: -0.01em;
+    margin-top: 40px;
+    margin-bottom: 20px;
   }
-  .source-logs-image {
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 20px 0;
-    border: 1px solid var(--border-color, #EDEDED);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    max-width: 800px;
-  }
-  .source-logs-image img {
-    width: 100%;
-    display: block;
-    cursor: pointer;
-  }
-  .source-logs-tip {
-    background: var(--tip-bg, #F8F9FA);
-    border-left: 3px solid var(--text-secondary, #5D5D5D);
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin: 16px 0;
-  }
-  .source-logs-tip p {
-    font-size: 14px;
-    color: var(--text-secondary, #5D5D5D);
-    line-height: 1.7;
-    margin: 0;
-  }
-  .source-logs-highlight {
-    background: var(--highlight-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%));
-    border-left: 4px solid #FF8A00;
-    padding: 16px 20px;
-    border-radius: 10px;
-    margin: 20px 0;
-  }
-  @media (prefers-color-scheme: dark) {
-    .source-logs-section {
-      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
-      --border-color: #3a3a3a;
-    }
-    .source-logs-title,
-    .source-logs-subtitle {
-      --text-primary: #e5e5e5;
-    }
-    .source-logs-tip {
-      --tip-bg: #2a2a2a;
-      --text-secondary: #a0a0a0;
-    }
-    .source-logs-highlight {
-      --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
-    }
-    .source-logs-image {
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
-    }
-  }
-  [data-theme="dark"] .source-logs-section {
-    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
-    --border-color: #3a3a3a;
-    --text-primary: #e5e5e5;
-    --text-secondary: #a0a0a0;
-  }
-  [data-theme="dark"] .source-logs-tip {
-    --tip-bg: #2a2a2a;
-  }
-  [data-theme="dark"] .source-logs-highlight {
-    --highlight-bg: linear-gradient(135deg, #2d2416 0%, #3d2d1a 100%);
-  }
-  [data-theme="dark"] .source-logs-image {
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+  
+  /* 移除分隔线 */
+  #nd-page hr {
+    display: none;
   }
 `}</style>
 
-<div className="source-logs-image">
-  <img src="/images/information-management/source-logs/overview.png" alt="信息源日志概览" />
+
+
+## 核心功能
+
+### 功能一：监控同步状态
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  清晰展示每条信息源的同步结果：
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li>成功、失败、解析中、已过期等状态</li>
+  <li>立刻知道哪些信息源正常运行</li>
+  <li>快速识别出现问题的信息源</li>
+</ul>
+
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '16px 20px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+  </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>通过状态标识，一眼就能看清所有信息源的健康状况。
+  </p>
 </div>
 
-## 具体作用
-
-<div className="source-logs-section">
-  <h3 className="source-logs-title">监控同步状态</h3>
-
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    清晰展示每条信息源的同步结果：
-  </p>
-
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-    <li>成功、失败、解析中、已过期等状态</li>
-    <li>立刻知道哪些信息源正常运行</li>
-    <li>快速识别出现问题的信息源</li>
-  </ul>
-
-  <div className="source-logs-tip">
-    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 通过状态标识，一眼就能看清所有信息源的健康状况。</p>
-  </div>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/source-logs/overview.png" alt="信息源日志概览" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div className="source-logs-section">
-  <h3 className="source-logs-title">排查故障与失败原因</h3>
+### 功能二：排查故障与失败原因
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    若信息源同步失败，可在「查看详情」中看到：
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  若信息源同步失败，可在「查看详情」中看到：
+</p>
 
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-    <li>失败原因与错误时间</li>
-    <li>异常日志详细信息</li>
-    <li>网络问题、权限错误、链接失效等具体原因</li>
-  </ul>
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li>失败原因与错误时间</li>
+  <li>异常日志详细信息</li>
+  <li>网络问题、权限错误、链接失效等具体原因</li>
+</ul>
 
-  <div className="source-logs-tip">
-    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 快速定位问题，让 AI 的知识库保持新鲜、完整。</p>
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>快速定位问题，让 AI 的知识库保持新鲜、完整。
+  </p>
 </div>
 
-<div className="source-logs-section">
-  <h3 className="source-logs-title">记录历史同步时间</h3>
+### 功能三：记录历史同步时间
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    每条记录都有最近同步时间：
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  每条记录都有最近同步时间：
+</p>
 
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-    <li>判断信息源是否按时更新</li>
-    <li>验证自动同步任务是否稳定运行</li>
-    <li>追踪信息源的更新频率</li>
-  </ul>
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li>判断信息源是否按时更新</li>
+  <li>验证自动同步任务是否稳定运行</li>
+  <li>追踪信息源的更新频率</li>
+</ul>
 
-  <div className="source-logs-tip">
-    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 确保信息源始终保持最新状态，提供准确的数据支持。</p>
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>确保信息源始终保持最新状态，提供准确的数据支持。
+  </p>
 </div>
 
-<div className="source-logs-section">
-  <h3 className="source-logs-title">全量数据流转记录</h3>
+### 功能四：全量数据流转记录
 
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px' }}>
-    记录每一条信息源的完整流程：
-  </p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  记录每一条信息源的完整流程：
+</p>
 
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, marginBottom: '16px', paddingLeft: '20px' }}>
-    <li>抓取、解析、入库的全过程</li>
-    <li>共同步了多少条数据</li>
-    <li>成功与失败的数量统计</li>
-  </ul>
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0', paddingLeft: '20px' }}>
+  <li>抓取、解析、入库的全过程</li>
+  <li>共同步了多少条数据</li>
+  <li>成功与失败的数量统计</li>
+</ul>
 
-  <div className="source-logs-tip">
-    <p><Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 方便审计和追溯，一目了然地掌握数据流转情况。</p>
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '16px 0 40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>提示：</strong>方便审计和追溯，一目了然地掌握数据流转情况。
+  </p>
 </div>
 
 ---
 
-<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
-  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6 }}>
-    <Lightbulb className="inline h-5 w-5 mr-2 text-[#FF8A00]" /> 遇到同步问题或需要帮助？欢迎提交反馈，我们会及时为您解答！
-  </p>
-  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
-    提交反馈意见 →
+<div style={{ margin: '90px 0 0 0', display: 'flex', justifyContent: 'center' }}>
+  <a
+    href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
+  >
+    <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+      <Send className="h-5 w-5" />
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#FFFFFF', margin: 0, lineHeight: 1.2 }}>提交反馈意见</p>
+      <span style={{ color: '#FFFFFF', fontSize: '20px', lineHeight: 1, fontWeight: 700 }}>›</span>
+    </div>
   </a>
 </div>
+
+<p style={{ fontSize: '17px', color: '#86868b', textAlign: 'center', margin: '12px 0 90px 0' }}>
+  遇到问题或需要帮助？欢迎提交反馈，我们会及时为您解答！
+</p>
+
+<ImageZoomOverlay />

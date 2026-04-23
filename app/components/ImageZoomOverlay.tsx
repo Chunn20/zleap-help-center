@@ -34,7 +34,8 @@ export default function ImageZoomOverlay() {
     document.body.appendChild(overlay);
 
     function initImageZoom() {
-      const images = document.querySelectorAll('.qs-media img');
+      // 选择所有在图片容器中的图片（通过父元素的 cursor: pointer 样式识别）
+      const images = document.querySelectorAll('div[style*="cursor: pointer"] img, .qs-media img');
 
       images.forEach(img => {
         const imgElement = img as HTMLImageElement;

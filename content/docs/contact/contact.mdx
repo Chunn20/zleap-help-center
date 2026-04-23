@@ -4,386 +4,194 @@ description: 通过官方渠道联系 Zleap 团队或加入用户社区。
 ---
 
 import { Lightbulb, Globe, Sparkles } from 'lucide-react';
+import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
-  /* 全局纯白 */
-  body {
-    background: #FFFFFF;
+  /* 调整页面标题（H1）和描述文字的距离 */
+  #nd-page > h1 {
+    margin-bottom: 0px !important;
   }
   
-  /* 容器 */
-  .contact-wrapper {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0;
+  /* 调整描述文字的上边距 */
+  #nd-page > h1 + p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
   }
   
-  /* 标题样式 */
-  .contact-wrapper h2 {
-    font-size: 28px;
+  /* H2 标题样式 */
+  #nd-page h2 {
+    font-size: 24px;
     font-weight: 700;
     color: #1d1d1f;
-    margin: 40px 0 24px 0;
     letter-spacing: -0.02em;
     line-height: 1.3;
+    margin-top: 40px;
+    margin-bottom: 24px;
   }
   
-  /* 正文样式 */
-  .contact-wrapper p {
-    font-size: 15px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 12px 0;
+  /* 移除分隔线 */
+  #nd-page hr {
+    display: none;
   }
   
-  /* 强调+跳转卡片 - 访问官网 */
-  .contact-cta {
-    margin: 32px 0;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .contact-cta-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%);
-    padding: 16px 48px;
-    border-radius: 16px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(255, 138, 0, 0.25);
-    cursor: pointer;
-    min-width: 280px;
-    justify-content: center;
-  }
-  
-  .contact-cta-card:hover {
-    box-shadow: 0 6px 24px rgba(255, 138, 0, 0.4);
-    transform: translateY(-2px);
-    background: linear-gradient(180deg, #FF9A1A 0%, #FFC266 100%);
-  }
-  
-  .contact-cta-icon {
-    width: 40px;
-    height: 40px;
-    background: #FFFFFF;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FF8A00;
-    flex-shrink: 0;
-  }
-  
-  .contact-cta-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .contact-cta-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #FFFFFF !important;
-    margin: 0;
-    line-height: 1.2;
-  }
-  
-  .contact-cta-arrow {
-    color: #FFFFFF !important;
-    font-size: 20px;
-    line-height: 1;
-    font-weight: 700;
-    transition: transform 0.2s;
-  }
-  
-  .contact-cta-card:hover .contact-cta-arrow {
-    transform: translateX(4px);
-  }
-  
-  .contact-cta-desc {
-    text-align: center;
-    font-size: 14px;
-    color: #86868b;
-    margin-top: 12px;
-  }
-  
-  /* 基础卡片2 - 社交媒体 */
-  .contact-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 32px 0;
-  }
-  
+  /* 响应式 */
   @media (max-width: 640px) {
-    .contact-grid-2 {
-      grid-template-columns: 1fr;
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
     }
-  }
-  
-  .contact-card2 {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
-    padding: 24px;
-  }
-  
-  .contact-card2-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1d1d1f;
-    margin: 0 0 16px 0;
-  }
-  
-  .contact-qr-row {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .contact-qr-item {
-    text-align: center;
-  }
-  
-  .contact-qr-box {
-    background: #FAFAFA;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 8px;
-  }
-  
-  .contact-qr-box img {
-    width: 120px;
-    height: 120px;
-    display: block;
-    cursor: pointer;
-  }
-  
-  .contact-qr-label {
-    font-size: 12px;
-    color: #1d1d1f;
-    font-weight: 500;
-    margin: 0;
-  }
-  
-  .contact-link-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .contact-link-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #F5F5F7;
-    padding: 10px 14px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  
-  .contact-link-item:hover {
-    background: #EBEBEB;
-  }
-  
-  .contact-link-icon {
-    flex-shrink: 0;
-  }
-  
-  .contact-link-text h3 {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1d1d1f;
-    margin: 0 0 2px 0;
-  }
-  
-  .contact-link-text p {
-    font-size: 11px;
-    color: #86868b;
-    margin: 0;
-  }
-  
-  /* 基础卡片1 - 加入社群 */
-  .contact-card1 {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-  }
-  
-  .contact-card1-qr {
-    background: #FAFAFA;
-    border-radius: 12px;
-    padding: 16px;
-    display: inline-block;
-    margin-bottom: 16px;
-  }
-  
-  .contact-card1-qr img {
-    width: 120px;
-    height: 120px;
-    display: block;
-    cursor: pointer;
-  }
-  
-  .contact-card1-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1d1d1f;
-    margin: 0 0 8px 0;
-  }
-  
-  .contact-card1-desc {
-    font-size: 13px;
-    color: #86868b;
-    margin: 0;
-  }
-  
-  /* 提示卡片 */
-  .contact-tip-card {
-    background: #FFF9F0;
-    border: 1px solid #FFE9CC;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin: 32px 0;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .contact-tip-icon {
-    flex-shrink: 0;
-    color: #FF8A00;
-  }
-  
-  .contact-tip-card p {
-    font-size: 14px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 0;
-  }
-  
-  .contact-tip-card a {
-    color: #FF8A00;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .contact-tip-card a:hover {
-    text-decoration: underline;
   }
 `}</style>
 
-<div className="contact-wrapper">
+## 访问官网
 
-{/* 访问官网 - 强调+跳转卡片 */}
-<div className="contact-cta">
-  <a href="https://zleap.com" target="_blank" rel="noopener noreferrer" className="contact-cta-card">
-    <div className="contact-cta-icon">
+<div style={{ margin: '90px 0 0 0', display: 'flex', justifyContent: 'center' }}>
+  <a
+    href="https://zleap.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
+  >
+    <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
       <Globe className="h-5 w-5" />
     </div>
-    <div className="contact-cta-content">
-      <p className="contact-cta-title">访问 zleap.com 官网</p>
-      <span className="contact-cta-arrow">›</span>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#FFFFFF', margin: 0, lineHeight: 1.2 }}>访问 zleap.com 官网</p>
+      <span style={{ color: '#FFFFFF', fontSize: '20px', lineHeight: 1, fontWeight: 700 }}>›</span>
     </div>
   </a>
 </div>
-<p className="contact-cta-desc">体验完整功能，开启智能创作之旅</p>
+
+<p style={{ fontSize: '17px', color: '#86868b', textAlign: 'center', margin: '12px 0 90px 0' }}>
+  体验完整功能，开启智能创作之旅
+</p>
+
+---
 
 ## 社交媒体
 
-<div className="contact-grid-2">
-  {/* 微信公众号 - 基础卡片2 */}
-  <div className="contact-card2">
-    <h3 className="contact-card2-title">微信公众号</h3>
-    <div className="contact-qr-item" style={{ textAlign: 'center' }}>
-      <div className="contact-qr-box" style={{ display: 'inline-block' }}>
-        <img src="/images/contact/qr-wechat-mp.png" alt="微信公众号" />
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', margin: '32px 0' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg>
       </div>
-      <p className="contact-qr-label">扫码关注获取最新动态</p>
+      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>微信公众号</p>
+    </div>
+    <div>
+      <div style={{ background: '#FAFAFA', borderRadius: '10px', padding: '10px', marginBottom: '8px', display: 'inline-block' }}>
+        <img src="/images/contact/qr-wechat-mp.png" alt="微信公众号" style={{ width: '120px', height: '120px', display: 'block', cursor: 'pointer' }} />
+      </div>
+      <p style={{ fontSize: '12px', color: '#1d1d1f', fontWeight: 500, margin: 0 }}>扫码关注获取最新动态</p>
     </div>
   </div>
 
-  {/* 小红书 - 基础卡片2 */}
-  <div className="contact-card2">
-    <h3 className="contact-card2-title">小红书</h3>
-    <div className="contact-qr-item" style={{ textAlign: 'center' }}>
-      <div className="contact-qr-box" style={{ display: 'inline-block' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/></svg>
+      </div>
+      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>小红书</p>
+    </div>
+    <div>
+      <div style={{ background: '#FAFAFA', borderRadius: '10px', padding: '10px', marginBottom: '8px', display: 'inline-block' }}>
         <a href="https://xhslink.com/m/36WYk6w3Oqi" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/qr-xiaohongshu.png" alt="小红书" />
+          <img src="/images/contact/qr-xiaohongshu.png" alt="小红书" style={{ width: '120px', height: '120px', display: 'block', cursor: 'pointer' }} />
         </a>
       </div>
-      <p className="contact-qr-label">扫码关注小红书账号</p>
+      <p style={{ fontSize: '12px', color: '#1d1d1f', fontWeight: 500, margin: 0 }}>扫码关注小红书账号</p>
     </div>
   </div>
 </div>
 
-<div className="contact-grid-2">
-  {/* Facebook - 基础卡片2 */}
-  <div className="contact-card2">
-    <h3 className="contact-card2-title">Facebook</h3>
-    <a href="https://facebook.com/zleapai" target="_blank" rel="noopener noreferrer" className="contact-link-item">
-      <div className="contact-link-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', margin: '32px 0' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
       </div>
-      <div className="contact-link-text">
-        <h3>访问主页</h3>
-        <p>facebook.com/zleapai</p>
-      </div>
-    </a>
+      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>Facebook</p>
+    </div>
+    <div>
+      <a href="https://facebook.com/zleapai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: '#F5F5F7', padding: '10px 14px', borderRadius: '10px', textDecoration: 'none', transition: 'background 0.2s' }}>
+        <div style={{ flexShrink: 0 }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#FF8A00' }}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <h3 style={{ fontSize: '14px', fontWeight: 500, color: '#1d1d1f', margin: '0 0 2px 0' }}>访问主页</h3>
+          <p style={{ fontSize: '11px', color: '#86868b', margin: 0 }}>facebook.com/zleapai</p>
+        </div>
+      </a>
+    </div>
   </div>
 
-  {/* X (Twitter) - 基础卡片2 */}
-  <div className="contact-card2">
-    <h3 className="contact-card2-title">X (Twitter)</h3>
-    <a href="https://x.com/zleapai" target="_blank" rel="noopener noreferrer" className="contact-link-item">
-      <div className="contact-link-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0D131A"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </div>
-      <div className="contact-link-text">
-        <h3>访问主页</h3>
-        <p>x.com/zleapai</p>
-      </div>
-    </a>
+      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>X (Twitter)</p>
+    </div>
+    <div>
+      <a href="https://x.com/zleapai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: '#F5F5F7', padding: '10px 14px', borderRadius: '10px', textDecoration: 'none', transition: 'background 0.2s' }}>
+        <div style={{ flexShrink: 0 }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#FF8A00' }}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <h3 style={{ fontSize: '14px', fontWeight: 500, color: '#1d1d1f', margin: '0 0 2px 0' }}>访问主页</h3>
+          <p style={{ fontSize: '11px', color: '#86868b', margin: 0 }}>x.com/zleapai</p>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
+
+---
 
 ## 加入社群
 
-<p>扫码加入官方用户群，与更多用户交流心得；或添加企业微信联系专属客服，获得一对一支持。</p>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  扫码加入官方用户群，与更多用户交流心得；或添加企业微信联系专属客服，获得一对一支持。
+</p>
 
-<div className="contact-grid-2">
-  {/* 官方微信群 - 基础卡片1 */}
-  <div className="contact-card1">
-    <div className="contact-card1-qr">
-      <img src="/images/contact/qr-wechat-group.png" alt="官方微信群" />
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', margin: '32px 0' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg>
+      </div>
+      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>官方微信群</p>
     </div>
-    <h3 className="contact-card1-title">官方微信群</h3>
-    <p className="contact-card1-desc">扫码加入用户交流群</p>
+    <div>
+      <div style={{ background: '#FAFAFA', borderRadius: '12px', padding: '16px', display: 'inline-block', marginBottom: '16px' }}>
+        <img src="/images/contact/qr-wechat-group.png" alt="官方微信群" style={{ width: '120px', height: '120px', display: 'block', cursor: 'pointer' }} />
+      </div>
+      <p style={{ fontSize: '13px', color: '#86868b', margin: 0 }}>扫码加入用户交流群</p>
+    </div>
   </div>
 
-  {/* 官方企业微信 - 基础卡片1 */}
-  <div className="contact-card1">
-    <div className="contact-card1-qr">
-      <img src="/images/contact/qr-wecom.png" alt="企业微信" />
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg>
+      </div>
+      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>官方企业微信</p>
     </div>
-    <h3 className="contact-card1-title">官方企业微信</h3>
-    <p className="contact-card1-desc">添加专属客服获得支持</p>
+    <div>
+      <div style={{ background: '#FAFAFA', borderRadius: '12px', padding: '16px', display: 'inline-block', marginBottom: '16px' }}>
+        <img src="/images/contact/qr-wecom.png" alt="企业微信" style={{ width: '120px', height: '120px', display: 'block', cursor: 'pointer' }} />
+      </div>
+      <p style={{ fontSize: '13px', color: '#86868b', margin: 0 }}>添加专属客服获得支持</p>
+    </div>
   </div>
 </div>
 
-{/* 提示卡片 */}
-<div className="contact-tip-card">
-  <div className="contact-tip-icon">
-    <Lightbulb className="h-5 w-5" />
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
-  <p>
-    有功能建议或内容反馈？欢迎 <a href="/docs/contact/feedback">提交反馈意见</a>，我们会认真阅读每一条建议。
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    有功能建议或内容反馈？欢迎 <a href="/docs/contact/feedback" style={{ color: '#FF8A00', fontWeight: 500, textDecoration: 'none' }}>提交反馈意见</a>，我们会认真阅读每一条建议。
   </p>
 </div>
 
-</div>
+<ImageZoomOverlay />

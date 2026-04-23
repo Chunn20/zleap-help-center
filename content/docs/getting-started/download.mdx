@@ -6,342 +6,100 @@ description: Zleap 提供多平台版本，您可根据设备类型选择以下�
 import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-react';
 
 <style>{`
-  /* 全局纯白 */
-  body {
-    background: #FFFFFF;
+  /* 调整页面标题（H1）和描述文字的距离 */
+  #nd-page > h1 {
+    margin-bottom: 0px !important;
   }
   
-  /* 容器 */
-  .download-wrapper {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0;
+  /* 调整描述文字的上边距 */
+  #nd-page > h1 + p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
   }
   
-  /* 标题样式 */
-  .download-wrapper h2 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #1d1d1f;
-    margin: 40px 0 24px 0;
-    letter-spacing: -0.02em;
-    line-height: 1.3;
-  }
-  
-  /* 正文样式 */
-  .download-wrapper p {
-    font-size: 15px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 12px 0;
-  }
-  
-  /* 特殊卡片 - 网页版 */
-  .download-special-card {
-    background: #0D131A;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 32px;
-    margin: 32px 0;
-    box-shadow: 0 4px 20px rgba(13, 19, 26, 0.3);
-    text-align: center;
-  }
-  
-  .download-special-card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  
-  .download-special-card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #FFFFFF;
-    margin: 0;
-  }
-  
-  .download-special-card p {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.7;
-    margin: 16px 0 24px 0;
-  }
-  
-  /* 强调+跳转卡片 - 立即访问 */
-  .download-cta {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .download-cta-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%);
-    padding: 16px 48px;
-    border-radius: 16px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(255, 138, 0, 0.25);
-    cursor: pointer;
-    min-width: 280px;
-    justify-content: center;
-  }
-  
-  .download-cta-card:hover {
-    box-shadow: 0 6px 24px rgba(255, 138, 0, 0.4);
-    transform: translateY(-2px);
-    background: linear-gradient(180deg, #FF9A1A 0%, #FFC266 100%);
-  }
-  
-  .download-cta-card:active {
-    transform: translateY(0px);
-    box-shadow: 0 2px 8px rgba(255, 138, 0, 0.3);
-  }
-  
-  .download-cta-icon {
-    width: 40px;
-    height: 40px;
-    background: #FFFFFF;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FF8A00;
-    flex-shrink: 0;
-  }
-  
-  .download-cta-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .download-cta-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #FFFFFF !important;
-    margin: 0;
-    line-height: 1.2;
-  }
-  
-  .download-cta-arrow {
-    color: #FFFFFF !important;
-    font-size: 20px;
-    line-height: 1;
-    font-weight: 700;
-    transition: transform 0.2s;
-  }
-  
-  .download-cta-card:hover .download-cta-arrow {
-    transform: translateX(4px);
-  }
-  
-  /* 基础卡片2 - iOS/Android */
-  .download-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 32px 0;
-  }
-  
+  /* 响应式 */
   @media (max-width: 640px) {
-    .download-grid {
-      grid-template-columns: 1fr;
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
     }
-  }
-  
-  .download-card2 {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .download-card2-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .download-card2-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  
-  .download-card2-title {
-    flex: 1;
-  }
-  
-  .download-card2-title h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1d1d1f;
-    margin: 0 0 4px 0;
-  }
-  
-  .download-card2-title p {
-    font-size: 13px;
-    color: #86868b;
-    margin: 0;
-  }
-  
-  .download-card2-desc {
-    font-size: 14px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 0;
-  }
-  
-  .download-card2-tip {
-    background: #F5F5F7;
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: #1d1d1f;
-    line-height: 1.7;
-  }
-  
-  .download-card2-qr {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background: #FAFAFA;
-    border-radius: 8px;
-  }
-  
-  .download-card2-qr img {
-    width: 160px;
-    height: 160px;
-    object-fit: contain;
-    display: block;
-  }
-  
-  /* 提示卡片 */
-  .download-tip-card {
-    background: #FFF9F0;
-    border: 1px solid #FFE9CC;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin: 32px 0;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  
-  .download-tip-card-icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  
-  .download-tip-card p {
-    font-size: 14px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 0;
-  }
-  
-  .download-tip-card a {
-    color: #FF8A00;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .download-tip-card a:hover {
-    text-decoration: underline;
   }
 `}</style>
 
-<div className="download-wrapper">
-
-{/* 网页版 - 特殊卡片 */}
-<div className="download-special-card">
-  <div className="download-special-card-icon">
-    <Globe className="h-8 w-8 text-[#FF8A00]" />
-    <h3>网页版</h3>
+<div style={{ background: '#898989', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '32px', margin: '0 0 32px 0', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)', textAlign: 'center' }}>
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
+    <Globe className="h-8 w-8" style={{ color: '#FF8A00' }} />
+    <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#FFFFFF', margin: 0 }}>网页版</h2>
   </div>
-  <p>
+  <p style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0' }}>
     无需下载安装，通过浏览器即可直接访问。推荐使用 Chrome、Edge、Safari 或 Firefox 以获得最佳体验。
   </p>
-  <div className="download-cta">
-    <a href="https://www.zleap.com" target="_blank" rel="noopener noreferrer" className="download-cta-card">
-      <div className="download-cta-icon">
+  <div style={{ margin: '24px 0', display: 'flex', justifyContent: 'center' }}>
+    <a
+      href="https://www.zleap.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
+    >
+      <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
         <Zap className="h-5 w-5" />
       </div>
-      <div className="download-cta-content">
-        <p className="download-cta-title">立即访问</p>
-        <span className="download-cta-arrow">›</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <p style={{ fontSize: '17px', fontWeight: 700, color: '#FFFFFF', margin: 0, lineHeight: 1.2 }}>立即访问</p>
+        <span style={{ color: '#FFFFFF', fontSize: '20px', lineHeight: 1, fontWeight: 700 }}>›</span>
       </div>
     </a>
   </div>
 </div>
 
-{/* iOS + Android 并排 - 基础卡片2 */}
-<div className="download-grid">
-
-  {/* iOS */}
-  <div className="download-card2">
-    <div className="download-card2-header">
-      <div className="download-card2-icon">
-        <Apple className="h-10 w-10 text-[#FF8A00]" />
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', margin: '32px 0' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <Apple className="h-5 w-5" />
       </div>
-      <div className="download-card2-title">
-        <h3>iOS 版</h3>
-        <p>iPhone · iPad</p>
+      <div>
+        <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: '0 0 4px 0' }}>iOS 版</p>
+        <p style={{ fontSize: '13px', color: '#86868b', margin: 0 }}>iPhone · iPad</p>
       </div>
     </div>
-    <p className="download-card2-desc">
+    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '0 0 16px 0' }}>
       支持 iPhone 与 iPad，可通过 App Store 安全下载。
     </p>
-    <div className="download-card2-tip">
+    <div style={{ background: '#F5F5F7', borderRadius: '8px', padding: '12px 16px', fontSize: '13px', color: '#1d1d1f', lineHeight: 1.7, marginBottom: '16px' }}>
       在 App Store 中搜索 <strong>「Zleap」</strong> 点击获取，或扫描下方二维码跳转至下载页面。
     </div>
-    <div className="download-card2-qr">
-      <img src="/images/contact/qr-ios.PNG" alt="iOS 下载二维码" />
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', background: '#FAFAFA', borderRadius: '8px' }}>
+      <img src="/images/contact/qr-ios.PNG" alt="iOS 下载二维码" style={{ width: '160px', height: '160px', objectFit: 'contain', display: 'block' }} />
     </div>
   </div>
 
-  {/* Android */}
-  <div className="download-card2">
-    <div className="download-card2-header">
-      <div className="download-card2-icon">
-        <Smartphone className="h-10 w-10 text-[#FF8A00]" />
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+        <Smartphone className="h-5 w-5" />
       </div>
-      <div className="download-card2-title">
-        <h3>Android 版</h3>
-        <p>手机 · 平板</p>
+      <div>
+        <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: '0 0 4px 0' }}>Android 版</p>
+        <p style={{ fontSize: '13px', color: '#86868b', margin: 0 }}>手机 · 平板</p>
       </div>
     </div>
-    <p className="download-card2-desc">
+    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '0 0 16px 0' }}>
       支持安卓手机及平板设备，可通过 Google Play 下载。
     </p>
-    <div className="download-card2-tip">
+    <div style={{ background: '#F5F5F7', borderRadius: '8px', padding: '12px 16px', fontSize: '13px', color: '#1d1d1f', lineHeight: 1.7, marginBottom: '16px' }}>
       在 Google Play 中搜索 <strong>「Zleap」</strong> 进行安装，或扫描下方二维码进入下载页面。
     </div>
-    <div className="download-card2-qr">
-      <img src="/images/contact/qr-android.PNG" alt="Android 下载二维码" />
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', background: '#FAFAFA', borderRadius: '8px' }}>
+      <img src="/images/contact/qr-android.PNG" alt="Android 下载二维码" style={{ width: '160px', height: '160px', objectFit: 'contain', display: 'block' }} />
     </div>
   </div>
-
 </div>
 
-{/* 温馨提示 - 提示卡片 */}
-<div className="download-tip-card">
-  <div className="download-tip-card-icon">
-    <Lightbulb className="h-5 w-5 text-[#FF8A00]" />
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
-  <p>
-    <strong>温馨提示：</strong>请确保从官方渠道下载，以保证软件安全与最新版本。如遇下载或使用问题，可<a href="/docs/contact/contact">联系客服</a>获取帮助。
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    <strong>温馨提示：</strong>请确保从官方渠道下载，以保证软件安全与最新版本。如遇下载或使用问题，可<a href="/docs/contact/contact" style={{ color: '#FF8A00', fontWeight: 500, textDecoration: 'none' }}>联系客服</a>获取帮助。
   </p>
-</div>
-
 </div>

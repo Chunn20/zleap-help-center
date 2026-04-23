@@ -6,7 +6,7 @@
   /* Primary Colors */
   --color-fd-primary: #FF8A00;
   --color-fd-primary-foreground: #ffffff;
-  --color-fd-ring: #FF8A00;
+  --color-fd-ring: transparent;
 
   /* 统一强调色 */
   --color-bg-pure: #FFFFFF;           /* 100% 纯白底色 */
@@ -22,7 +22,7 @@
 .dark {
   --color-fd-primary: #FF8A00;
   --color-fd-primary-foreground: #ffffff;
-  --color-fd-ring: #FF8A00;
+  --color-fd-ring: transparent;
 
   /* Dark mode */
   --color-bg-pure: #000000;
@@ -43,6 +43,33 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+/* 移除所有元素的默认 focus outline */
+*:focus,
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+/* 移除侧边栏链接的 ring 样式 */
+aside[data-fd-sidebar] a,
+aside[data-fd-sidebar] button {
+  --tw-ring-color: transparent !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+}
+
+aside[data-fd-sidebar] a:focus,
+aside[data-fd-sidebar] a:focus-visible,
+aside[data-fd-sidebar] button:focus,
+aside[data-fd-sidebar] button:focus-visible {
+  --tw-ring-color: transparent !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  box-shadow: none !important;
 }
 
 html {
@@ -72,11 +99,44 @@ aside[data-fd-sidebar] a {
   transition: all 0.2s ease;
   font-weight: 400;
   color: #1d1d1f;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 aside[data-fd-sidebar] a:hover {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.04);
   color: #000000;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+aside[data-fd-sidebar] a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+aside[data-fd-sidebar] a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 移除侧边栏所有层级链接的边框 */
+aside[data-fd-sidebar] [data-level] a,
+aside[data-fd-sidebar] [data-level="1"] a,
+aside[data-fd-sidebar] [data-level="2"] a,
+aside[data-fd-sidebar] [data-level="3"] a {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+aside[data-fd-sidebar] [data-level] a:hover,
+aside[data-fd-sidebar] [data-level] a:focus,
+aside[data-fd-sidebar] [data-level] a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 /* Active sidebar item - 左侧2px淡蓝线 + 文字加粗 */
@@ -136,9 +196,11 @@ code {
   padding-bottom: 4px;
 }
 
+/* 页面标题 H1 */
 #nd-page > h1 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 24px;
 }
 
 /* 右侧目录 - 极简样式 */

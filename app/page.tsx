@@ -141,7 +141,7 @@ export default function HomePage() {
     e.preventDefault();
     if (searchQuery.trim()) {
       setShowSuggestions(false);
-      router.push(`/docs?search=${encodeURIComponent(searchQuery)}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -161,7 +161,8 @@ export default function HomePage() {
               <img src="/logo.png" alt="Zleap" className="h-10 rounded" />
               <span className="text-xl font-bold text-gray-900">智跃</span>
             </Link>
-            <img src="/图标/AI 驱动的智能内容社区.png" alt="AI 驱动的智能内容社区" className="h-6" />
+            <span className="text-xl text-gray-400">|</span>
+            <span className="text-base text-gray-900">帮助中心</span>
           </div>
 
           <nav className="flex items-center gap-6">
@@ -199,8 +200,8 @@ export default function HomePage() {
         }}
       >
         <div className="mx-auto max-w-7xl px-6 text-center w-full">
-          <p className="mb-10 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
-          <h1 className="mb-16 text-5xl font-bold text-gray-900">
+          <p className="mb-4 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
+          <h1 className="mb-8 text-5xl font-bold text-gray-900">
             让 AI Agent 成为你的智能信息助手
           </h1>
 
@@ -256,7 +257,7 @@ export default function HomePage() {
           </div>
 
           {/* Features Section - 认识Zleap */}
-          <div className="mt-20">
+          <div className="mt-30">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {features.map((feature) => (

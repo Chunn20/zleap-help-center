@@ -4,220 +4,55 @@ description: 我们非常重视您的意见，帮助我们做得更好。
 ---
 
 import { MessageCircle, Sparkles, Send } from 'lucide-react';
+import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
-  /* 全局纯白 */
-  body {
-    background: #FFFFFF;
+  /* 调整页面标题（H1）和描述文字的距离 */
+  #nd-page > h1 {
+    margin-bottom: 0px !important;
   }
   
-  /* 容器 */
-  .feedback-wrapper {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0;
+  /* 调整描述文字的上边距 */
+  #nd-page > h1 + p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
   }
   
-  /* 标题样式 */
-  .feedback-wrapper h2 {
-    font-size: 28px;
+  /* H2 标题样式 */
+  #nd-page h2 {
+    font-size: 24px;
     font-weight: 700;
     color: #1d1d1f;
-    margin: 40px 0 24px 0;
     letter-spacing: -0.02em;
     line-height: 1.3;
-    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 24px;
   }
   
-  /* 正文样式 */
-  .feedback-wrapper p {
-    font-size: 15px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 12px 0;
-  }
-  
-  /* 介绍文字居中 */
-  .feedback-intro {
-    text-align: center;
-    max-width: 600px;
-    margin: 12px auto;
-  }
-  
-  /* 特殊卡片 - 您可能会想告诉我们 */
-  .feedback-special-card {
-    background: #0D131A;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 32px;
-    margin: 32px 0;
-    box-shadow: 0 4px 20px rgba(13, 19, 26, 0.3);
-    text-align: center;
-  }
-  
-  .feedback-special-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  
-  .feedback-special-icon {
-    width: 40px;
-    height: 40px;
-    background: #FF8A00;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    flex-shrink: 0;
-  }
-  
-  .feedback-special-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #FFFFFF;
-    margin: 0;
-  }
-  
-  .feedback-special-list {
-    margin: 0;
-    padding-left: 20px;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 14px;
-    line-height: 2;
-    text-align: left;
-    display: inline-block;
-  }
-  
-  .feedback-special-list li {
-    color: rgba(255, 255, 255, 0.85);
-  }
-  
-  /* 强调+跳转卡片 - 提交反馈 */
-  .feedback-cta {
-    margin: 32px 0;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .feedback-cta-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%);
-    padding: 16px 48px;
-    border-radius: 16px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(255, 138, 0, 0.25);
-    cursor: pointer;
-    min-width: 280px;
-    justify-content: center;
-  }
-  
-  .feedback-cta-card:hover {
-    box-shadow: 0 6px 24px rgba(255, 138, 0, 0.4);
-    transform: translateY(-2px);
-    background: linear-gradient(180deg, #FF9A1A 0%, #FFC266 100%);
-  }
-  
-  .feedback-cta-icon {
-    width: 40px;
-    height: 40px;
-    background: #FFFFFF;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FF8A00;
-    flex-shrink: 0;
-  }
-  
-  .feedback-cta-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .feedback-cta-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #FFFFFF !important;
-    margin: 0;
-    line-height: 1.2;
-  }
-  
-  .feedback-cta-arrow {
-    color: #FFFFFF !important;
-    font-size: 20px;
-    line-height: 1;
-    font-weight: 700;
-    transition: transform 0.2s;
-  }
-  
-  .feedback-cta-card:hover .feedback-cta-arrow {
-    transform: translateX(4px);
-  }
-  
-  .feedback-cta-desc {
-    text-align: center;
-    font-size: 13px;
-    color: #86868b;
-    margin-top: 12px;
-  }
-  
-  /* 提示卡片 */
-  .feedback-tip-card {
-    background: #FFF9F0;
-    border: 1px solid #FFE9CC;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin: 32px 0;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .feedback-tip-icon {
-    flex-shrink: 0;
-    color: #FF8A00;
-  }
-  
-  .feedback-tip-card p {
-    font-size: 14px;
-    color: #1d1d1f;
-    line-height: 1.7;
-    margin: 0;
-  }
-  
-  .feedback-tip-card a {
-    color: #FF8A00;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .feedback-tip-card a:hover {
-    text-decoration: underline;
+  /* 移除分隔线 */
+  #nd-page hr {
+    display: none;
   }
 `}</style>
 
-<div className="feedback-wrapper">
+<div style={{ textAlign: 'center', margin: '40px 0 32px 0' }}>
+  <div style={{ width: '56px', height: '56px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '16px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', color: '#FF8A00' }}>
+    <MessageCircle className="h-7 w-7" />
+  </div>
+  <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#1d1d1f', margin: '0 0 12px 0', letterSpacing: '-0.02em', lineHeight: 1.3 }}>给帮助中心提建议</h1>
+  <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, maxWidth: '600px', margin: '0 auto' }}>
+    我们非常重视您的意见。无论是功能建议、内容改进还是任何想法，您的每一个反馈都能帮助我们把 Zleap 做得更好。
+  </p>
+</div>
 
-## 给帮助中心提建议
-
-<p className="feedback-intro">我们非常重视您的意见。无论是功能建议、内容改进还是任何想法，您的每一个反馈都能帮助我们把 Zleap 做得更好。</p>
-
-<div className="feedback-special-card">
-  <div className="feedback-special-header">
-    <div className="feedback-special-icon">
+<div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '14px', padding: '24px', margin: '32px auto', maxWidth: '600px' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+    <div style={{ width: '40px', height: '40px', background: '#FFE9B9', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
       <Sparkles className="h-5 w-5" />
     </div>
-    <p className="feedback-special-title">您可能会想告诉我们</p>
+    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>您可能会想告诉我们</p>
   </div>
-  <ul className="feedback-special-list">
+  <ul style={{ margin: 0, paddingLeft: '20px', color: '#86868b', fontSize: '17px', lineHeight: 2 }}>
     <li>希望增加某个功能或改进现有体验</li>
     <li>文档中哪个部分写得不够清晰</li>
     <li>在使用过程中遇到的问题或困惑</li>
@@ -225,26 +60,34 @@ import { MessageCircle, Sparkles, Send } from 'lucide-react';
   </ul>
 </div>
 
-<div className="feedback-cta">
-  <a href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff" target="_blank" rel="noopener noreferrer" className="feedback-cta-card">
-    <div className="feedback-cta-icon">
+<div style={{ margin: '90px 0 0 0', display: 'flex', justifyContent: 'center' }}>
+  <a
+    href="https://kcnfstknddo1.feishu.cn/share/base/form/shrcnPCPMzQMlLQbNmedv6YRZff"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
+  >
+    <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
       <Send className="h-5 w-5" />
     </div>
-    <div className="feedback-cta-content">
-      <p className="feedback-cta-title">提交反馈意见</p>
-      <span className="feedback-cta-arrow">›</span>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#FFFFFF', margin: 0, lineHeight: 1.2 }}>提交反馈意见</p>
+      <span style={{ color: '#FFFFFF', fontSize: '20px', lineHeight: 1, fontWeight: 700 }}>›</span>
     </div>
   </a>
 </div>
-<p className="feedback-cta-desc">预计填写时间：1-2 分钟</p>
 
-<div className="feedback-tip-card">
-  <div className="feedback-tip-icon">
-    <MessageCircle className="h-5 w-5" />
+<p style={{ fontSize: '17px', color: '#86868b', textAlign: 'center', margin: '12px 0 90px 0' }}>
+  预计填写时间：1-2 分钟
+</p>
+
+<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+  <div style={{ flexShrink: 0 }}>
+    <MessageCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
   </div>
-  <p>
-    如需即时沟通，欢迎 <a href="/docs/contact/contact">加入我们的官方社群</a>
+  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+    如需即时沟通，欢迎 <a href="/docs/contact/contact" style={{ color: '#FF8A00', fontWeight: 500, textDecoration: 'none' }}>加入我们的官方社群</a>
   </p>
 </div>
 
-</div>
+<ImageZoomOverlay />

@@ -5,7 +5,7 @@ import './global.css';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Zleap 帮助中心',
+    template: '%s | Zleap',
     default: 'Zleap 帮助中心',
   },
   description: '智跃 Zleap 产品帮助文档',
