@@ -384,14 +384,11 @@ function SearchPageContent() {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#f8f8ff]">
+    <div className="relative flex min-h-screen flex-col bg-[linear-gradient(135deg,#F5FBFF_0%,#FFFAEF_100%)]">
       <div
         className="relative z-10 flex flex-1 flex-col overflow-hidden"
         style={{
-          backgroundImage: 'url(/background.png)',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top center',
-          backgroundSize: '100% 100%',
+          background: 'linear-gradient(135deg, #F5FBFF 0%, #FFFAEF 100%)',
         }}
       >
         <HelpCenterHeader />
