@@ -162,20 +162,23 @@ export default function HomePage() {
                 rightSlot={
                   <>
                     {searchQuery && (
-                      <button
-                        type="button"
-                        onClick={handleClear}
-                        className="absolute right-24 top-1/2 mr-2 -translate-y-1/2 border-r border-[#dee0e3] pr-1 text-gray-400 transition-colors hover:text-gray-600"
-                      >
-                        <X className="h-5 w-5" />
-                      </button>
+                      <div>
+                        <button
+                          type="button"
+                          onClick={handleClear}
+                          className="absolute right-24 top-1/2 mr-2 -translate-y-1/2 border-r border-[#dee0e3] pr-1 text-gray-400 transition-colors hover:text-gray-600"
+                        >
+                          <X className="h-5 w-5" />
+                        </button>
+                        <button
+                          type="submit"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-lg bg-[#FF8A00] px-6 py-2 font-medium text-white transition-colors hover:bg-[#FF9A1A]"
+                        >
+                          搜索
+                        </button>
+                      </div>
                     )}
-                    <button
-                      type="submit"
-                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-lg bg-[#FF8A00] px-6 py-2 font-medium text-white transition-colors hover:bg-[#FF9A1A]"
-                    >
-                      搜索
-                    </button>
+
                   </>
                 }
               />
@@ -221,7 +224,7 @@ export default function HomePage() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="rounded-3xl overflow-hidden transition-transform hover:scale-105 relative"
+                  className="transition-transform hover:scale-105 relative"
                   style={{
                     minHeight: '400px',
                   }}
@@ -229,7 +232,7 @@ export default function HomePage() {
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 object-cover"
                   />
                   <div className="relative z-10 p-8 flex flex-col h-full">
                     <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>

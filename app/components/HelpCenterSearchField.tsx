@@ -26,7 +26,7 @@ export function HelpCenterSearchField({
       <img
         src="/图标/搜索图标.png"
         alt="搜索"
-        className="absolute left-4 top-1/2 z-10 h-5 w-5 -translate-y-1/2"
+        className="absolute left-4 top-1/2 z-10 h-6 w-6 -translate-y-1/2"
       />
       <input
         type="text"

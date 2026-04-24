@@ -16,6 +16,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
         <RootProvider
+          theme={{
+            forcedTheme: 'light',
+            defaultTheme: 'light',
+            enableSystem: false,
+          }}
           i18n={{
             locale: 'zh-CN',
             translations: {
