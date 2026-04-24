@@ -9,8 +9,7 @@ export function HelpCenterHeader() {
             <img src="/logo.png" alt="Zleap" className="h-10 rounded" />
             <span className="text-xl font-bold text-gray-900">智跃</span>
           </Link>
-          <span className="text-xl text-gray-400">|</span>
-          <span className="text-base text-gray-900">帮助中心</span>
+          <span className="text-base text-gray-900 border-l border-solid border-gray-400 pl-3">帮助中心</span>
         </div>
 
         <nav className="flex items-center gap-6">

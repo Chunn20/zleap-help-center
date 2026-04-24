@@ -162,22 +162,20 @@ export default function HomePage() {
                 rightSlot={
                   <>
                     {searchQuery && (
-                      <>
-                        <button
-                          type="button"
-                          onClick={handleClear}
-                          className="absolute right-24 top-1/2 -translate-y-1/2 border-r border-[#dee0e3] pr-1 mr-2 text-gray-400 transition-colors hover:text-gray-600"
-                        >
-                          <X className="h-5 w-5" />
-                        </button>
-                        <button
-                          type="submit"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-lg bg-[#FF8A00] px-6 py-2 font-medium text-white transition-colors hover:bg-[#FF9A1A]"
-                        >
-                          搜索
-                        </button>
-                      </>
+                      <button
+                        type="button"
+                        onClick={handleClear}
+                        className="absolute right-24 top-1/2 mr-2 -translate-y-1/2 border-r border-[#dee0e3] pr-1 text-gray-400 transition-colors hover:text-gray-600"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
                     )}
+                    <button
+                      type="submit"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-lg bg-[#FF8A00] px-6 py-2 font-medium text-white transition-colors hover:bg-[#FF9A1A]"
+                    >
+                      搜索
+                    </button>
                   </>
                 }
               />
