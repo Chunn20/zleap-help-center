@@ -17,25 +17,25 @@ export function HelpCenterHeader() {
             href="https://intro.zleap.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[#FF8A00]  bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
+            className="text-sm text-gray-600 hover:text-[#FF8A00]  hover:bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
           >
             企业版
           </a>
           <Link
             href="/docs/getting-started/download"
-            className="text-sm text-[#FF8A00]  bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
+            className="text-sm text-gray-600 hover:text-[#FF8A00]  hover:bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
           >
             下载使用
           </Link>
           <Link
             href="/docs/contact/contact"
-            className="text-sm text-[#FF8A00]  bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
+            className="text-sm text-gray-600 hover:text-[#FF8A00]  hover:bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
           >
             联系我们
           </Link>
           <Link
             href="/docs/support/changelog"
-            className="text-sm text-[#FF8A00]  bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
+            className="text-sm text-gray-600 hover:text-[#FF8A00]  hover:bg-[#FF8A001A] px-2 py-1 rounded-[6px]"
           >
             更新日志
           </Link>
