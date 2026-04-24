@@ -4,348 +4,214 @@ description: 通过输入网页链接，自动抓取网页内容作为信息源
 ---
 
 import { Globe, Link2, CheckCircle, AlertCircle, Lightbulb, HelpCircle } from 'lucide-react';
+import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <style>{`
-  .crawler-section {
-    border: 1px solid var(--border-color, #EDEDED);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 32px;
-    background: var(--card-bg, linear-gradient(to bottom, #ffffff 0%, #fafafa 100%));
+  /* 调整页面标题（H1）和描述文字的距离 */
+  #nd-page > h1 {
+    margin-bottom: 0px !important;
   }
-  .crawler-title {
-    font-size: 20px;
+
+  /* 调整描述文字的上边距 */
+  #nd-page > h1 + p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* H2 标题样式 */
+  #nd-page h2 {
+    font-size: 24px;
     font-weight: 700;
-    color: var(--text-primary, #0D131A);
-    margin: 0 0 16px 0;
-    padding-left: 12px;
-    border-left: 4px solid #FF8A00;
+    color: #1d1d1f;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin-top: 60px;
+    margin-bottom: 24px;
   }
-  .crawler-intro {
-    font-size: 14px;
-    color: var(--text-secondary, #5D5D5D);
-    line-height: 1.8;
-    margin-bottom: 16px;
+
+  /* 第一个 H2 标题样式（紧跟描述文字） */
+  #nd-page > p + h2 {
+    margin-top: 0px;
   }
-  .crawler-image {
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 20px 0;
-    border: 1px solid var(--border-color, #EDEDED);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    max-width: 800px;
-  }
-  .crawler-image img {
-    width: 100%;
-    display: block;
-  }
-  .crawler-tip {
-    background: var(--tip-bg, #FFF7ED);
-    border-left: 3px solid #FF8A00;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin: 16px 0;
-  }
-  .crawler-tip p {
-    font-size: 14px;
-    color: var(--text-secondary, #5D5D5D);
-    line-height: 1.7;
-    margin: 0;
-  }
-  .crawler-step-number {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%);
-    color: #fff;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 700;
-    margin-right: 12px;
-    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25);
-  }
-  .crawler-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 14px;
-  }
-  .crawler-table th,
-  .crawler-table td {
-    border: 1px solid var(--border-color, #EDEDED);
-    padding: 12px;
-    text-align: left;
-  }
-  .crawler-table th {
-    background: var(--table-header-bg, #FAFAFA);
-    font-weight: 600;
-    color: var(--text-primary, #0D131A);
-  }
-  .crawler-table td {
-    color: var(--text-secondary, #5D5D5D);
-  }
-  .crawler-faq {
-    background: var(--faq-bg, #F9F9F9);
-    border: 1px solid var(--border-color, #EDEDED);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .crawler-faq h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary, #0D131A);
-    margin: 0 0 8px 0;
-  }
-  .crawler-faq p {
-    font-size: 14px;
-    color: var(--text-secondary, #5D5D5D);
-    line-height: 1.7;
-    margin: 0;
-  }
-  @media (prefers-color-scheme: dark) {
-    .crawler-section,
-    .crawler-faq {
-      --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
-      --faq-bg: #1a1a1a;
-      --border-color: #3a3a3a;
-      --table-header-bg: #2a2a2a;
-    }
-    .crawler-tip {
-      --tip-bg: #2d2416;
-    }
-    .crawler-image {
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
-    }
-  }
-  [data-theme="dark"] .crawler-section,
-  [data-theme="dark"] .crawler-faq {
-    --card-bg: linear-gradient(to bottom, #1a1a1a 0%, #242424 100%);
-    --faq-bg: #1a1a1a;
-    --border-color: #3a3a3a;
-    --table-header-bg: #2a2a2a;
-  }
-  [data-theme="dark"] .crawler-tip {
-    --tip-bg: #2d2416;
-  }
-  [data-theme="dark"] .crawler-image {
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.06);
+
+  /* 移除分隔线 */
+  #nd-page hr {
+    display: none;
   }
 `}</style>
 
-<h2 id="what-is-crawler" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
-  一、什么是网页爬虫
-</h2>
-
-<div className="crawler-section">
-  <p className="crawler-intro">
-    网页爬虫支持用户通过输入网页链接，自动抓取网页内容作为信息源；系统将对链接格式、合法性、连通性、重复性、数量进行全自动校验，确保链接有效后再提交入库。
-  </p>
-</div>
-
----
-
-<h2 id="how-to-use" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
-  二、操作步骤
-</h2>
-
-<h3 id="step1" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
-  <span className="crawler-step-number">1</span>选择信息源类型
-</h3>
-
-<div className="crawler-section">
-  <p className="crawler-intro">
-    <strong>【信息管理】</strong> - <strong>【创建信息源】</strong> - <strong>【网页爬虫】</strong>
-  </p>
-
-  <div className="crawler-image">
-    <img src="/images/information-management/create-private/web-crawler/select-type.gif" alt="选择网页爬虫" />
+<div style={{ background: '#898989', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '32px', margin: '0 0 40px 0', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+    <span style={{ background: '#FF8A00', color: '#fff', fontSize: '11px', fontWeight: 700, padding: '3px 10px', borderRadius: '20px', letterSpacing: '0.05em' }}>核心概念</span>
   </div>
+  <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#FFFFFF', margin: '0 0 16px 0', lineHeight: 1.4 }}>网页爬虫是信息的「自动抓取工具」</h2>
+  <p style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0' }}>
+    网页爬虫支持用户通过输入网页链接，自动抓取网页内容作为信息源。
+  </p>
+  <p style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0 0 0' }}>
+    系统将对链接格式、合法性、连通性、重复性、数量进行全自动校验，确保链接有效后再提交入库。
+  </p>
 </div>
 
----
+## 操作步骤
 
-<h3 id="step2" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
-  <span className="crawler-step-number">2</span>填写基础表单
-</h3>
+### 步骤1：选择信息源类型
 
-<div className="crawler-section">
-  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
-    <li>在<strong>【上传信息源】</strong>中粘贴所需爬取的网页，完成粘贴后点击<strong>【验证链接】</strong></li>
-    <li>在<strong>【信息要点】</strong>给信息源命名，可在<strong>【信息要点】</strong>添加说明，便于之后管理信息源</li>
-    <li>打开<strong>【启用状态】</strong>，该信息源则可以提供给<strong>【创建助手】</strong>/<strong>【创建任务】</strong></li>
-    <li>按需选择爬取网页的开始时间<strong>【首次同步】</strong>和间隔时间<strong>【同步频率】</strong>以及爬取网页的范围<strong>【爬取范围】</strong></li>
-  </ol>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, marginBottom: '16px' }}>
+  【信息管理】 - 【创建信息源】 - 【网页爬虫】
+</p>
 
-  <div className="crawler-image">
-    <img src="/images/information-management/create-private/web-crawler/form.gif" alt="填写表单" />
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/create-private/web-crawler/select-type.gif" alt="选择网页爬虫" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+### 步骤2：填写基础表单
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, marginBottom: '16px' }}>
+  在【上传信息源】中粘贴所需爬取的网页，完成粘贴后点击【验证链接】。在【信息要点】给信息源命名，可在【信息要点】添加说明，便于之后管理信息源。打开【启用状态】，该信息源则可以提供给【创建助手】/【创建任务】。按需选择爬取网页的开始时间【首次同步】和间隔时间【同步频率】以及爬取网页的范围【爬取范围】。
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/create-private/web-crawler/form.gif" alt="填写表单" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+## 规则说明
+
+### 链接输入框
+
+<p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', lineHeight: 1.7, marginBottom: '12px' }}>（1）输入规则</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '20px' }}>
+  <li>输入框默认占位提示：输入 http:// 或 https:// 开头的 URL 地址，可换行输入多个链接</li>
+  <li>支持换行输入多条链接</li>
+  <li>链接必须以 http:// 或 https:// 开头</li>
+</ul>
+
+<p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', lineHeight: 1.7, marginBottom: '12px' }}>（2）链接验证功能</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, marginBottom: '16px' }}>
+  点击「验证链接」后，系统自动执行以下 5 项校验：
+</p>
+
+<table style={{ width: '100%', borderCollapse: 'collapse', margin: '16px 0', fontSize: '14px' }}>
+  <thead>
+    <tr>
+      <th style={{ border: '1px solid #e5e5e5', padding: '12px', textAlign: 'left', background: '#fafafa', fontWeight: 600, color: '#1d1d1f' }}>校验类型</th>
+      <th style={{ border: '1px solid #e5e5e5', padding: '12px', textAlign: 'left', background: '#fafafa', fontWeight: 600, color: '#1d1d1f' }}>校验规则</th>
+      <th style={{ border: '1px solid #e5e5e5', padding: '12px', textAlign: 'left', background: '#fafafa', fontWeight: 600, color: '#1d1d1f' }}>校验失败提示</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>空输入校验</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>至少输入 1 条链接</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>请输入至少 1 条链接</td>
+    </tr>
+    <tr>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>重复校验</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>未提交 / 已提交链接全局去重</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>第 X 行与第 Y 行链接重复 / 第 X 行链接已存在</td>
+    </tr>
+    <tr>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>数量校验</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>最多支持 5 条链接</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>最多支持 5 条链接</td>
+    </tr>
+    <tr>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>格式校验</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>必须为合法 URL，以 http/https 开头</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>第 X 行：格式错误</td>
+    </tr>
+    <tr>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>连通性校验</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>HTTP 状态码 200~399，超时≤5 秒</td>
+      <td style={{ border: '1px solid #e5e5e5', padding: '12px', color: '#1d1d1f' }}>链接失效</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', lineHeight: 1.7, marginBottom: '12px' }}>（3）提交按钮状态规则</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '0' }}>
+  <li><strong>验证不通过：</strong>按钮保持灰色，文字为「提交链接」，不可点击</li>
+  <li><strong>所有链接格式正确 + 均可正常访问：</strong>按钮自动变为「提交信息」，可点击提交</li>
+</ul>
+
+### 已提交链接列表
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, marginBottom: '16px' }}>
+  提交后的链接将实时展示在列表中，用于查看总数量、各链接状态、解析结果。
+</p>
+
+<p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', lineHeight: 1.7, marginBottom: '12px' }}>列表字段说明</p>
+
+<ol style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
+  <li><strong>提交链接总数 & 总体状态（实时更新）</strong><br />示例：共5条（2条验证成功，1条提交中，2条验证失败）</li>
+  <li><strong>链接解析后名称 / 原始链接</strong></li>
+</ol>
+
+<p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', lineHeight: 1.7, marginBottom: '12px' }}>验证状态，共 4 种：</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '40px', marginBottom: '0' }}>
+  <li>提交中</li>
+  <li>验证成功</li>
+  <li>链接失效</li>
+  <li>格式错误</li>
+</ul>
+
+## 常见问题（FAQ）
+
+<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '16px' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+    <HelpCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>Q1：为什么「提交链接」按钮是灰色的？</p>
   </div>
+  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}><strong>A：</strong>至少有 1 条链接未通过格式 / 连通性 / 重复 / 数量校验，请根据红色提示修正后再提交。</p>
 </div>
 
----
-
-<h2 id="rules" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
-  规则说明
-</h2>
-
-<h3 id="link-input" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
-  1. 链接输入框
-</h3>
-
-<div className="crawler-section">
-  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px' }}>
-    （1）输入规则
-  </h4>
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '20px' }}>
-    <li>输入框默认占位提示：输入 http:// 或 https:// 开头的 URL 地址，可换行输入多个链接</li>
-    <li>支持换行输入多条链接</li>
-    <li>链接必须以 http:// 或 https:// 开头</li>
-  </ul>
-
-  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px' }}>
-    （2）链接验证功能
-  </h4>
-  <p className="crawler-intro">
-    点击<strong>「验证链接」</strong>后，系统自动执行以下 5 项校验：
-  </p>
-
-  <table className="crawler-table">
-    <thead>
-      <tr>
-        <th>校验类型</th>
-        <th>校验规则</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>空输入校验</td>
-        <td>至少输入 1 条链接</td>
-      </tr>
-      <tr>
-        <td>重复校验</td>
-        <td>未提交 / 已提交链接全局去重</td>
-      </tr>
-      <tr>
-        <td>数量校验</td>
-        <td>最多支持 5 条链接</td>
-      </tr>
-      <tr>
-        <td>格式校验</td>
-        <td>必须为合法 URL，以 http/https 开头</td>
-      </tr>
-      <tr>
-        <td>连通性校验</td>
-        <td>HTTP 状态码 200~399，超时≤5 秒</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <table className="crawler-table">
-    <thead>
-      <tr>
-        <th>校验规则</th>
-        <th>校验失败提示</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>至少输入 1 条链接</td>
-        <td>请输入至少 1 条链接</td>
-      </tr>
-      <tr>
-        <td>未提交 / 已提交链接全局去重</td>
-        <td>第 X 行与第 Y 行链接重复 / 第 X 行链接已存在</td>
-      </tr>
-      <tr>
-        <td>最多支持 5 条链接</td>
-        <td>最多支持 5 条链接</td>
-      </tr>
-      <tr>
-        <td>必须为合法 URL，以 http/https 开头</td>
-        <td>第 X 行：格式错误</td>
-      </tr>
-      <tr>
-        <td>HTTP 状态码 200~399，超时≤5 秒</td>
-        <td>链接失效</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px', marginTop: '20px' }}>
-    （3）提交按钮状态规则
-  </h4>
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '0' }}>
-    <li><strong>验证不通过：</strong>按钮保持灰色，文字为「提交链接」，不可点击</li>
-    <li><strong>所有链接格式正确 + 均可正常访问：</strong>按钮自动变为「提交信息」，可点击提交</li>
-  </ul>
+<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '16px' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+    <HelpCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>Q2：提示 "链接已存在" 是什么意思？</p>
+  </div>
+  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}><strong>A：</strong>该链接在系统中已提交过（未提交或已提交均会判断），不支持重复提交。</p>
 </div>
 
----
-
-<h3 id="submitted-links" style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '16px', marginTop: '24px' }}>
-  2. 已提交链接列表
-</h3>
-
-<div className="crawler-section">
-  <p className="crawler-intro">
-    提交后的链接将实时展示在列表中，用于查看总数量、各链接状态、解析结果。
-  </p>
-
-  <h4 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary, #0D131A)', marginBottom: '12px' }}>
-    列表字段说明
-  </h4>
-  <ol style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '16px' }}>
-    <li><strong>提交链接总数 & 总体状态（实时更新）</strong><br />示例：共5条（2条验证成功，1条提交中，2条验证失败）</li>
-    <li><strong>链接解析后名称 / 原始链接</strong></li>
-  </ol>
-  <p style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '8px' }}>
-    <strong>3. 验证状态</strong>，共 4 种：
-  </p>
-  <ul style={{ fontSize: '14px', color: 'var(--text-secondary, #5D5D5D)', lineHeight: 1.8, paddingLeft: '40px', marginBottom: '0' }}>
-    <li>提交中</li>
-    <li>验证成功</li>
-    <li>链接失效</li>
-    <li>格式错误</li>
-  </ul>
+<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '16px' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+    <HelpCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>Q3：最多能提交几条链接？</p>
+  </div>
+  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}><strong>A：</strong>单次最多支持 5 条。</p>
 </div>
 
----
-
-<h2 id="faq" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary, #0D131A)', marginBottom: '24px', paddingLeft: '12px', borderLeft: '4px solid #FF8A00' }}>
-  三、常见问题（FAQ）
-</h2>
-
-<div className="crawler-faq">
-  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q1：为什么「提交链接」按钮是灰色的？</h4>
-  <p><strong>A：</strong>至少有 1 条链接未通过格式 / 连通性 / 重复 / 数量校验，请根据红色提示修正后再提交。</p>
+<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '32px' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+    <HelpCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>Q4：提示 "链接失效" 怎么办？</p>
+  </div>
+  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}><strong>A：</strong>请检查链接是否可在浏览器正常打开；若可打开仍提示失效，可能是网络超时或目标网站限制访问。</p>
 </div>
 
-<div className="crawler-faq">
-  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q2：提示 "链接已存在" 是什么意思？</h4>
-  <p><strong>A：</strong>该链接在系统中已提交过（未提交或已提交均会判断），不支持重复提交。</p>
-</div>
-
-<div className="crawler-faq">
-  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q3：最多能提交几条链接？</h4>
-  <p><strong>A：</strong>单次最多支持 5 条。</p>
-</div>
-
-<div className="crawler-faq">
-  <h4><HelpCircle className="inline h-5 w-5 mr-1 text-[#FF8A00]" /> Q4：提示 "链接失效" 怎么办？</h4>
-  <p><strong>A：</strong>请检查链接是否可在浏览器正常打开；若可打开仍提示失效，可能是网络超时或目标网站限制访问。</p>
-</div>
-
----
-
-<div style={{ background: 'var(--feedback-bg, linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%))', borderRadius: '16px', padding: '32px', textAlign: 'center', marginTop: '48px' }}>
-  <p style={{ fontSize: '15px', color: 'var(--text-primary, #0D131A)', marginBottom: '20px', lineHeight: 1.6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-    <Lightbulb className="h-5 w-5 text-[#FF8A00]" /> 对网页爬虫功能有疑问或建议？欢迎提交反馈！
-  </p>
-  <a href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF8A00', color: '#fff', padding: '12px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)', transition: 'all 0.3s' }}>
-    提交反馈意见 →
+<div style={{ margin: '90px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0px' }}>
+  <a
+    href="https://kcnfstknddo1.feishu.cn/sync/LJgrdRQFtsFQkqbCsOlc33NDnle"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
+    className="feedback-btn"
+  >
+    <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+      <Lightbulb className="h-5 w-5" />
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#FFFFFF', margin: 0, lineHeight: 1.2 }}>提交反馈意见</p>
+      <span style={{ color: '#FFFFFF', fontSize: '20px', lineHeight: 1, fontWeight: 700 }}>›</span>
+    </div>
   </a>
+  <p style={{ fontSize: '17px', color: '#1d1d1f', margin: '12px 0 0 0', textAlign: 'center' }}>
+    对网页爬虫功能有疑问或建议？欢迎通过反馈表单告诉我们
+  </p>
 </div>
+
+<ImageZoomOverlay />
