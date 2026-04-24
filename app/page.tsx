@@ -86,7 +86,6 @@ export default function HomePage() {
 
   const updateSearchQuery = (query: string) => {
     setSearchQuery(query);
-
     if (query.trim()) {
       const filtered = searchableDocs.filter(doc =>
         doc.title.toLowerCase().includes(query.toLowerCase()) ||
