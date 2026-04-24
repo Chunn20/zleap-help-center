@@ -134,9 +134,6 @@ $ awk '{printf "%s\\\\n", $0}' public_key.pem
   上传【public_key.pem】（消息加密公钥）
 </p>
 
-<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/information-management/create-private/wecom-bot/upload-public-key.png" alt="上传公钥" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
-</div>
 
 ### 步骤 7：添加存档内容
 
@@ -158,41 +155,51 @@ $ awk '{printf "%s\\\\n", $0}' public_key.pem
 
 ---
 
-## Zleap 配置
+## 前置工作已完成，配置相关信息
 
-### 配置 1：CorpID
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/create-private/wecom-bot/zleap-config.png" alt="Zleap 配置" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  在企业微信【我的企业】页面，查看并复制【企业 ID】。
+### 步骤1：企业ID
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  查询路径：企业微信-> 我的企业 -> 企业ID
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/information-management/create-private/wecom-bot/corpid-copy.png" alt="在企业微信中查看并复制企业ID" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+  <img src="/images/information-management/create-private/wecom-bot/company-id.png" alt="企业ID" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-### 配置 2：Secret
+### 步骤2：Secret配置
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  在企业微信【管理工具】>【会话内容存档】页面，查看并复制【Secret】。
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 8px 0' }}>
+  查询路径1（发送secret至企业微信）：企业微信->企微会话存档配置->Secret【查看】->点击【发送】->等待系统发送到企业微信
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/information-management/create-private/wecom-bot/secret-copy.png" alt="在企业微信中查看并复制Secret" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+  <img src="/images/information-management/create-private/wecom-bot/secret-send.png" alt="发送Secret" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-### 配置 3：密钥文件
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/create-private/wecom-bot/secret-view.png" alt="查看Secret" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  参考本文档「消息加密公钥配置」，上传【private_key.pem】文件至 Zleap 配置表单。
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '16px 0 8px 0' }}>
+  查询路径2（企业微信查看）：企业微信团队查看secret信息并复制
 </p>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-  <div style={{ flexShrink: 0, marginTop: '2px' }}>
-    <AlertTriangle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-  </div>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
-    <strong>重要提示：</strong>请妥善保管 private_key.pem 文件，不要泄露给他人。该文件是解密会话内容的关键。
-  </p>
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/create-private/wecom-bot/secret-copy.png" alt="复制Secret" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+### 步骤3：密钥文件
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  密钥文件，参考本文档「消息加密公钥配置」,上传【private_key.pem】文件至Zleap配置表单
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/information-management/create-private/wecom-bot/company-id.png" alt="企业ID" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
 ---
