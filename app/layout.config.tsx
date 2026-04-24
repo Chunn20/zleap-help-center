@@ -12,8 +12,7 @@ const Logo: ReactNode = (
       className="rounded"
     />
     <span style={{ fontSize: '20px', fontWeight: 600, color: '#1d1d1f' }}>智跃</span>
-    <span style={{ fontSize: '20px', color: '#86868b' }}>|</span>
-    <span style={{ fontSize: '16px', fontWeight: 400, color: '#1d1d1f' }}>帮助中心</span>
+    <span className='border-l border-solid border-gray-400 pl-3' style={{ fontSize: '16px', fontWeight: 400, color: '#1d1d1f' }}>帮助中心</span>
   </div>
 );
 
