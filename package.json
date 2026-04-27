@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --hostname 192.168.50.137 --port 3000 --turbopack",
     "build": "next build",
     "start": "next start",
     "postinstall": "fumadocs-mdx"
