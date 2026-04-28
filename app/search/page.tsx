@@ -277,7 +277,7 @@ function SearchPageContent() {
         ...getMatchMeta(item.content, 'title'),
       }));
 
-      const descriptionCandidates = [...group.texts, ...group.headings].map((item) => ({
+      const descriptionCandidates = group.texts.map((item) => ({
         item,
         ...getMatchMeta(item.content, 'description'),
       }));
@@ -298,6 +298,8 @@ function SearchPageContent() {
           .filter((candidate) => candidate.isMatch)
           .sort((a, b) => a.bucket - b.bucket || b.score - a.score)[0] ??
         null;
+      const fallbackDescriptionItem =
+        bestDescriptionCandidate?.item ?? group.texts[0] ?? null;
 
       const primaryBucket = Math.min(
         bestTitleCandidate.bucket,
@@ -309,7 +311,7 @@ function SearchPageContent() {
       const pageTitleHtml = ensureHighlighted(page.content);
       const titleItem = bestTitleCandidate.item;
       const titleHtml = ensureHighlighted(titleItem.content);
-      const descriptionItem = bestDescriptionCandidate?.item;
+      const descriptionItem = fallbackDescriptionItem;
       const contentHtml = descriptionItem
         ? createSnippet(ensureHighlighted(descriptionItem.content), currentQuery)
         : '';
