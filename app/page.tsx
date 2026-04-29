@@ -77,12 +77,31 @@ const features = [
   },
 ];
 
+const SEARCH_HISTORY_KEY = 'zleap-help-center-search-history';
+const MAX_SEARCH_HISTORY = 8;
+
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState<typeof searchableDocs>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  const saveSearchHistory = (keyword: string) => {
+    const normalized = keyword.trim();
+    if (!normalized) return;
+
+    setSearchHistory((current) => {
+      const next = [
+        normalized,
+        ...current.filter((item) => item !== normalized),
+      ].slice(0, MAX_SEARCH_HISTORY);
+
+      localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(next));
+      return next;
+    });
+  };
 
   const updateSearchQuery = (query: string) => {
     setSearchQuery(query);
@@ -96,9 +115,25 @@ export default function HomePage() {
       setShowSuggestions(true);
     } else {
       setSuggestions([]);
-      setShowSuggestions(false);
+      setShowSuggestions(searchHistory.length > 0);
     }
   };
+
+  useEffect(() => {
+    const stored = localStorage.getItem(SEARCH_HISTORY_KEY);
+    if (!stored) return;
+
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        setSearchHistory(
+          parsed.filter((item): item is string => typeof item === 'string').slice(0, MAX_SEARCH_HISTORY)
+        );
+      }
+    } catch {
+      localStorage.removeItem(SEARCH_HISTORY_KEY);
+    }
+  }, []);
 
   // 点击外部关闭建议框
   useEffect(() => {
@@ -115,12 +150,14 @@ export default function HomePage() {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      saveSearchHistory(searchQuery);
       setShowSuggestions(false);
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
   const handleSuggestionClick = (keyword: string) => {
+    saveSearchHistory(keyword);
     setShowSuggestions(false);
     setSearchQuery(keyword);
     router.push(`/search?q=${encodeURIComponent(keyword)}`);
@@ -134,7 +171,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <HelpCenterHeader />
+      <HelpCenterHeader hideSearch />
 
       {/* Hero Section with Background */}
       <section
@@ -157,7 +194,10 @@ export default function HomePage() {
               <HelpCenterSearchField
                 value={searchQuery}
                 onChange={updateSearchQuery}
-                onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
+                onFocus={() =>
+                  (searchQuery.trim() || searchHistory.length > 0) &&
+                  setShowSuggestions(true)
+                }
                 rightSlot={
                   <>
                     {searchQuery && (
@@ -165,13 +205,15 @@ export default function HomePage() {
                         <button
                           type="button"
                           onClick={handleClear}
-                          className="absolute right-24 top-1/2 mr-2 -translate-y-1/2 border-r border-[#dee0e3] pr-1 text-gray-400 transition-colors hover:text-gray-600"
+                          className="absolute right-20 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full bg-[#BBBFC4] text-white transition-colors hover:bg-[#9FA5AF]"
+                          aria-label="清空搜索"
                         >
-                          <X className="h-5 w-5" />
+                          <X className="h-3 w-3 stroke-3" />
                         </button>
+                        <span className="absolute right-18 top-1/2 h-4 w-px -translate-y-1/2 bg-[#DEE0E3]" />
                         <button
                           type="submit"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-lg bg-[#FF8A00] px-6 py-2 font-medium text-white transition-colors hover:bg-[#FF9A1A]"
+                          className="absolute right-8 top-1/2 -translate-y-1/2 text-[16px] leading-none text-[#FF8A00] transition-colors hover:text-[#FF9A1A]"
                         >
                           搜索
                         </button>
@@ -195,6 +237,26 @@ export default function HomePage() {
                       <div className="flex items-center gap-3">
                         <img src="/图标/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
                         <span className="text-sm text-gray-900">{doc.title}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {showSuggestions && !searchQuery.trim() && searchHistory.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl border border-gray-200 shadow-lg max-h-96 overflow-y-auto z-50">
+                  <div className="px-6 pt-4 pb-2 text-left text-sm text-gray-400">
+                    搜索历史
+                  </div>
+                  {searchHistory.map((keyword) => (
+                    <button
+                      key={keyword}
+                      type="button"
+                      onClick={() => handleSuggestionClick(keyword)}
+                      className="w-full text-left px-6 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 last:rounded-b-2xl"
+                    >
+                      <div className="flex items-center gap-3">
+                        <img src="/图标/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
+                        <span className="text-sm text-gray-900">{keyword}</span>
                       </div>
                     </button>
                   ))}

@@ -118,11 +118,11 @@ function SearchPageContent() {
     const fallbackCharIndex =
       normalizedKeyword.length > 0
         ? Array.from(new Set(normalizedKeyword.split(''))).reduce((best, char) => {
-            const index = lowercasePlainText.indexOf(char);
-            if (index === -1) return best;
-            if (best === -1) return index;
-            return Math.min(best, index);
-          }, -1)
+          const index = lowercasePlainText.indexOf(char);
+          if (index === -1) return best;
+          if (best === -1) return index;
+          return Math.min(best, index);
+        }, -1)
         : -1;
 
     const anchorIndex =
@@ -277,7 +277,7 @@ function SearchPageContent() {
         ...getMatchMeta(item.content, 'title'),
       }));
 
-      const descriptionCandidates = [...group.texts, ...group.headings].map((item) => ({
+      const descriptionCandidates = group.texts.map((item) => ({
         item,
         ...getMatchMeta(item.content, 'description'),
       }));
@@ -298,6 +298,8 @@ function SearchPageContent() {
           .filter((candidate) => candidate.isMatch)
           .sort((a, b) => a.bucket - b.bucket || b.score - a.score)[0] ??
         null;
+      const fallbackDescriptionItem =
+        bestDescriptionCandidate?.item ?? group.texts[0] ?? null;
 
       const primaryBucket = Math.min(
         bestTitleCandidate.bucket,
@@ -309,7 +311,7 @@ function SearchPageContent() {
       const pageTitleHtml = ensureHighlighted(page.content);
       const titleItem = bestTitleCandidate.item;
       const titleHtml = ensureHighlighted(titleItem.content);
-      const descriptionItem = bestDescriptionCandidate?.item;
+      const descriptionItem = fallbackDescriptionItem;
       const contentHtml = descriptionItem
         ? createSnippet(ensureHighlighted(descriptionItem.content), currentQuery)
         : '';
@@ -321,13 +323,13 @@ function SearchPageContent() {
           href: page.url.split('#')[0],
         },
         ...(titleItem.type === 'heading' &&
-        stripHtml(titleHtml) !== stripHtml(pageTitleHtml)
+          stripHtml(titleHtml) !== stripHtml(pageTitleHtml)
           ? [
-              {
-                label: stripHtml(titleHtml),
-                href: titleItem.url,
-              },
-            ]
+            {
+              label: stripHtml(titleHtml),
+              href: titleItem.url,
+            },
+          ]
           : []),
       ];
 
@@ -384,20 +386,16 @@ function SearchPageContent() {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-[linear-gradient(135deg,#F5FBFF_0%,#FFFAEF_100%)]">
+    <div className="relative flex min-h-screen flex-col bg-white font-['OPPO_Sans_4.0-SemiBold']">
+      <HelpCenterHeader />
       <div
-        className="relative z-10 flex flex-1 flex-col overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #F5FBFF 0%, #FFFAEF 100%)',
-        }}
+        className="relative z-10 flex flex-1 flex-col overflow-hidden bg-[url('/Search/background.png')] bg-size-[100%_auto] bg-top bg-no-repeat"
       >
-        <HelpCenterHeader />
-
-        <div className="relative z-10 px-6 pt-16 pb-4">
+        <div className="relative z-50 px-6 pt-16 pb-4">
           <SearchBox initialQuery={query} onSearch={handleSearch} />
         </div>
 
-        <div className="relative z-10 flex-1 px-6 pb-24">
+        <div className="relative z-0 flex-1 px-6 pb-24">
           <SearchResults results={results} query={query} isLoading={isLoading} />
         </div>
       </div>
