@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <DocsLayout
         tree={source.pageTree}
         {...baseOptions}
-        sidebar={{ collapsible: false }}
+        sidebar={{ collapsible: false, className: 'bg-white' }}
         containerProps={{ style: docsLayoutStyle }}
       >
         {children}
