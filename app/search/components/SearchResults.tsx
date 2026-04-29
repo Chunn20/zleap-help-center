@@ -1,7 +1,7 @@
 'use client';
 
-import { SearchResultItem } from './SearchResultItem';
 import { FileQuestion } from 'lucide-react';
+import { SearchResultItem } from './SearchResultItem';
 import type { SearchResult } from './types';
 
 interface SearchResultsProps {
@@ -21,17 +21,6 @@ export function SearchResults({ results, query, isLoading }: SearchResultsProps)
     );
   }
 
-  if (!query) {
-    return (
-      <div className="mx-auto mt-10 w-full max-w-4xl">
-        <div className="flex flex-col items-center justify-center rounded-[28px]  px-8 py-16 text-gray-600">
-          <FileQuestion className="mb-4 h-16 w-16" />
-          <p className="text-lg">请输入关键词开始搜索</p>
-        </div>
-      </div>
-    );
-  }
-
   if (results.length === 0) {
     return (
       <div className="mx-auto mt-10 w-full max-w-4xl">
@@ -46,12 +35,11 @@ export function SearchResults({ results, query, isLoading }: SearchResultsProps)
 
   return (
     <div className="mx-auto mt-6 w-full max-w-4xl">
-      <div className="mb-8 px-2 text-[15px] text-[#8c94a8]">
-        为你找到“<span className="font-semibold text-[#5f6b85]">{query}</span>”相关结果共{' '}
-        <span className="font-semibold text-[#5f6b85]">{results.length}</span> 条
+      <div className="mb-8 text-[15px] text-[#8F959E]">
+        为你找到“<span >{query}</span>”相关结果共{' '}
+        <span>{results.length}</span> 条
       </div>
-
-      <div className="space-y-5">
+      <div className="space-y-12">
         {results.map((result) => (
           <SearchResultItem
             key={result.id}

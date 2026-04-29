@@ -49,21 +49,26 @@ export function SearchResultItem({
     <article >
       <Link
         href={url}
-        className="mb-4 block text-[30px] font-semibold leading-[1.35] text-[#1d1f26] transition-color [&_mark]:bg-transparent [&_mark]:px-0 [&_mark]:text-[#2563eb]"
+        className="mb-3 block text-[20px] font-semibold leading-[1.35] text-[#1d1f26] transition-color [&_mark]:bg-transparent [&_mark]:px-0 [&_mark]:text-[#FF8A00]"
         dangerouslySetInnerHTML={{ __html: titleHtml }}
       />
       {pathSegments.length > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-[#97a1b7]">
+        <div className="mb-3 flex flex-wrap items-center gap-y-1 text-[16px] text-[#97a1b7]">
           {pathSegments.map((segment, index) => (
-            <div key={`${segment.label}-${index}`} className="flex items-center gap-2">
+            <div key={`${segment.label}-${index}`} className="flex items-center">
               {segment.href ? (
                 <Link
                   href={segment.href}
-                  className="max-w-full transition-colors hover:text-[#2563eb]"
+                  className={`max-w-full transition-colors hover:text-[#2563eb] ${index === pathSegments.length - 1 ? 'text-[#1F2329]' : ''
+                    }`}
                   dangerouslySetInnerHTML={{ __html: segment.label }}
                 />
               ) : (
-                <span className="max-w-full" dangerouslySetInnerHTML={{ __html: segment.label }} />
+                <span
+                  className={`max-w-full ${index === pathSegments.length - 1 ? 'text-[#1F2329]' : ''
+                    }`}
+                  dangerouslySetInnerHTML={{ __html: segment.label }}
+                />
               )}
               {index < pathSegments.length - 1 && (
                 <ChevronRight className="h-3.5 w-3.5 text-[#c2c8d6]" />
@@ -74,7 +79,7 @@ export function SearchResultItem({
       )}
       <Link
         href={contentUrl}
-        className="line-clamp-2 text-[17px] leading-8 text-[#333a49] [&_mark]:bg-transparent [&_mark]:px-0 [&_mark]:font-medium [&_mark]:text-[#2563eb]"
+        className="line-clamp-2 text-[16px] leading-8 text-[#333a49] [&_mark]:bg-transparent [&_mark]:px-0 [&_mark]:font-medium [&_mark]:text-[#FF8A00]"
         dangerouslySetInnerHTML={{
           __html:
             contentHtml ||

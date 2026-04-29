@@ -28,15 +28,17 @@ export function HelpCenterSearchField({
         alt="搜索"
         className="absolute left-4 top-1/2 z-10 h-6 w-6 -translate-y-1/2"
       />
-      <input
-        type="text"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        onKeyDown={onKeyDown}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        className={`w-full rounded-full border-2 border-[#FF8A00] bg-white py-4 pl-12 text-base shadow-sm transition-shadow focus:border-[#FF8A00] focus:outline-none focus:shadow-[0_0_0_3px_rgba(255,138,0,0.1)] ${inputPaddingClass}`}
-      />
+      <div className="rounded-full bg-[linear-gradient(90deg,#F6D365_0%,#FCA886_100%)] p-0.5 shadow-sm transition-shadow focus-within:shadow-[0_0_0_3px_rgba(255,138,0,0.1)]">
+        <input
+          type="text"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          onKeyDown={onKeyDown}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          className={`w-full rounded-full border-0 bg-white py-4 pl-12 text-base focus:outline-none ${inputPaddingClass}`}
+        />
+      </div>
       {rightSlot}
       {children}
     </div>
