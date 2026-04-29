@@ -6,6 +6,7 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   allowedDevOrigins: ['192.168.50.220'],
+  turbopack: false,
 };
 
 export default withMDX(config);
