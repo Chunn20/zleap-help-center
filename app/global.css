@@ -88,8 +88,18 @@ header[data-fd-nav] {
 
 /* Sidebar - 纯白背景，取消任何填充 */
 aside[data-fd-sidebar] {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF !important;
   border-right: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* 强制侧边栏容器背景为白色 */
+aside[data-fd-sidebar] > div {
+  background-color: #FFFFFF !important;
+}
+
+/* 侧边栏内容区域背景为白色 */
+aside[data-fd-sidebar] nav {
+  background-color: #FFFFFF !important;
 }
 
 /* Sidebar links - 极简样式 */
