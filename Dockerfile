@@ -3,14 +3,11 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# 复制依赖文件
-COPY package.json package-lock.json ./
+# 复制所有文件
+COPY . .
 
 # 安装依赖
-RUN npm ci
-
-# 复制项目文件
-COPY . .
+RUN npm install
 
 # 构建项目
 RUN npm run build
@@ -24,16 +21,17 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# 复制必要文件
+# 复制必要文件（包括 source.config.ts，因为 fumadocs-mdx postinstall 需要）
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/package-lock.json ./
 COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/source.config.ts ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# 只安装生产依赖
-RUN npm ci --only=production && npm cache clean --force
+# 安装所有依赖（fumadocs-mdx postinstall 需要 dev 依赖）
+RUN npm install && npm cache clean --force
 
 EXPOSE 3000
 
