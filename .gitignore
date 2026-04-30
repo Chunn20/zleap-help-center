@@ -27,3 +27,18 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude AI 相关文件（不上传到公司 GitLab）
+.claude/
+memory/
+MEMORY.md
+
+# 临时开发文件（不上传到公司 GitLab）
+标准格式.md
+batch_fix.py
+replace_tip_boxes.py
+temp_update.sh
+update-format.sh
+update_format.py
+*.pyc
+__pycache__/
