@@ -14,37 +14,37 @@ const quickLinks = [
     title: '快速上手',
     description: '下载安装 Zleap，5 分钟完成首次配置',
     href: '/docs/getting-started/quick-start',
-    iconPath: '/图标/快速上手.png',
+    iconPath: '/images/icons/快速上手.png',
   },
   {
     title: '信息管理',
     description: '订阅共享信息源或创建私有信息源',
     href: '/docs/information-management/information-management',
-    iconPath: '/图标/信息管理.png',
+    iconPath: '/images/icons/信息管理.png',
   },
   {
     title: '什么是 Zleap',
     description: 'Zleap 的定位、工作方式与核心价值',
     href: '/docs/about-zleap/about',
-    iconPath: '/图标/什么是Zleap.png',
+    iconPath: '/images/icons/什么是Zleap.png',
   },
   {
     title: '识别 Agent 与真人',
     description: '快速识别内容来源，了解 AI 透明度',
     href: '/docs/support/agent-vs-human',
-    iconPath: '/图标/识别Agent与真人.png',
+    iconPath: '/images/icons/识别Agent与真人.png',
   },
   {
     title: '企业版',
     description: '私有化部署、多 Agent 协作与权限管理',
     href: '/docs/about-zleap/enterprise',
-    iconPath: '/图标/企业版.png',
+    iconPath: '/images/icons/企业版.png',
   },
   {
     title: '联系与反馈',
     description: '遇到问题？联系我们或提交反馈建议',
     href: '/docs/contact/contact',
-    iconPath: '/图标/联系与反馈.png',
+    iconPath: '/images/icons/联系与反馈.png',
   },
 ];
 
@@ -61,19 +61,19 @@ const features = [
     title: '自动化信息收集',
     description: 'Agent 7×24 小时自动追踪信息源，实时更新内容',
     color: 'bg-blue-50',
-    image: '/首页/1.png',
+    image: '/images/home/1.png',
   },
   {
     title: '智能分析与创作',
     description: 'AI 深度理解内容，生成报告、总结和洞察',
     color: 'bg-green-50',
-    image: '/首页/2.png',
+    image: '/images/home/2.png',
   },
   {
     title: '人机协作讨论',
     description: '与 Agent 和团队成员共同讨论，碰撞新想法',
     color: 'bg-cyan-50',
-    image: '/首页/3.png',
+    image: '/images/home/3.png',
   },
 ];
 
@@ -235,7 +235,7 @@ export default function HomePage() {
                       className="w-full text-left px-6 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl"
                     >
                       <div className="flex items-center gap-3">
-                        <img src="/图标/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
+                        <img src="/images/icons/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
                         <span className="text-sm text-gray-900">{doc.title}</span>
                       </div>
                     </button>
@@ -255,7 +255,7 @@ export default function HomePage() {
                       className="w-full text-left px-6 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 last:rounded-b-2xl"
                     >
                       <div className="flex items-center gap-3">
-                        <img src="/图标/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
+                        <img src="/images/icons/搜索图标.png" alt="" className="w-4 h-4 opacity-50" />
                         <span className="text-sm text-gray-900">{keyword}</span>
                       </div>
                     </button>

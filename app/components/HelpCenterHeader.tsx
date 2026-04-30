@@ -170,7 +170,7 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
             <form onSubmit={handleSearch} className="w-[360px]">
               <div className="relative" ref={searchRef}>
                 <img
-                  src="/图标/搜索图标.png"
+                  src="/images/icons/搜索图标.png"
                   alt="搜索"
                   className="absolute left-4 top-1/2 z-10 h-4 w-4 -translate-y-1/2 opacity-60"
                 />
@@ -206,7 +206,7 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
                         className="w-full border-b border-gray-100 px-5 py-3 text-left transition-colors first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 hover:bg-gray-50"
                       >
                         <div className="flex items-center gap-3">
-                          <img src="/图标/搜索图标.png" alt="" className="h-4 w-4 opacity-50" />
+                          <img src="/images/icons/搜索图标.png" alt="" className="h-4 w-4 opacity-50" />
                           <span className="text-sm text-gray-900">{doc.title}</span>
                         </div>
                       </button>
@@ -226,7 +226,7 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
                         className="w-full border-b border-gray-100 px-5 py-3 text-left transition-colors last:rounded-b-2xl last:border-b-0 hover:bg-gray-50"
                       >
                         <div className="flex items-center gap-3">
-                          <img src="/图标/搜索图标.png" alt="" className="h-4 w-4 opacity-50" />
+                          <img src="/images/icons/搜索图标.png" alt="" className="h-4 w-4 opacity-50" />
                           <span className="text-sm text-gray-900">{keyword}</span>
                         </div>
                       </button>
@@ -243,12 +243,14 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
           >
             企业版
           </button> */}
-          <button
-            type="button"
-            className="h-9 rounded-full bg-[#FF8A00] px-5 text-sm font-medium text-white shadow-[0px_4px_12px_0px_rgba(255,138,0,0.28)]"
+          <a
+            href="https://zleap.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="h-9 rounded-full bg-[#FF8A00] px-5 text-sm font-medium text-white shadow-[0px_4px_12px_0px_rgba(255,138,0,0.28)] inline-flex items-center justify-center"
           >
             登录
-          </button>
+          </a>
         </div>
       </div>
     </header>

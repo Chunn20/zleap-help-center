@@ -389,7 +389,7 @@ function SearchPageContent() {
     <div className="relative flex min-h-screen flex-col bg-white font-['OPPO_Sans_4.0-SemiBold']">
       <HelpCenterHeader />
       <div
-        className="relative z-10 flex flex-1 flex-col overflow-hidden bg-[url('/Search/background.png')] bg-size-[100%_auto] bg-top bg-no-repeat"
+        className="relative z-10 flex flex-1 flex-col overflow-hidden bg-[url('/images/search/background.png')] bg-size-[100%_auto] bg-top bg-no-repeat"
       >
         <div className="relative z-50 px-6 pt-16 pb-4">
           <SearchBox initialQuery={query} onSearch={handleSearch} />

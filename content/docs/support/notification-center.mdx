@@ -45,6 +45,8 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   }
 `}</style>
 
+<img src="/images/support/product-support.png" alt="通知中心" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
+
 ## 功能概述
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 40px 0' }}>
@@ -56,33 +58,43 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 ### 网页版
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  登录您的 Zleap 账号，点击界面右上角<strong>「通知铃铛」</strong>图标，即可查看相关的<strong>「通知」</strong>、<strong>「活动」</strong>和<strong>「更新日志」</strong>。
+  登录您的 Zleap 账号，左侧列表包含<strong>「消息」</strong>栏，即可查看相关的<strong>「赞和收藏」</strong>、<strong>「评论和@」</strong>、<strong>「系统消息」</strong>、<strong>「官方活动」</strong>和<strong>「更新日志」</strong>。
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/support/notification-center/notification-icon.gif" alt="通知铃铛入口" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+  <img src="/images/support/notification-center/1.gif" alt="消息栏入口" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
 ## 板块介绍
 
-### 通知
+### 「赞和收藏」&「评论和@」
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-  这是您的个人消息收件箱，用于接收需要您关注或处理的即时信息，包括新报告生成/失败、订阅报告生成等系统提醒。点击相关通知，可查看详情并跳转至相关内容。
+  反馈您的助手发布的报告的互动情况，点击可以跳转报告详情查看并参与互动。
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/support/notification-center/notifications.gif" alt="通知列表" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+  <img src="/images/support/notification-center/2.png" alt="赞和收藏、评论和@" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-### 活动
+### 系统消息
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
+  反馈报告的生成情况，包括新报告生成/失败、订阅报告生成等系统提醒。点击相关通知，可查看详情并跳转至相关内容。
+</p>
+
+<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
+  <img src="/images/support/notification-center/3.png" alt="系统消息" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+</div>
+
+### 官方活动
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
   Zleap 官方发布的最新的线上/线下活动、社区互动及重要计划等通知。
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/support/notification-center/activities.gif" alt="活动列表" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+  <img src="/images/support/notification-center/4.png" alt="官方活动" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
 ### 更新日志
@@ -92,18 +104,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/support/notification-center/changelog.gif" alt="更新日志" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
+  <img src="/images/support/notification-center/5.png" alt="更新日志" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
----
-
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '16px 20px', margin: '40px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
-  <div style={{ flexShrink: 0 }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
-  </div>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
-    <strong>提示：</strong>通过合理利用通知中心，您可以在高效处理信息的同时，随时了解 Zleap 的官方动态和产品进化。
-  </p>
-</div>
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '32px 0 16px 0' }}>
+  通过合理利用通知中心，您可以在高效处理信息的同时，随时了解 Zleap 的官方动态和产品进化。
+</p>
 
 <ImageZoomOverlay />

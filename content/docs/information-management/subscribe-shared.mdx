@@ -9,6 +9,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 <style>{`
   /* 调整页面标题（H1）和描述文字的距离 */
   #nd-page > h1 {
+    font-size: 36px !important;
     margin-bottom: 0px !important;
   }
   
@@ -20,28 +21,32 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   
   /* H2 标题样式 */
   #nd-page h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1d1d1f;
-    letter-spacing: -0.02em;
-    line-height: 1.3;
+    font-size: 26px;
+    font-weight: 600;
+    color: #1A1D23;
+    line-height: 1.4;
     margin-top: 60px;
     margin-bottom: 24px;
   }
   
   /* 第一个 H2 标题样式（紧跟描述文字） */
   #nd-page > p + h2 {
-    margin-top: 0px;
+    margin-top: 40px;
   }
   
   /* H3 标题样式 */
   #nd-page h3 {
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 600;
-    color: #1d1d1f;
-    letter-spacing: -0.01em;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    color: #1A1D23;
+    line-height: 1.5;
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+  
+  /* 正文行间距 */
+  #nd-page p {
+    line-height: 26px;
   }
   
   /* 移除分隔线 */
@@ -50,34 +55,27 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   }
 `}</style>
 
+<img src="/images/information-management/subscribe-shared-source.png" alt="订阅共享信息源" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
 
-<div style={{ background: '#898989', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '32px', margin: '0 0 40px 0', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-    <span style={{ background: '#FF8A00', color: '#fff', fontSize: '11px', fontWeight: 700, padding: '3px 10px', borderRadius: '20px', letterSpacing: '0.05em' }}>核心概念</span>
-  </div>
-  <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#FFFFFF', margin: '0 0 16px 0', lineHeight: 1.4 }}>什么是共享信息源？</h2>
-  <p style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0' }}>
-    共享信息源是 Zleap 精选的优质内容频道，共享信息源涵盖 AI、时政、商业、职场、科技、财经等多个领域。您可以根据兴趣订阅相关频道，获取高价值信息，并将其作为创建助手、发布任务、生成报告和帖子的知识基础。
-  </p>
-</div>
+## 什么是共享信息源？
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '12px 0 40px 0' }}>共享信息源是 Zleap 精选的优质内容频道，共享信息源涵盖 AI、时政、商业、职场、科技、财经等多个领域。您可以根据兴趣订阅相关频道，获取高价值信息，并将其作为创建助手、发布任务、生成报告和帖子的知识基础。</p>
 
 ## 操作教程
 
 ### 进入「共享信息源」
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  点击「创作中心」的「信息管理」，进入「共享信息源」界面。
-</p>
+<p style={{ fontSize: '16px', color: '#1A1D23', lineHeight: '26px', margin: '12px 0' }}>点击「创作中心」的「信息管理」，进入「共享信息源」界面。</p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/information-management/subscribe-shared-step1.png" alt="进入共享信息源" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
   <div style={{ flexShrink: 0 }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
   </div>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     <strong>提示：</strong>当前，「共享信息源」已汇聚了来自 AI、时政、商业、职场等领域的数千条优质、新鲜的信息源，持续为您提供高质量公共信息。
   </p>
 </div>
@@ -86,36 +84,30 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 #### 订阅频道
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  选择需订阅的频道，在对应频道卡片右侧点击「加入」按钮。Zleap 支持订阅多个频道，您可任意订阅喜欢的频道。
-</p>
+<p style={{ fontSize: '16px', color: '#1A1D23', lineHeight: '26px', margin: '12px 0' }}>选择需订阅的频道，在对应频道卡片右侧点击「加入」按钮。Zleap 支持订阅多个频道，您可任意订阅喜欢的频道。</p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/information-management/subscribe-shared-step2.gif" alt="订阅频道" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
   <div style={{ flexShrink: 0 }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
   </div>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     <strong>提示：</strong>若想取消订阅，在订阅成功后，点击卡片右侧「已加入」按钮，即可取消订阅。
   </p>
 </div>
 
 #### 查看订阅内容
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  「加入」后，您可以在「信息源列表」的「我加入的」查看您已经订阅的所有「公共信息源」。
-</p>
+<p style={{ fontSize: '16px', color: '#1A1D23', lineHeight: '26px', margin: '12px 0' }}>「加入」后，您可以在「信息源列表」的「我加入的」查看您已经订阅的所有「公共信息源」。</p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/information-management/subscribe-shared-step3.gif" alt="查看订阅内容" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  点击任一频道，即可进入其最新发布的信息列表；点击具体的「事件名称」，可跳转至原文详情页。
-</p>
+<p style={{ fontSize: '16px', color: '#1A1D23', lineHeight: '26px', margin: '12px 0' }}>点击任一频道，即可进入其最新发布的信息列表；点击具体的「事件名称」，可跳转至原文详情页。</p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/information-management/subscribe-shared-step4.gif" alt="查看信息详情" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
@@ -123,9 +115,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 #### 使用 AI「搜索助手」检索内容
 
-<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  在频道信息页，您还可使用「搜索助手」进行 AI 驱动的信息检索。
-</p>
+<p style={{ fontSize: '16px', color: '#1A1D23', lineHeight: '26px', margin: '12px 0' }}>在频道信息页，您还可使用「搜索助手」进行 AI 驱动的信息检索。</p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/information-management/subscribe-shared-step5.gif" alt="使用搜索助手" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />

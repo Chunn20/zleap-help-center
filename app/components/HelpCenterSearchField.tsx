@@ -24,7 +24,7 @@ export function HelpCenterSearchField({
   return (
     <div className="relative">
       <img
-        src="/图标/搜索图标.png"
+        src="/images/icons/搜索图标.png"
         alt="搜索"
         className="absolute left-4 top-1/2 z-10 h-6 w-6 -translate-y-1/2"
       />

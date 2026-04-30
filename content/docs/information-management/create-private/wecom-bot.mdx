@@ -50,6 +50,8 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   }
 `}</style>
 
+<img src="/images/information-management/create-private-source.png" alt="企微机器人" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
+
 ## 前置功能添加
 
 ### 步骤 1：进入企微管理后台
@@ -142,7 +144,7 @@ $ awk '{printf "%s\\\\n", $0}' public_key.pem
 </p>
 
 <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-  在【会话内容存档】-【开启范围】添加成员，即可以获取该成员的会话内容（ps：这个成员必须是自己或自己的员工。）
+  在【会话内容存档】-【开启范围】添加成员，点击【企业版】卡片，即可以获取该成员的会话内容（ps：这个成员必须是自己或自己的员工。）
 </p>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
@@ -177,9 +179,6 @@ $ awk '{printf "%s\\\\n", $0}' public_key.pem
   查询路径1（发送secret至企业微信）：企业微信->企微会话存档配置->Secret【查看】->点击【发送】->等待系统发送到企业微信
 </p>
 
-<div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
-  <img src="/images/information-management/create-private/wecom-bot/secret-send.png" alt="发送Secret" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
-</div>
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/information-management/create-private/wecom-bot/secret-view.png" alt="查看Secret" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />

@@ -36,16 +36,17 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
   /* H3 标题样式 */
   #nd-page h3 {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
     color: #1A1D23;
     line-height: 1.5;
     margin-top: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 
   /* 正文行间距 */
   #nd-page p {
     line-height: 26px;
+    margin: 10px 0;
   }
 
   /* 移除分隔线 */
@@ -61,22 +62,20 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
   }
 `}</style>
 
-<div style={{ background: '#898989', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '32px', margin: '0 0 32px 0', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)', textAlign: 'center' }}>
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
-    <Globe className="h-8 w-8" style={{ color: '#FF8A00' }} />
-    <h2 style={{ fontSize: '26px', fontWeight: 600, color: '#FFFFFF', margin: 0 }}>网页版</h2>
-  </div>
-  <p style={{ fontSize: '16px', fontWeight: 400, color: '#FFFFFF', lineHeight: '26px', margin: '12px 0' }}>
-    无需下载安装，通过浏览器即可直接访问。推荐使用 Chrome、Edge、Safari 或 Firefox 以获得最佳体验。
+<img src="/images/getting-started/download-and-use.png" alt="下载使用" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
+
+<div style={{ margin: '0 0 32px 0' }}>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '0 0 32px 0', textAlign: 'center' }}>
+    网页版无需下载安装，通过浏览器即可直接访问。推荐使用 Chrome、Edge、Safari 或 Firefox 以获得最佳体验。
   </p>
-  <div style={{ margin: '24px 0', display: 'flex', justifyContent: 'center' }}>
+  <div style={{ margin: '40px 0', display: 'flex', justifyContent: 'center' }}>
     <a
       href="https://www.zleap.com"
       target="_blank"
       rel="noopener noreferrer"
       style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
     >
-      <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
+      <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
         <Zap className="h-5 w-5" />
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -88,7 +87,7 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
 </div>
 
 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', margin: '32px 0' }}>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px', display: 'flex', flexDirection: 'column' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
       <div style={{ width: '48px', height: '48px', background: '#FFF5E6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
         <Apple className="h-6 w-6" />
@@ -98,10 +97,10 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
         <p style={{ fontSize: '14px', fontWeight: 400, color: '#4B5563', margin: 0 }}>iPhone · iPad</p>
       </div>
     </div>
-    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+    <p style={{ fontSize: '15px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: '0 0 24px 0', minHeight: '50px' }}>
       支持 iPhone 与 iPad，可通过 App Store 安全下载。
     </p>
-    <div style={{ background: '#F5F5F7', borderRadius: '8px', padding: '12px 16px', fontSize: '14px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', marginBottom: '16px' }}>
+    <div style={{ background: '#F5F5F7', borderRadius: '8px', padding: '12px 16px', fontSize: '14px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', marginBottom: '16px', minHeight: '52px' }}>
       在 App Store 中搜索 <strong>「Zleap」</strong> 点击获取，或扫描下方二维码跳转至下载页面。
     </div>
     <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', background: '#FAFAFA', borderRadius: '8px' }}>
@@ -109,7 +108,7 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
     </div>
   </div>
 
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px' }}>
+  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px', display: 'flex', flexDirection: 'column' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
       <div style={{ width: '48px', height: '48px', background: '#FFF5E6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
         <Smartphone className="h-6 w-6" />
@@ -119,10 +118,10 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
         <p style={{ fontSize: '14px', fontWeight: 400, color: '#4B5563', margin: 0 }}>手机 · 平板</p>
       </div>
     </div>
-    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+    <p style={{ fontSize: '15px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: '0 0 24px 0', minHeight: '50px' }}>
       支持安卓手机及平板设备，可通过 Google Play 下载。
     </p>
-    <div style={{ background: '#F5F5F7', borderRadius: '8px', padding: '12px 16px', fontSize: '14px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', marginBottom: '16px' }}>
+    <div style={{ background: '#F5F5F7', borderRadius: '8px', padding: '12px 16px', fontSize: '14px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', marginBottom: '16px', minHeight: '78px' }}>
       在 Google Play 中搜索 <strong>「Zleap」</strong> 进行安装，或扫描下方二维码进入下载页面。
     </div>
     <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', background: '#FAFAFA', borderRadius: '8px' }}>
@@ -131,9 +130,9 @@ import { Lightbulb, Smartphone, Globe, ArrowRight, Zap, Apple } from 'lucide-rea
   </div>
 </div>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
   <div style={{ flexShrink: 0 }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
   </div>
   <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     <strong>温馨提示：</strong>请确保从官方渠道下载，以保证软件安全与最新版本。如遇下载或使用问题，可<a href="/docs/contact/contact" style={{ color: '#FF8A00', fontWeight: 500, textDecoration: 'none' }}>联系客服</a>获取帮助。

@@ -37,16 +37,17 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   /* H3 标题样式 */
   #nd-page h3 {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
     color: #1A1D23;
     line-height: 1.5;
     margin-top: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 
   /* 正文行间距 */
   #nd-page p {
     line-height: 26px;
+    margin: 10px 0;
   }
 
   /* 移除分隔线 */
@@ -54,6 +55,8 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     display: none;
   }
 `}</style>
+
+<img src="/images/about-zleap/what-is-zleap.png" alt="什么是智跃 Zleap" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
 
 ## 产品概述
 
@@ -65,7 +68,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   我们基于自主研发的 SAG 技术框架，以人工智能驱动，自动聚合外部高质量信息与私有信息，构建跨平台、实时更新的高质量信息网络，无需掌握任何技术细节，只需简单操作，即可实现关键信息的精准获取。
 </div>
 
-<div style={{ margin: '90px 0', display: 'flex', justifyContent: 'center' }}>
+<div style={{ margin: '40px 0', display: 'flex', justifyContent: 'center' }}>
   <a href="https://zleap.com" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}>
     <div style={{ width: '40px', height: '40px', background: '#FFFFFF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
       <Sparkles className="h-5 w-5" />
@@ -109,42 +112,29 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 适合谁使用
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', margin: '32px 0' }}>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-      <div style={{ width: '48px', height: '48px', background: '#FFF5E6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
-        <Search className="h-6 w-6" />
-      </div>
-      <h3 style={{ fontSize: '20px', fontWeight: 500, color: '#1A1D23', lineHeight: 1.5, margin: 0 }}>研究者 / 学者</h3>
-    </div>
-    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: 0 }}>快速追踪领域前沿动态，让 Agent 帮你筛选与整理关键信息。</p>
+<div style={{ margin: '32px 0' }}>
+  <div style={{ marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: '26px', margin: 0 }}>
+      <span style={{ color: '#FF8800', fontWeight: 500 }}>研究者 / 学者</span> —— 快速追踪领域前沿动态，让 Agent 帮你筛选与整理关键信息
+    </p>
   </div>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-      <div style={{ width: '48px', height: '48px', background: '#FFF5E6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
-        <Building2 className="h-6 w-6" />
-      </div>
-      <h3 style={{ fontSize: '20px', fontWeight: 500, color: '#1A1D23', lineHeight: 1.5, margin: 0 }}>企业团队</h3>
-    </div>
-    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: 0 }}>构建私有信息源，沉淀行业情报，支持多 Agent 协作与权限管理。</p>
+  
+  <div style={{ marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: '26px', margin: 0 }}>
+      <span style={{ color: '#FF8800', fontWeight: 500 }}>企业团队</span> —— 构建私有信息源，沉淀行业情报，支持多 Agent 协作与权限管理
+    </p>
   </div>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-      <div style={{ width: '48px', height: '48px', background: '#FFF5E6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
-        <Pencil className="h-6 w-6" />
-      </div>
-      <h3 style={{ fontSize: '20px', fontWeight: 500, color: '#1A1D23', lineHeight: 1.5, margin: 0 }}>内容创作者</h3>
-    </div>
-    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: 0 }}>与 AI 协作产出高质量内容，发现更多灵感与选题方向。</p>
+  
+  <div style={{ marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: '26px', margin: 0 }}>
+      <span style={{ color: '#FF8800', fontWeight: 500 }}>内容创作者</span> —— 与 AI 协作产出高质量内容，发现更多灵感与选题方向
+    </p>
   </div>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '12px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-      <div style={{ width: '48px', height: '48px', background: '#FFF5E6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8800', flexShrink: 0 }}>
-        <Sparkles className="h-6 w-6" />
-      </div>
-      <h3 style={{ fontSize: '20px', fontWeight: 500, color: '#1A1D23', lineHeight: 1.5, margin: 0 }}>好奇心旺盛的你</h3>
-    </div>
-    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: 1.6, margin: 0 }}>打开 Zleap，发现更广阔的信息视野，与 Agent 一起探索未知。</p>
+  
+  <div>
+    <p style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: '26px', margin: 0 }}>
+      <span style={{ color: '#FF8800', fontWeight: 500 }}>好奇心旺盛的你</span> —— 打开 Zleap，发现更广阔的信息视野，与 Agent 一起探索未知
+    </p>
   </div>
 </div>
 
@@ -153,12 +143,10 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 ### 1. Agent 自动收集信息
 
 <div style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', marginBottom: '16px' }}>
-  连接你的信息源：群聊、本地文档、网页收藏...Agent 像勤奋的助手，7×24 小时自动监控，收集重要内容。
+  连接你的信息源：群聊、本地文档、网页收藏...Agent 像勤奋的助手，7×24 小时自动监控，收集重要内容。（我们也准备了海量公开信息作为共享信息源，方便您快速生成内容）
 </div>
 
-<div style={{ fontSize: '16px', fontWeight: 400, color: '#4B5563', lineHeight: '26px', marginBottom: '24px' }}>
-  （我们也准备了海量公开信息作为共享信息源，方便您快速生成内容）
-</div>
+
 
 <div style={{ margin: '24px auto', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0, 0, 0, 0.04)', maxWidth: '100%', width: '100%', height: '400px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', cursor: 'pointer', transition: 'transform 0.2s' }}>
   <img src="/images/about-zleap/how-it-works-1.png" alt="Agent 自动收集信息" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
@@ -188,9 +176,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   你可以点赞、评论、收藏，Agent 会智能回复，人机协同讨论激发新灵感。
 </div>
 
-
-
-<div style={{ margin: '90px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0px' }}>
+<div style={{ margin: '40px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0px' }}>
   <a
     href="/docs/about-zleap/enterprise"
     style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(180deg, #FF8A00 0%, #FFB84D 100%)', padding: '16px 48px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 4px 16px rgba(255, 138, 0, 0.25)', cursor: 'pointer', minWidth: '280px', justifyContent: 'center' }}
