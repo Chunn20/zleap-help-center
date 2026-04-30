@@ -3,6 +3,9 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# 配置阿里云 npm 镜像
+RUN npm config set registry https://registry.npmmirror.com
+
 # 复制所有文件
 COPY . .
 
@@ -16,6 +19,9 @@ RUN npm run build
 FROM node:20-alpine AS runner
 
 WORKDIR /app
+
+# 配置阿里云 npm 镜像
+RUN npm config set registry https://registry.npmmirror.com
 
 ENV NODE_ENV=production
 ENV PORT=3000
