@@ -3,6 +3,8 @@
 @import 'fumadocs-ui/css/preset.css';
 
 :root {
+  --font-oppo-sans: 'OPPO Sans 4.0';
+  --default-font-family: 'OPPO Sans 4.0';
   /* Primary Colors */
   --color-fd-primary: #FF8A00;
   --color-fd-primary-foreground: #ffffff;
@@ -39,10 +41,24 @@ body {
   background-color: #FFFFFF;
   color: #1d1d1f;
   letter-spacing: -0.01em;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-oppo-sans);
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+html,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-oppo-sans);
+}
+
+/* Force MDX article content to OPPO Sans globally. */
+#nd-page,
+#nd-page :not(pre):not(code):not(kbd):not(samp) {
+  font-family: var(--font-oppo-sans) !important;
 }
 
 /* 移除所有元素的默认 focus outline */
@@ -211,4 +227,17 @@ code {
   font-size: 32px;
   font-weight: 800;
   margin-bottom: 24px;
+}
+
+/* Docs TOC（本页目录）字体规范 */
+#nd-toc #toc-title,
+#nd-toc a,
+[data-toc-popover-trigger],
+[data-toc-popover-content] a {
+  font-family: var(--font-oppo-sans);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0;
+  vertical-align: middle;
 }

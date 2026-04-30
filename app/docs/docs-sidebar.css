@@ -1,0 +1,61 @@
+/* Remove Fumadocs default vertical guide on first-level folder content
+   (see SidebarFolderContent in fumadocs-ui layouts/docs/slots/sidebar). */
+#nd-sidebar [class*='before:bg-fd-border']::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Remove active vertical line for nested folder/link items as well. */
+#nd-sidebar [data-active='true']::before {
+  content: none !important;
+  display: none !important;
+}
+
+#nd-sidebar [data-active='true'] {
+  background-color: #FF8A001F !important;
+}
+
+/* Ensure folder/link nav items use 500 weight (level-1 and level-2). */
+#nd-sidebar a[class*='text-fd-muted-foreground'],
+#nd-sidebar button[class*='text-fd-muted-foreground'],
+#nd-sidebar a[data-active='true'] {
+  font-weight: 500 !important;
+}
+
+/* Level-1 folder title color. */
+#nd-sidebar > div > div > div > [data-state] > button,
+#nd-sidebar > div > div > div > [data-state] > a {
+  color: #1F2329 !important;
+}
+
+/*
+ * Level-2 non-leaf folder indent.
+ *
+ * DOM chain for a level-2 folder trigger/link:
+ *   [data-state] (top Collapsible)
+ *   └─ [data-state] (CollapsibleContent)
+ *      └─ ... div.relative > div.flex-col
+ *         └─ [data-state] (nested Collapsible)  ← direct parent
+ *            └─ button / a:has([data-icon])      ← TARGET
+ *
+ * Top-level triggers only have 1 [data-state] ancestor (their own Collapsible),
+ * so the 3-level selector below skips them.
+ * Leaf <a> elements don't have [data-icon] inside, so :has([data-icon]) skips them.
+ */
+#nd-sidebar [data-state] [data-state] [data-state] > button,
+#nd-sidebar [data-state] [data-state] [data-state] > a:has([data-icon]) {
+  padding-inline-start: calc(10 * var(--spacing)) !important;
+}
+
+/*
+ * Non-active color for level-2+ items (leaf a + non-leaf button/a).
+ * - [data-state] [data-state] a  → leaf items inside any folder
+ * - [data-state] [data-state] [data-state] > button  → non-leaf folder triggers
+ * - [data-state] [data-state] [data-state] > a:has([data-icon])  → non-leaf folder links
+ * Top-level items only have 1 [data-state] ancestor, so they are unaffected.
+ */
+#nd-sidebar [data-state] [data-state] a:not([data-active='true']),
+#nd-sidebar [data-state] [data-state] [data-state] > button,
+#nd-sidebar [data-state] [data-state] [data-state] > a:has([data-icon]):not([data-active='true']) {
+  color: #52565C !important;
+}

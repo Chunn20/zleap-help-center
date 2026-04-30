@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 192.168.20.23 --port 3002",
     "build": "next build",
     "start": "next start",
     "postinstall": "fumadocs-mdx"
