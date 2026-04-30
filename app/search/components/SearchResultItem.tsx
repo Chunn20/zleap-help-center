@@ -79,7 +79,7 @@ export function SearchResultItem({
       )}
       <Link
         href={contentUrl}
-        className="line-clamp-2 text-[16px] leading-8 text-[#333a49] [&_mark]:bg-transparent [&_mark]:px-0 [&_mark]:font-medium [&_mark]:text-[#FF8A00]"
+        className="line-clamp-2 text-[14px] leading-8 text-[#333a49] [&_mark]:bg-transparent [&_mark]:px-0 [&_mark]:font-medium [&_mark]:text-[#FF8A00]"
         dangerouslySetInnerHTML={{
           __html:
             contentHtml ||
