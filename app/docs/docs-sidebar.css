@@ -1,0 +1,19 @@
+/* Remove Fumadocs default vertical guide on first-level folder content
+   (see SidebarFolderContent in fumadocs-ui layouts/docs/slots/sidebar). */
+#nd-sidebar [class*='before:bg-fd-border']::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Remove active vertical line for nested folder/link items as well. */
+#nd-sidebar [data-active='true']::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Ensure folder/link nav items use 500 weight (level-1 and level-2). */
+#nd-sidebar a[class*='text-fd-muted-foreground'],
+#nd-sidebar button[class*='text-fd-muted-foreground'],
+#nd-sidebar a[data-active='true'] {
+  font-weight: 500 !important;
+}
