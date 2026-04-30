@@ -143,29 +143,23 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ### 常见报错排查
 
-<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '16px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-    <AlertCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>授权失败</p>
-  </div>
-  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>检查 Gitee 账号是否正常，网络是否通畅，重新点击授权即可</p>
-</div>
+### 授权失败
 
-<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '16px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-    <AlertCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>同步失败</p>
-  </div>
-  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>检查仓库权限是否正常、Zleap 服务器网络是否连通</p>
-</div>
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  检查 Gitee 账号是否正常，网络是否通畅，重新点击授权即可
+</p>
 
-<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '32px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-    <AlertCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>仓库不显示</p>
-  </div>
-  <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>确认授权时已勾选对应仓库的读取权限，重新授权即可</p>
-</div>
+### 同步失败
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  检查仓库权限是否正常、Zleap 服务器网络是否连通
+</p>
+
+### 仓库不显示
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0 32px 0' }}>
+  确认授权时已勾选对应仓库的读取权限，重新授权即可
+</p>
 
 <div style={{ margin: '90px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0px' }}>
   <a
