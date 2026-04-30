@@ -81,85 +81,55 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 用 RSS 采集信息的优势
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginBottom: '32px' }}>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <Rss className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>聚合高效</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0 }}>
-      无需逐个访问多个信息平台，一个 RSS 配置就能聚合多源内容，集中管理信息更高效。
-    </p>
-  </div>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <Settings className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>轻量易配</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0 }}>
-      仅需填写 RSS 源地址，无需复杂参数设置，上手门槛低，快速完成配置并启用。
-    </p>
-  </div>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <Clock className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>及时同步</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0 }}>
-      源头内容更新后，系统按配置频率自动抓取，第一时间获取最新动态，无需手动刷新。
-    </p>
-  </div>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <FileText className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>内容纯净</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0 }}>
-      仅抓取源头核心内容，过滤广告、弹窗等冗余信息，获取的内容更聚焦。
-    </p>
-  </div>
-</div>
+### 聚合高效
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  无需逐个访问多个信息平台，一个 RSS 配置就能聚合多源内容，集中管理信息更高效。
+</p>
+
+### 轻量易配
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  仅需填写 RSS 源地址，无需复杂参数设置，上手门槛低，快速完成配置并启用。
+</p>
+
+### 及时同步
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  源头内容更新后，系统按配置频率自动抓取，第一时间获取最新动态，无需手动刷新。
+</p>
+
+### 内容纯净
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  仅抓取源头核心内容，过滤广告、弹窗等冗余信息，获取的内容更聚焦。
+</p>
 
 ## 用 RSS 采集信息的注意点
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '16px', padding: '20px', marginBottom: '32px' }}>
-  <div style={{ marginBottom: '16px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <AlertCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>确认源地址有效性</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>
-      需确保填写的是目标平台的有效 RSS 源地址（部分平台隐藏 RSS 入口，需提前查询），无效地址无法采集内容。
-    </p>
-  </div>
-  <div style={{ marginBottom: '16px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <Clock className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>适配更新频率</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>
-      不同源头的内容更新周期不同，可根据需求调整系统同步频率，避免过于频繁占用资源或同步不及时。
-    </p>
-  </div>
-  <div style={{ marginBottom: '16px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <FileText className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>遵守版权规范</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>
-      采集的 RSS 内容仅可用于内部业务管理，不得擅自转载，商用，需遵守目标平台的版权声明。
-    </p>
-  </div>
-  <div>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <CheckCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>过滤重复内容</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>
-      部分源头可能推送重复内容，可通过系统筛选功能设置规则，剔除重复信息，保证内容质量。
-    </p>
-  </div>
-</div>
+### 确认源地址有效性
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  需确保填写的是目标平台的有效 RSS 源地址（部分平台隐藏 RSS 入口，需提前查询），无效地址无法采集内容。
+</p>
+
+### 适配更新频率
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  不同源头的内容更新周期不同，可根据需求调整系统同步频率，避免过于频繁占用资源或同步不及时。
+</p>
+
+### 遵守版权规范
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  采集的 RSS 内容仅可用于内部业务管理，不得擅自转载，商用，需遵守目标平台的版权声明。
+</p>
+
+### 过滤重复内容
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  部分源头可能推送重复内容，可通过系统筛选功能设置规则，剔除重复信息，保证内容质量。
+</p>
 
 ## 如何使用 RSS 作为信息源？
 
@@ -223,38 +193,32 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 常见问题
 
-<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '16px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-    <HelpCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>如何找到网站的 RSS 源地址？</p>
-  </div>
-  <ol style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '12px' }}>
-    <li><strong>查看网站底部或侧边栏：</strong>许多网站会在页面底部或侧边栏提供 RSS 订阅图标或链接</li>
-    <li><strong>查看网站源代码：</strong>在网页中按 Ctrl+U（Windows）或 Cmd+Option+U（Mac），搜索 "rss" 或 "feed"</li>
-    <li><strong>使用 RSS 发现工具：</strong>可以使用浏览器插件如 "RSS Feed Reader" 自动发现页面中的 RSS 源</li>
-  </ol>
-  <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.8, marginBottom: '8px' }}>
-    <strong>常见 RSS 地址格式：</strong>
-  </p>
-  <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.8, paddingLeft: '40px', margin: 0 }}>
-    <li>https://example.com/feed</li>
-    <li>https://example.com/rss</li>
-    <li>https://example.com/feed.xml</li>
-  </ul>
-</div>
+### 如何找到网站的 RSS 源地址？
 
-<div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '20px', marginBottom: '32px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-    <HelpCircle className="h-5 w-5" style={{ color: '#FF8A00' }} />
-    <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>RSS 源不更新怎么办？</p>
-  </div>
-  <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.8, paddingLeft: '20px', margin: 0 }}>
-    <li>检查源地址是否仍然有效</li>
-    <li>确认目标网站是否正常运行</li>
-    <li>调整同步频率设置</li>
-    <li>联系技术支持获取帮助</li>
-  </ul>
-</div>
+<ol style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '20px', marginBottom: '12px' }}>
+  <li><strong>查看网站底部或侧边栏：</strong>许多网站会在页面底部或侧边栏提供 RSS 订阅图标或链接</li>
+  <li><strong>查看网站源代码：</strong>在网页中按 Ctrl+U（Windows）或 Cmd+Option+U（Mac），搜索 "rss" 或 "feed"</li>
+  <li><strong>使用 RSS 发现工具：</strong>可以使用浏览器插件如 "RSS Feed Reader" 自动发现页面中的 RSS 源</li>
+</ol>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, marginBottom: '8px' }}>
+  <strong>常见 RSS 地址格式：</strong>
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '40px', margin: '0 0 32px 0' }}>
+  <li>https://example.com/feed</li>
+  <li>https://example.com/rss</li>
+  <li>https://example.com/feed.xml</li>
+</ul>
+
+### RSS 源不更新怎么办？
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.8, paddingLeft: '20px', margin: '0 0 32px 0' }}>
+  <li>检查源地址是否仍然有效</li>
+  <li>确认目标网站是否正常运行</li>
+  <li>调整同步频率设置</li>
+  <li>联系技术支持获取帮助</li>
+</ul>
 
 <div style={{ margin: '90px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0px' }}>
   <a

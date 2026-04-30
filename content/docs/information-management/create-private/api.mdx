@@ -80,47 +80,29 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 用 API 采集信息的优势
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', margin: '20px 0 40px 0' }}>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
-        <CheckCircle className="h-5 w-5" />
-      </div>
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>实时新鲜</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', margin: 0, lineHeight: 1.7 }}>配置好请求地址后，系统会直接从对方系统拉取最新数据，实时抓取动态数据。</p>
-  </div>
+### 实时新鲜
 
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
-        <Settings className="h-5 w-5" />
-      </div>
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>自动省力</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', margin: 0, lineHeight: 1.7 }}>只要配置好参数和超时时间，系统会定期自动同步数据，不用每天重复手动操作，把人力从 "搬运数据" 里解放出来。</p>
-  </div>
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  配置好请求地址后，系统会直接从对方系统拉取最新数据，实时抓取动态数据。
+</p>
 
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
-        <Target className="h-5 w-5" />
-      </div>
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>准确少错</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', margin: 0, lineHeight: 1.7 }}>系统直接对接传输数据，避免了人工录入时的抄错、漏填问题，数据准确率更高。</p>
-  </div>
+### 自动省力
 
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
-        <Wrench className="h-5 w-5" />
-      </div>
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>灵活可控</p>
-    </div>
-    <p style={{ fontSize: '17px', color: '#86868b', margin: 0, lineHeight: 1.7 }}>可以根据需求调整参数（如时间范围、数据类型），精准获取想要的信息，避免冗余数据干扰。</p>
-  </div>
-</div>
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  只要配置好参数和超时时间，系统会定期自动同步数据，不用每天重复手动操作，把人力从 "搬运数据" 里解放出来。
+</p>
+
+### 准确少错
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  系统直接对接传输数据，避免了人工录入时的抄错、漏填问题，数据准确率更高。
+</p>
+
+### 灵活可控
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  可以根据需求调整参数（如时间范围、数据类型），精准获取想要的信息，避免冗余数据干扰。
+</p>
 
 ---
 
@@ -258,81 +240,70 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 ## 常见问题
 
-<div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px', margin: '20px 0 40px 0' }}>
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
-        <Wrench className="h-5 w-5" />
-      </div>
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>调试失败怎么办？</p>
-    </div>
-    
-    <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-      <strong>1. 检查 API 地址是否正确</strong>
-    </p>
-    <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
-      <li>确认 URL 是否完整（包含 http:// 或 https://）</li>
-      <li>检查是否有拼写错误</li>
-      <li>确认 API 地址是否可访问（可在浏览器中直接访问测试）</li>
-    </ul>
-    
-    <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-      <strong>2. 检查参数配置</strong>
-    </p>
-    <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
-      <li>必填参数是否都已填写</li>
-      <li>参数值格式是否正确（如日期格式、数字格式等）</li>
-      <li>密钥（key/token）是否有效且未过期</li>
-    </ul>
-    
-    <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-      <strong>3. 检查请求方式</strong>
-    </p>
-    <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
-      <li>确认选择的请求方式（GET/POST/PUT/DELETE）与 API 文档要求一致</li>
-      <li>大部分查询类 API 使用 GET 方式</li>
-    </ul>
-    
-    <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-      <strong>4. 检查网络连接</strong>
-    </p>
-    <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: 0, paddingLeft: '20px' }}>
-      <li>确认网络连接正常</li>
-      <li>检查是否有防火墙或代理限制</li>
-      <li>确认 API 服务器是否正常运行</li>
-    </ul>
+### 调试失败怎么办？
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  <strong>1. 检查 API 地址是否正确</strong>
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
+  <li>确认 URL 是否完整（包含 http:// 或 https://）</li>
+  <li>检查是否有拼写错误</li>
+  <li>确认 API 地址是否可访问（可在浏览器中直接访问测试）</li>
+</ul>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  <strong>2. 检查参数配置</strong>
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
+  <li>必填参数是否都已填写</li>
+  <li>参数值格式是否正确（如日期格式、数字格式等）</li>
+  <li>密钥（key/token）是否有效且未过期</li>
+</ul>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  <strong>3. 检查请求方式</strong>
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
+  <li>确认选择的请求方式（GET/POST/PUT/DELETE）与 API 文档要求一致</li>
+  <li>大部分查询类 API 使用 GET 方式</li>
+</ul>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  <strong>4. 检查网络连接</strong>
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 32px 0', paddingLeft: '20px' }}>
+  <li>确认网络连接正常</li>
+  <li>检查是否有防火墙或代理限制</li>
+  <li>确认 API 服务器是否正常运行</li>
+</ul>
+
+### 如何设置合适的超时时间？
+
+<p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: '10px 0' }}>
+  超时时间是指系统等待 API 响应的最长时间，超过这个时间就会认为请求失败。
+</p>
+
+<p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
+  <strong>建议设置：</strong>
+</p>
+
+<ul style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
+  <li><strong>轻量级查询（如天气、汇率）</strong>：10-20 秒</li>
+  <li><strong>中等数据量（如新闻列表、商品信息）</strong>：20-30 秒</li>
+  <li><strong>大数据量或复杂查询</strong>：30-60 秒</li>
+</ul>
+
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
   </div>
-  
-  <div style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', borderRadius: '16px', padding: '24px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-      <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
-        <Settings className="h-5 w-5" />
-      </div>
-      <p style={{ fontSize: '17px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>如何设置合适的超时时间？</p>
-    </div>
-    
-    <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '12px 0 16px 0' }}>
-      超时时间是指系统等待 API 响应的最长时间，超过这个时间就会认为请求失败。
-    </p>
-    
-    <p style={{ fontSize: '17px', color: '#1d1d1f', lineHeight: 1.7, margin: '12px 0' }}>
-      <strong>建议设置：</strong>
-    </p>
-    <ul style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, margin: '0 0 16px 0', paddingLeft: '20px' }}>
-      <li><strong style={{ color: '#1d1d1f' }}>轻量级查询（如天气、汇率）</strong>：10-20 秒</li>
-      <li><strong style={{ color: '#1d1d1f' }}>中等数据量（如新闻列表、商品信息）</strong>：20-30 秒</li>
-      <li><strong style={{ color: '#1d1d1f' }}>大数据量或复杂查询</strong>：30-60 秒</li>
-    </ul>
-    
-    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
-      <div style={{ flexShrink: 0 }}>
-        <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
-      </div>
-      <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
-        <strong>提示：</strong>如果是数据量大、处理复杂的请求（如报表生成、大文件下载），可以适当调长超时时间（如 60 秒）；如果是实时性要求高的请求（如支付、订单接口），建议调短超时时间（如 10-15 秒），避免用户等待过久。
-      </p>
-    </div>
-  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
+    <strong>提示：</strong>如果是数据量大、处理复杂的请求（如报表生成、大文件下载），可��适当调长超时时间（如 60 秒）；如果是实时性要求高的请求（如支付、订单接口），建议调短超时时间（如 10-15 秒），避免用户等待过久。
+  </p>
 </div>
 
 ---
