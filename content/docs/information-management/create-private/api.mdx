@@ -58,23 +58,22 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 <img src="/images/information-management/create-private-source.png" alt="API 数据接入" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
 
-<div style={{ background: '#898989', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '32px', margin: '0 0 40px 0', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-    <span style={{ background: '#FF8A00', color: '#fff', fontSize: '11px', fontWeight: 700, padding: '3px 10px', borderRadius: '20px', letterSpacing: '0.05em' }}>核心概念</span>
-  </div>
-  <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#FFFFFF', margin: '0 0 16px 0', lineHeight: 1.4 }}>API 是不同系统之间的「数据快递通道」</h2>
-  <p style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0' }}>
+
+  <h2>
+    核心概念
+  </h2>
+  <h3>API 是不同系统之间的「数据快递通道」</h3>
+  <p>
     API (Application Programming Interface，应用程序编程接口)，你可以把 API 理解成不同系统之间的「数据快递通道」。从其他平台获取数据到智跃 Zleap 里，API 就是双方提前约定好的 "快递路线"：
   </p>
-  <ul style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0', paddingLeft: '20px' }}>
-    <li><strong style={{ color: '#FFFFFF' }}>API 请求地址</strong> = 快递要送达的目的地</li>
-    <li><strong style={{ color: '#FFFFFF' }}>参数</strong> = 快递面单上的 "备注信息"（告诉对方你要什么类型、什么范围的数据）</li>
-    <li><strong style={{ color: '#FFFFFF' }}>请求方式（如 GET）</strong> = 快递的 "取件规则"（比如是 "上门取件" 还是 "网点自提"）</li>
+  <ul>
+    <li><strong>API 请求地址</strong> = 快递要送达的目的地</li>
+    <li><strong>参数</strong> = 快递面单上的 "备注信息"（告诉对方你要什么类型、什么范围的数据）</li>
+    <li><strong>请求方式（如 GET）</strong> = 快递的 "取件规则"（比如是 "上门取件" 还是 "网点自提"）</li>
   </ul>
-  <p style={{ fontSize: '14px', color: '#FFFFFF', lineHeight: 1.8, margin: '12px 0 0 0' }}>
+  <p>
     填写好上面的信息，数据就能自动从对方系统 "快递" 到智跃 Zleap 里。
   </p>
-</div>
 
 ---
 
@@ -302,7 +301,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
   </div>
   <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
-    <strong>提示：</strong>如果是数据量大、处理复杂的请求（如报表生成、大文件下载），可��适当调长超时时间（如 60 秒）；如果是实时性要求高的请求（如支付、订单接口），建议调短超时时间（如 10-15 秒），避免用户等待过久。
+    <strong>提示：</strong>如果是数据量大、处理复杂的请求（如报表生成、大文件下载），可适当调长超时时间（如 60 秒）；如果是实时性要求高的请求（如支付、订单接口），建议调短超时时间（如 10-15 秒），避免用户等待过久。
   </p>
 </div>
 

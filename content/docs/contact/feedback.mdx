@@ -56,17 +56,19 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   }
 `}</style>
 
-<div style={{ textAlign: 'center', margin: '40px 0 32px 0' }}>
-  <div style={{ width: '56px', height: '56px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '16px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', color: '#FF8A00' }}>
+<div style={{margin: '40px 0 32px 0' }}>
+  <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
+  <div style={{ width: '56px', height: '56px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00' }}>
     <MessageCircle className="h-7 w-7" />
   </div>
-  <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#1d1d1f', margin: '0 0 12px 0', letterSpacing: '-0.02em', lineHeight: 1.3 }}>给帮助中心提建议</h1>
-  <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, maxWidth: '600px', margin: '0 auto' }}>
+  <h1 style={{fontSize: '28px', fontWeight: 700, color: '#1d1d1f',margin:0}}>给帮助中心提建议</h1>
+  </div>
+  <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7}}>
     我们非常重视您的意见。无论是功能建议、内容改进还是任何想法，您的每一个反馈都能帮助我们把 Zleap 做得更好。
   </p>
 </div>
 
-<div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '14px', padding: '24px', margin: '32px auto', maxWidth: '600px' }}>
+<div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '14px', padding: '24px' }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
     <div style={{ width: '40px', height: '40px', background: '#FFE9B9', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
       <Sparkles className="h-5 w-5" />
