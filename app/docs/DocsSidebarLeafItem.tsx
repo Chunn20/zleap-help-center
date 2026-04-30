@@ -2,12 +2,7 @@
 
 import { usePathname } from 'fumadocs-core/framework';
 import type * as PageTree from 'fumadocs-core/page-tree';
-import type { ReactNode } from 'react';
 import {
-  SidebarFolder,
-  SidebarFolderContent,
-  SidebarFolderLink,
-  SidebarFolderTrigger,
   SidebarItem,
   useFolderDepth,
 } from 'fumadocs-ui/components/sidebar/base';
@@ -23,11 +18,12 @@ function isActiveHref(href: string, pathname: string) {
 }
 
 function getItemOffset(depth: number) {
-  return `calc(${2 + 3 * depth} * var(--spacing))`;
+  const nestedIndent = depth >= 1 ? 1 : 0;
+  return `calc(${5 + 4 * depth + nestedIndent} * var(--spacing))`;
 }
 
 const itemBase =
-  'relative flex flex-row items-center gap-2 rounded-lg p-2 text-start text-fd-muted-foreground wrap-anywhere font-medium [&_svg]:size-4 [&_svg]:shrink-0 transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none data-[active=true]:bg-fd-primary/10 data-[active=true]:text-fd-primary data-[active=true]:hover:transition-colors';
+  'relative flex flex-row items-center gap-2 rounded-lg p-2 text-[#52565C] text-start text-fd-muted-foreground wrap-anywhere font-medium [&_svg]:size-4 [&_svg]:shrink-0 transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none data-[active=true]:bg-[#FF8A001F] data-[active=true]:text-fd-primary data-[active=true]:hover:transition-colors';
 
 const secondLevelTypography =
   "font-['OPPO_Sans_4.0'] text-[14px] font-medium leading-[22px] tracking-normal align-middle";
@@ -49,54 +45,5 @@ export function DocsSidebarLeafItem({ item }: { item: PageTree.Item }) {
     >
       {item.name}
     </SidebarItem>
-  );
-}
-
-function hasActiveInFolder(folder: PageTree.Folder, pathname: string): boolean {
-  if (folder.index && isActiveHref(folder.index.url, pathname)) return true;
-
-  return folder.children.some((node) => {
-    if (node.type === 'page') return isActiveHref(node.url, pathname);
-    if (node.type === 'folder') return hasActiveInFolder(node, pathname);
-    return false;
-  });
-}
-
-export function DocsSidebarFolder({
-  item,
-  children,
-}: {
-  item: PageTree.Folder;
-  children: ReactNode;
-}) {
-  const pathname = usePathname();
-  const depth = useFolderDepth();
-  const isNested = depth >= 1;
-  const folderTitleClass = `${isNested ? secondLevelTypography : ''} font-medium`;
-
-  return (
-    <SidebarFolder
-      collapsible={item.collapsible}
-      defaultOpen={item.defaultOpen}
-      active={hasActiveInFolder(item, pathname)}
-    >
-      {item.index ? (
-        <SidebarFolderLink
-          href={item.index.url}
-          active={isActiveHref(item.index.url, pathname)}
-          external={item.index.external}
-          className={folderTitleClass}
-        >
-          {item.icon}
-          {item.name}
-        </SidebarFolderLink>
-      ) : (
-        <SidebarFolderTrigger className={folderTitleClass}>
-          {item.icon}
-          {item.name}
-        </SidebarFolderTrigger>
-      )}
-      <SidebarFolderContent>{children}</SidebarFolderContent>
-    </SidebarFolder>
   );
 }
