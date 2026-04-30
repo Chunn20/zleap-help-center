@@ -191,15 +191,13 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <img src="/images/information-management/create-private/rss/config-form.png" alt="RSS配置表单" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
-    <strong>RSS 配置建议：</strong>
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
+    <strong>RSS 配置建议：</strong>信息名称建议使用易于识别的名称，如 "科技资讯 RSS"、"行业动态订阅" 等；同步频率根据源头更新频率合理设置，一般建议 3-6 小时同步一次；内容筛选可设置关键词过滤，只保留相关内容。
   </p>
-  <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
-    <li style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7 }}><strong>信息名称：</strong>建议使用易于识别的名称，如 "科技资讯 RSS"、"行业动态订阅" 等</li>
-    <li style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7 }}><strong>同步频率：</strong>根据源头更新频率合理设置，一般建议 3-6 小时同步一次</li>
-    <li style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7 }}><strong>内容筛选：</strong>可设置关键词过滤，只保留相关内容</li>
-  </ul>
 </div>
 
 <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, marginBottom: '16px' }}>
@@ -214,9 +212,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <img src="/images/information-management/create-private/rss/source-list.png" alt="RSS信息源列表" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00', flexShrink: 0 }} />
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     接下来，您就可以使用创建的信息源创建助手和设置任务啦！
   </p>
 </div>

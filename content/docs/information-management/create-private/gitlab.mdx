@@ -97,9 +97,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-    <CheckCircle className="h-5 w-5" style={{ color: '#FF8A00', flexShrink: 0 }} />
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <CheckCircle className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     创建成功后，GitLab 会生成 <strong>Application ID</strong> 和 <strong>Secret</strong>，请妥善保存这两个值。
   </p>
 </div>
@@ -156,9 +158,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 </p>
 
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-    <CheckCircle className="h-5 w-5" style={{ color: '#FF8A00', flexShrink: 0 }} />
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <CheckCircle className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     配置完成后，Zleap 就可以访问您授权的 GitLab 仓库信息了！
   </p>
 </div>
@@ -177,9 +181,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <li><strong>read_api：</strong>读取 API 数据，包括 Issue、MR 等（推荐）</li>
 </ul>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-    <AlertCircle className="h-5 w-5" style={{ color: '#FF8A00', flexShrink: 0 }} />
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <AlertCircle className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     <strong>安全提示：</strong>只授予 Zleap 必要的权限，避免授予写入权限（如 write_repository、api）
   </p>
 </div>

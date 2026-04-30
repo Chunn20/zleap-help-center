@@ -154,16 +154,13 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <li>应用创建后，点击「添加 Key」，选择「Web 服务 API」类型，提交申请</li>
 </ol>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00', flexShrink: 0 }} />
-    <strong>关键提醒：</strong>拿到 API 后，一定要问清 3 件事：
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
+    <strong>关键提醒：</strong>拿到 API 后，一定要问清 3 件事：是否需要密钥（token/AppID）？（安全相关，必填）；调用频率限制（比如每分钟最多调用 100 次，避免被拉黑）；数据返回格式（一般是 JSON，确保智跃 Zleap 支持）。
   </p>
-  <ul style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, paddingLeft: '32px' }}>
-    <li>是否需要密钥（token/AppID）？（安全相关，必填）</li>
-    <li>调用频率限制（比如每分钟最多调用 100 次，避免被拉黑）</li>
-    <li>数据返回格式（一般是 JSON，确保智跃 Zleap 支持）</li>
-  </ul>
 </div>
 
 ---
@@ -226,9 +223,11 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   </tbody>
 </table>
 
-<div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '20px 24px', margin: '32px 0' }}>
-  <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-    <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00', flexShrink: 0 }} />
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+  <div style={{ flexShrink: 0 }}>
+    <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
+  </div>
+  <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
     <strong>提示：</strong>获取信息的话一般就用 GET！
   </p>
 </div>
@@ -325,19 +324,13 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
       <li><strong style={{ color: '#1d1d1f' }}>大数据量或复杂查询</strong>：30-60 秒</li>
     </ul>
     
-    <div style={{ background: '#FFF9F0', border: '1px solid #FFE9CC', borderRadius: '12px', padding: '16px 20px', margin: '16px 0 0 0', display: 'flex', gap: '12px', alignItems: 'center' }}>
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
       <div style={{ flexShrink: 0 }}>
-        <Lightbulb className="h-5 w-5" style={{ color: '#FF8A00' }} />
+        <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
       </div>
-      <div>
-        <p style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: 0 }}>
-          <strong>提示：</strong>
-        </p>
-        <ul style={{ fontSize: '14px', color: '#1d1d1f', lineHeight: 1.7, margin: '8px 0 0 0', paddingLeft: '20px' }}>
-          <li>如果是数据量大、处理复杂的请求（如报表生成、大文件下载），可以适当调长超时时间（如 60 秒）</li>
-          <li>如果是实时性要求高的请求（如支付、订单接口），建议调短超时时间（如 10-15 秒），避免用户等待过久</li>
-        </ul>
-      </div>
+      <p style={{ fontSize: '16px', fontWeight: 400, color: '#1A1D23', lineHeight: '26px', margin: 0 }}>
+        <strong>提示：</strong>如果是数据量大、处理复杂的请求（如报表生成、大文件下载），可以适当调长超时时间（如 60 秒）；如果是实时性要求高的请求（如支付、订单接口），建议调短超时时间（如 10-15 秒），避免用户等待过久。
+      </p>
     </div>
   </div>
 </div>
