@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+.next
+.git
+.env.local
+.env.development
+.env.test
+.env.production
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

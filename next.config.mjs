@@ -7,6 +7,7 @@ const config = {
   reactStrictMode: true,
   allowedDevOrigins: ['192.168.50.220'],
   turbopack: false,
+  output: 'standalone',
 };
 
 export default withMDX(config);
