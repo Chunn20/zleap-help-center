@@ -12,11 +12,11 @@ export function HelpCenterFooter() {
               rel="noopener noreferrer"
               className="text-gray-600 transition-colors hover:text-[#FF8A00]"
             >
-              <span className="text-sm">小红书</span>
+              <span className="text-xs">小红书</span>
             </a>
 
             <div className="group relative">
-              <span className="cursor-pointer text-sm text-gray-600 transition-colors hover:text-[#FF8A00]">
+              <span className="cursor-pointer text-xs text-gray-600 transition-colors hover:text-[#FF8A00]">
                 公众号
               </span>
               <div
@@ -42,7 +42,7 @@ export function HelpCenterFooter() {
             </div>
 
             <div className="group relative">
-              <span className="cursor-pointer text-sm text-gray-600 transition-colors hover:text-[#FF8A00]">
+              <span className="cursor-pointer text-xs text-gray-600 transition-colors hover:text-[#FF8A00]">
                 企业微信
               </span>
               <div
@@ -73,18 +73,18 @@ export function HelpCenterFooter() {
               rel="noopener noreferrer"
               className="text-gray-600 transition-colors hover:text-[#FF8A00]"
             >
-              <span className="text-sm">X (Twitter)</span>
+              <span className="text-xs">X (Twitter)</span>
             </a>
 
             <Link
               href="/docs/contact/contact"
               className="text-gray-600 transition-colors hover:text-[#FF8A00]"
             >
-              <span className="text-sm">联系我们</span>
+              <span className="text-xs">联系我们</span>
             </Link>
           </div>
 
-          <p className="text-sm text-gray-600">
+          <p className="text-xs text-gray-600">
             © 2025 广州智跃深空人工智能科技有限公司 · 保留所有权利
           </p>
         </div>

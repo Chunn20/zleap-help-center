@@ -18,9 +18,19 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
   const [suggestions, setSuggestions] = useState<typeof searchableDocs>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const saveSearchHistory = (keyword: string) => {
     const normalized = keyword.trim();
@@ -127,16 +137,16 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)]">
-      <div className="mx-auto flex max-w-full items-center justify-between gap-8 px-8 py-3">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Zleap" className="h-10 rounded" />
-            <span className="text-xl font-weight-500 font-bold text-gray-900">智跃</span>
+      <div className="mx-auto flex max-w-full items-center justify-between gap-3 md:gap-8 px-4 md:px-8 py-3">
+        <div className="flex items-center gap-2 md:gap-3">
+          <Link href="/" className="flex items-center gap-1.5 md:gap-2">
+            <img src="/logo.png" alt="Zleap" className="h-8 md:h-10 rounded" />
+            <span className="text-base md:text-xl font-weight-500 font-bold text-gray-900">智跃</span>
           </Link>
-          <span className="text-base text-gray-900 border-l border-solid border-gray-400 pl-3">帮助中心</span>
+          <span className="text-sm md:text-base text-gray-900 border-l border-solid border-gray-400 pl-2 md:pl-3">帮助中心</span>
         </div>
 
-        <nav className="flex flex-1 items-center  gap-10 pl-[50px]">
+        <nav className="hidden lg:flex flex-1 items-center gap-6 xl:gap-10 pl-[30px] xl:pl-[50px]">
           <a
             href="https://intro.zleap.com/"
             target="_blank"
@@ -165,9 +175,9 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
           </Link>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           {!hideSearch && (
-            <form onSubmit={handleSearch} className="w-[360px]">
+            <form onSubmit={handleSearch} className="w-[180px] md:w-[280px] lg:w-[360px]">
               <div className="relative" ref={searchRef}>
                 <img
                   src="/images/icons/搜索图标.png"
@@ -182,8 +192,8 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
                     (searchQuery.trim() || searchHistory.length > 0) &&
                     setShowSuggestions(true)
                   }
-                  placeholder="请输入关键字，如：信息管理、信息源"
-                  className="h-9 w-full rounded-full border border-[#eef1f7] bg-white py-2 pl-10 pr-10 text-xs text-[#1d1f26] shadow-[0px_1.1px_13.2px_0px_rgba(28,76,186,0.08)] outline-none transition-colors placeholder:text-[#a8afbf] focus:border-[#FF8A00]"
+                  placeholder={isMobile ? "请输入关键字" : "请输入关键字，如：信息管理、信息源"}
+                  className="h-9 w-full rounded-full border border-[#eef1f7] bg-white py-2 pl-10 pr-10 text-xs text-[#1d1f26] shadow-[0px_1.1px_13.2px_0px_rgba(28,76,186,0.08)] outline-none transition-colors placeholder:text-[10px] focus:border-[#FF8A00]"
                 />
                 {searchQuery && (
                   <button
@@ -247,7 +257,7 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
             href="https://zleap.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="h-9 rounded-full bg-[#FF8A00] px-5 text-sm font-medium text-white shadow-[0px_4px_12px_0px_rgba(255,138,0,0.28)] inline-flex items-center justify-center"
+            className="h-8 md:h-9 rounded-full bg-[#FF8A00] px-3 md:px-5 text-xs md:text-sm font-medium text-white shadow-[0px_4px_12px_0px_rgba(255,138,0,0.28)] inline-flex items-center justify-center"
           >
             登录
           </a>

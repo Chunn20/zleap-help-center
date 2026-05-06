@@ -24,6 +24,9 @@ yarn-error.log*
 .env
 .env*.local
 
+# 生产环境数据文件（不上传到 Git）
+data/changelog.json
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
