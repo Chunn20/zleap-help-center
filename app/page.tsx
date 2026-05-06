@@ -175,21 +175,21 @@ export default function HomePage() {
 
       {/* Hero Section with Background */}
       <section
-        className="relative py-26 overflow-hidden"
+        className="relative py-12 md:py-20 lg:py-26 overflow-hidden"
         style={{
           backgroundImage: 'url(/background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="mx-auto max-w-7xl px-6 text-center w-full">
-          <p className="mb-4 text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
-          <h1 className="mb-8 text-5xl font-bold text-gray-900">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 text-center w-full">
+          <p className="mb-3 md:mb-4 text-sm md:text-base font-semibold text-[#FF8A00]">AI 驱动的智能内容社区</p>
+          <h1 className="mb-6 md:mb-8 text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
             让 AI Agent 成为你的智能信息助手
           </h1>
 
           {/* Search Box */}
-          <form onSubmit={handleSearch} className="mx-auto mb-8 max-w-4xl">
+          <form onSubmit={handleSearch} className="mx-auto mb-6 md:mb-8 max-w-4xl px-4 md:px-0">
             <div className="relative" ref={searchRef}>
               <HelpCenterSearchField
                 value={searchQuery}
@@ -205,15 +205,15 @@ export default function HomePage() {
                         <button
                           type="button"
                           onClick={handleClear}
-                          className="absolute right-20 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full bg-[#BBBFC4] text-white transition-colors hover:bg-[#9FA5AF]"
+                          className="absolute right-16 md:right-20 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full bg-[#BBBFC4] text-white transition-colors hover:bg-[#9FA5AF]"
                           aria-label="清空搜索"
                         >
                           <X className="h-3 w-3 stroke-3" />
                         </button>
-                        <span className="absolute right-18 top-1/2 h-4 w-px -translate-y-1/2 bg-[#DEE0E3]" />
+                        <span className="absolute right-14 md:right-18 top-1/2 h-4 w-px -translate-y-1/2 bg-[#DEE0E3]" />
                         <button
                           type="submit"
-                          className="absolute right-8 top-1/2 -translate-y-1/2 text-[16px] leading-none text-[#FF8A00] transition-colors hover:text-[#FF9A1A]"
+                          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-[14px] md:text-[16px] leading-none text-[#FF8A00] transition-colors hover:text-[#FF9A1A]"
                         >
                           搜索
                         </button>
@@ -279,25 +279,25 @@ export default function HomePage() {
           </div>
 
           {/* Features Section - 认识Zleap */}
-          <div className="mt-30">
-            <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">认识Zleap</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-16 md:mt-24 lg:mt-30 px-4">
+            <h2 className="mb-8 md:mb-12 text-center text-2xl md:text-3xl font-bold text-gray-900">认识Zleap</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="transition-transform hover:scale-105 relative"
+                  className="transition-transform hover:scale-105 relative rounded-2xl overflow-hidden"
                   style={{
-                    minHeight: '400px',
+                    minHeight: '300px',
                   }}
                 >
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="absolute inset-0 object-cover"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
-                  <div className="relative z-10 p-8 flex flex-col h-full">
-                    <h3 className="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
-                    <p className="text-sm text-gray-700">{feature.description}</p>
+                  <div className="relative z-10 p-6 md:p-8 flex flex-col h-full">
+                    <h3 className="mb-2 md:mb-3 text-lg md:text-xl font-bold text-gray-900">{feature.title}</h3>
+                    <p className="text-xs md:text-sm text-gray-700">{feature.description}</p>
                   </div>
                 </div>
               ))}
@@ -307,24 +307,24 @@ export default function HomePage() {
       </section>
 
       {/* Quick Links Section */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto max-w-7xl px-6">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">使用Zleap</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-12 md:py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <h2 className="mb-8 md:mb-12 text-center text-2xl md:text-3xl font-bold text-gray-900">使用Zleap</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {quickLinks.map((link) => {
               return (
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="group rounded-2xl border border-gray-200 bg-gray-50 p-6 transition-all hover:border-[#FF8A00] hover:shadow-lg"
+                  className="group rounded-2xl border border-gray-200 bg-gray-50 p-5 md:p-6 transition-all hover:border-[#FF8A00] hover:shadow-lg"
                 >
-                  <div className="mb-4 flex justify-center">
-                    <img src={link.iconPath} alt={link.title} className="h-12 w-12" />
+                  <div className="mb-3 md:mb-4 flex justify-center">
+                    <img src={link.iconPath} alt={link.title} className="h-10 w-10 md:h-12 md:w-12" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-[#FF8A00] text-center">
+                  <h3 className="mb-1.5 md:mb-2 text-base md:text-lg font-semibold text-gray-900 group-hover:text-[#FF8A00] text-center">
                     {link.title}
                   </h3>
-                  <p className="text-sm text-gray-600 text-center">{link.description}</p>
+                  <p className="text-xs md:text-sm text-gray-600 text-center leading-relaxed">{link.description}</p>
                 </Link>
               );
             })}

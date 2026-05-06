@@ -1,0 +1,1 @@
+- [Fumadocs Visual Branding](memory/branding.md) — project branding guidelines using #FEF9E6 and #AFDCFF
