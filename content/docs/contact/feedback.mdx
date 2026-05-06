@@ -56,14 +56,16 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   }
 `}</style>
 
-<div style={{margin: '40px 0 32px 0' }}>
-  <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
+<img src="/images/contact/contact-header.png" alt="反馈与建议" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
+
+<div style={{margin: '40px 0 32px 0', textAlign: 'center' }}>
+  <div style={{display:'flex', alignItems:'center', gap:'12px', justifyContent: 'center'}}>
   <div style={{ width: '56px', height: '56px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00' }}>
     <MessageCircle className="h-7 w-7" />
   </div>
   <h1 style={{fontSize: '28px', fontWeight: 700, color: '#1d1d1f',margin:0}}>给帮助中心提建议</h1>
   </div>
-  <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7}}>
+  <p style={{ fontSize: '17px', color: '#86868b', lineHeight: 1.7, maxWidth: '600px', margin: '12px auto 0' }}>
     我们非常重视您的意见。无论是功能建议、内容改进还是任何想法，您的每一个反馈都能帮助我们把 Zleap 做得更好。
   </p>
 </div>
