@@ -285,21 +285,21 @@ export default function HomePage() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="transition-transform hover:scale-105 relative rounded-2xl overflow-hidden bg-white"
+                  className="transition-transform hover:scale-105 relative rounded-2xl overflow-hidden"
                   style={{
                     minHeight: '300px',
                   }}
                 >
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
                   <div className="relative z-10 p-6 md:p-8">
-                    <h3 className="mb-2 md:mb-3 text-lg md:text-xl font-bold text-gray-900">{feature.title}</h3>
-                    <p className="text-xs md:text-sm text-gray-700">{feature.description}</p>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0" style={{ height: '60%' }}>
-                    <img
-                      src={feature.image}
-                      alt={feature.title}
-                      className="w-full h-full object-cover object-top"
-                    />
+                    <div className="inline-block bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 mb-2">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1">{feature.title}</h3>
+                      <p className="text-xs md:text-sm text-gray-700">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
               ))}
