@@ -34,6 +34,51 @@ function SearchPageContent() {
     }
   }, [queryParam]);
 
+  // 保存滚动位置
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY;
+      sessionStorage.setItem('search-scroll-position', scrollPos.toString());
+      console.log('保存滚动位置:', scrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 恢复滚动位置
+  useEffect(() => {
+    const restoreScroll = () => {
+      const savedScrollPosition = sessionStorage.getItem('search-scroll-position');
+      console.log('尝试恢复滚动位置:', savedScrollPosition);
+
+      if (savedScrollPosition) {
+        const scrollPos = parseInt(savedScrollPosition, 10);
+
+        // 多次尝试恢复，确保内容已加载
+        const attempts = [0, 50, 100, 200, 300];
+        attempts.forEach(delay => {
+          setTimeout(() => {
+            window.scrollTo(0, scrollPos);
+            console.log('执行滚动到:', scrollPos, '当前位置:', window.scrollY);
+          }, delay);
+        });
+      }
+    };
+
+    // 页面加载时立即尝试恢复
+    restoreScroll();
+
+    // 监听浏览器返回事件
+    const handlePopState = () => {
+      console.log('检测到返回操作');
+      setTimeout(restoreScroll, 50);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const stripHtml = (value: string) => value.replace(/<[^>]*>/g, '').trim();
 
   const escapeRegExp = (value: string) =>
