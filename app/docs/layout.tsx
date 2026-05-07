@@ -13,7 +13,7 @@ const docsLayoutStyle = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <HelpCenterHeader />
+      <HelpCenterHeader hideSearch />
       <DocsLayout
         tree={source.pageTree}
         {...baseOptions}
