@@ -295,11 +295,9 @@ export default function HomePage() {
                     alt={feature.title}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
-                  <div className="relative z-10 p-6 md:p-8">
-                    <div className="inline-block bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 mb-2">
-                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1">{feature.title}</h3>
-                      <p className="text-xs md:text-sm text-gray-700">{feature.description}</p>
-                    </div>
+                  <div className="relative z-10 pt-4 px-6 md:pt-5 md:px-8">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1">{feature.title}</h3>
+                    <p className="text-xs md:text-sm text-gray-700">{feature.description}</p>
                   </div>
                 </div>
               ))}
