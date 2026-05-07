@@ -295,7 +295,7 @@ export default function HomePage() {
                     alt={feature.title}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
-                  <div className="relative z-10 p-6 md:p-8 flex flex-col h-full">
+                  <div className="relative z-10 p-6 md:p-8 flex flex-col h-full bg-white/90 backdrop-blur-sm">
                     <h3 className="mb-2 md:mb-3 text-lg md:text-xl font-bold text-gray-900">{feature.title}</h3>
                     <p className="text-xs md:text-sm text-gray-700">{feature.description}</p>
                   </div>
