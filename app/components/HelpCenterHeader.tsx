@@ -146,7 +146,7 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
           <span className="text-sm md:text-base text-gray-900 border-l border-solid border-gray-400 pl-2 md:pl-3">帮助中心</span>
         </div>
 
-        <nav className="hidden lg:flex flex-1 items-center gap-6 xl:gap-10 pl-[30px] xl:pl-[50px]">
+        <nav className="hidden lg:flex flex-1 items-center gap-8 pl-[30px] xl:pl-[50px]">
           <a
             href="https://intro.zleap.com/"
             target="_blank"
