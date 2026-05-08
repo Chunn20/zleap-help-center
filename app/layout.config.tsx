@@ -7,5 +7,6 @@ export const baseOptions: BaseLayoutProps = {
   themeSwitch: {
     enabled: false,
   },
-
+  links: [],
+  i18n: false,
 };

@@ -319,4 +319,13 @@ code {
   aside[data-fd-sidebar] {
     font-size: 14px;
   }
+
+  /* 确保 TOC 在移动端显示 */
+  #nd-toc {
+    display: block !important;
+  }
+
+  [data-toc] {
+    display: block !important;
+  }
 }

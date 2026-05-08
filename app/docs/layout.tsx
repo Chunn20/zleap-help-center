@@ -23,6 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           components: {
             Item: DocsSidebarLeafItem,
           },
+          enabled: true,
         }}
         containerProps={{ style: docsLayoutStyle }}
       >
