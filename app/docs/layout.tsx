@@ -18,12 +18,11 @@ export default function Layout({ children }: { children: ReactNode }) {
         tree={source.pageTree}
         {...baseOptions}
         sidebar={{
-          collapsible: false,
+          collapsible: true,
           className: 'bg-white',
           components: {
             Item: DocsSidebarLeafItem,
           },
-          enabled: true,
         }}
         containerProps={{ style: docsLayoutStyle }}
       >

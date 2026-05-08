@@ -320,13 +320,6 @@ code {
     font-size: 14px;
   }
 
-  /* 移动端：确保侧边栏可以通过汉堡菜单访问 */
-  @media (max-width: 1024px) {
-    aside[data-fd-sidebar] {
-      display: block !important;
-    }
-  }
-
   /* 确保 TOC 在移动端显示 */
   #nd-toc {
     display: block !important;
