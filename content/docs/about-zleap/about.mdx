@@ -54,6 +54,13 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   #nd-page hr {
     display: none;
   }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
 `}</style>
 
 <img src="/images/about-zleap/what-is-zleap.png" alt="什么是智跃 Zleap" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />

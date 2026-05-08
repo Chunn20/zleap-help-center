@@ -59,6 +59,13 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   ul li::marker {
     color: #FF8800;
   }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
 `}</style>
 
 <img src="/images/about-zleap/enterprise-overview.png" alt="Zleap 企业版概览" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />

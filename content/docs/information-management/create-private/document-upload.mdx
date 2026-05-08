@@ -78,6 +78,16 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   .feedback-btn:hover span {
     transform: 'translateX(4px)' !important;
   }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns: repeat(2, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
 `}</style>
 
 <img src="/images/information-management/create-private-source.png" alt="文档上传" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
@@ -196,7 +206,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   <img src="/images/information-management/create-private/document-upload/paste-step2.gif" alt="粘贴链接" style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
 </div>
 
-<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0' }}>
+<div style={{ display: 'flex', gap: '12px', alignItems: 'center', margin: '32px 0', background: '#FAFAFA', padding: '16px 20px', borderRadius: '12px' }}>
   <div style={{ flexShrink: 0 }}>
     <Lightbulb className="h-5 w-5" style={{ color: '#FF8800' }} />
   </div>
