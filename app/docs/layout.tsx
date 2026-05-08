@@ -18,6 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         tree={source.pageTree}
         {...baseOptions}
         sidebar={{
+          enabled: true,
           collapsible: true,
           className: 'bg-white',
           components: {
