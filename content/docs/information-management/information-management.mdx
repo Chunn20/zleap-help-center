@@ -76,6 +76,13 @@ import { Lightbulb, Settings, Rocket, ClipboardList, BarChart3 } from 'lucide-re
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
   }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .info-cards-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
 `}</style>
 
 <img src="/images/information-management/information-management-overview.png" alt="信息管理是什么？" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 0 32px 0', borderRadius: '12px' }} />
@@ -86,7 +93,7 @@ import { Lightbulb, Settings, Rocket, ClipboardList, BarChart3 } from 'lucide-re
 
 
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', margin: '24px 0 40px 0' }}>
+<div className="info-cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', margin: '24px 0 40px 0' }}>
   <a href="/docs/information-management/create-private/document-upload" className="info-jump-card">
     <img src="/images/information-management/icon/document-upload.png" alt="文档上传" style={{ width: '40px', height: '40px' }} />
     <p style={{ fontSize: '15px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>文档上传</p>

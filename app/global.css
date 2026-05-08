@@ -320,6 +320,13 @@ code {
     font-size: 14px;
   }
 
+  /* 确保侧边栏在移动端可见 */
+  aside[data-fd-sidebar] {
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+  }
+
   /* 确保 TOC 在移动端显示 */
   #nd-toc {
     display: block !important;
