@@ -141,9 +141,8 @@ export function HelpCenterHeader({ hideSearch = false }: HelpCenterHeaderProps) 
         <div className="flex items-center gap-2 md:gap-3">
           <Link href="/" className="flex items-center gap-1.5 md:gap-2">
             <img src="/logo.png" alt="Zleap" className="h-8 md:h-10 rounded" />
-            <span className="text-base md:text-xl font-weight-500 font-bold text-gray-900">智跃</span>
+            <span className="text-base md:text-xl font-bold text-gray-900">智跃帮助中心</span>
           </Link>
-          <span className="text-sm md:text-base text-gray-900 border-l border-solid border-gray-400 pl-2 md:pl-3">帮助中心</span>
         </div>
 
         <nav className="hidden lg:flex flex-1 items-center gap-8 pl-8">
