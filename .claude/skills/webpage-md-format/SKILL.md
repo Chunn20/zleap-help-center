@@ -48,10 +48,16 @@
 
 1. **CSS 样式**：按 standard-page.md 中的标准 CSS 调整
    - H1: 36px, margin-bottom: 0
-   - H2: 26px/600, margin-top: 60px, margin-bottom: 24px
-   - H3: 20px/600, margin-top: 32px, margin-bottom: 16px
-   - 正文: 16px/400, line-height: 26px
+   - H2: 26px/600, margin-top: 60px, margin-bottom: 26px
+   - H3: 20px/600, margin-top: 30px, margin-bottom: 12px
+   - 正文: 16px/400, line-height: 26px, margin: 0
    - 颜色: #1A1D23
+   
+   **标题间距标准（重要）：**
+   - H2 到 H3 的间距：26px（H2 的 margin-bottom）
+   - H3 到正文的间距：12px（H3 的 margin-bottom）
+   - 正文到下一个 H3 的间距：30px（H3 的 margin-top）
+   - 正文段落的 margin 必须设为 0，避免与标题间距冲突
 
 2. **灰色卡片（核心概念）**：改为普通段落（16px/400/26px）
 
