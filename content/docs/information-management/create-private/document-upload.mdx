@@ -94,7 +94,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
 
 {/* 第一排：本地上传 + 粘贴链接 */}
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', margin: '30px 0 12px 0', maxWidth: '720px', marginLeft: 'auto', marginRight: 'auto' }}>
-  <a href="#local-upload" className="jump-card" style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '24px', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'all 0.2s', cursor: 'pointer' }}>
+  <a href="#本地文档上传" className="jump-card" style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '24px', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'all 0.2s', cursor: 'pointer' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
       <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
         <FileText className="h-5 w-5" />
@@ -103,7 +103,7 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
     </div>
     <p style={{ fontSize: '17px', color: '#86868b', margin: 0, lineHeight: 1.7 }}>支持 PDF、Word、PPT、Markdown 等多种格式，快速将本地文件转化为知识资产</p>
   </a>
-  <a href="#paste-link" className="jump-card" style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '24px', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'all 0.2s', cursor: 'pointer' }}>
+  <a href="#粘贴链接" className="jump-card" style={{ background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '16px', padding: '24px', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'all 0.2s', cursor: 'pointer' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
       <div style={{ width: '40px', height: '40px', background: 'rgba(255, 138, 0, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00', flexShrink: 0 }}>
         <Cloud className="h-5 w-5" />
@@ -124,19 +124,19 @@ import ImageZoomOverlay from '@/app/components/ImageZoomOverlay';
   </div>
   <p style={{ fontSize: '17px', color: '#86868b', margin: '0 0 16px 0', lineHeight: 1.7 }}>从语雀、思源笔记、飞书等主流知识管理平台导入内容</p>
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
-    <a href="#feishu-kb" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px', background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }} className="kb-import-card">
+    <a href="#飞书知识库操作步骤" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px', background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }} className="kb-import-card">
       <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00' }}>
         <Cloud className="h-4 w-4" />
       </div>
       <span style={{ fontSize: '14px', fontWeight: 500, color: '#FF8A00' }}>飞书知识库</span>
     </a>
-    <a href="#siyuan-notes" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px', background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }} className="kb-import-card">
+    <a href="#思源笔记操作步骤" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px', background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }} className="kb-import-card">
       <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00' }}>
         <FileText className="h-4 w-4" />
       </div>
       <span style={{ fontSize: '14px', fontWeight: 500, color: '#FF8A00' }}>思源笔记</span>
     </a>
-    <a href="#yuque-kb" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px', background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }} className="kb-import-card">
+    <a href="#语雀知识库操作步骤" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px', background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s', cursor: 'pointer' }} className="kb-import-card">
       <div style={{ width: '36px', height: '36px', background: '#FFE9B9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF8A00' }}>
         <BookOpen className="h-4 w-4" />
       </div>
