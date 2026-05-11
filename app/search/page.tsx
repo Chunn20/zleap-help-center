@@ -17,6 +17,8 @@ interface RawSearchResult {
   breadcrumbs?: string[];
 }
 
+const DEFAULT_PAGE_SIZE = 10; // 默认每页显示条数
+
 function SearchPageContent() {
   const searchParams = useSearchParams();
   const queryParam = searchParams.get('q') || '';
@@ -24,10 +26,13 @@ function SearchPageContent() {
   const [query, setQuery] = useState(queryParam);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
   useEffect(() => {
     setQuery(queryParam);
     if (queryParam) {
+      setCurrentPage(1); // 新搜索时重置页码
       void performSearch(queryParam);
     } else {
       setResults([]);
@@ -423,11 +428,24 @@ function SearchPageContent() {
 
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
+    setCurrentPage(1); // 新搜索时重置页码
     if (newQuery) {
       performSearch(newQuery);
     } else {
       setResults([]);
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // 切换页码后滚动到顶部
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePageSizeChange = (size: number) => {
+    setPageSize(size);
+    setCurrentPage(1); // 切换每页条数时重置到第一页
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -441,7 +459,15 @@ function SearchPageContent() {
         </div>
 
         <div className="relative z-0 flex-1 px-6 pb-24">
-          <SearchResults results={results} query={query} isLoading={isLoading} />
+          <SearchResults
+            results={results}
+            query={query}
+            isLoading={isLoading}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+          />
         </div>
       </div>
 

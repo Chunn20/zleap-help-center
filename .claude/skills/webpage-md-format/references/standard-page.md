@@ -105,8 +105,7 @@
   font-weight: 600;
   color: #1A1D23;
   line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 ```
 
@@ -213,8 +212,8 @@
 
 **完整样式：**
 ```jsx
-<div style={{ margin: '32px 0' }}>
-  <div style={{ marginBottom: '24px' }}>
+<div>
+  <div style={{ marginBottom: '30px' }}>
     <h3 style={{ fontSize: '20px', fontWeight: 500, color: '#1A1D23', lineHeight: 1.5, margin: '0 0 12px 0' }}>
       <span style={{ color: '#1A1D23', fontWeight: 700 }}>场景标题</span>
     </h3>
@@ -223,7 +222,7 @@
     </p>
   </div>
   
-  <div style={{ marginBottom: '24px' }}>
+  <div style={{ marginBottom: '30px' }}>
     <h3 style={{ fontSize: '20px', fontWeight: 500, color: '#1A1D23', lineHeight: 1.5, margin: '0 0 12px 0' }}>
       <span style={{ color: '#1A1D23', fontWeight: 700 }}>第二个场景</span>
     </h3>
