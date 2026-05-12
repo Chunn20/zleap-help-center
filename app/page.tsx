@@ -287,7 +287,7 @@ export default function HomePage() {
                   key={feature.title}
                   className="transition-transform hover:scale-105 relative rounded-2xl overflow-hidden"
                   style={{
-                    minHeight: '300px',
+                    minHeight: '400px',
                   }}
                 >
                   <img
