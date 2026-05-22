@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 
 export default function ChangelogAdminPage() {
   const [password, setPassword] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [entries, setEntries] = useState<any[]>([]);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -16,6 +18,7 @@ export default function ChangelogAdminPage() {
     const isAuth = sessionStorage.getItem('admin_authenticated') === 'true';
     if (isAuth) {
       setIsAuthenticated(true);
+      setAdminPassword(sessionStorage.getItem('admin_password') || '');
     }
   }, []);
 
@@ -31,6 +34,9 @@ export default function ChangelogAdminPage() {
       if (response.ok) {
         setIsAuthenticated(true);
         setMessage('');
+        setAdminPassword(password);
+        sessionStorage.setItem('admin_authenticated', 'true');
+        sessionStorage.setItem('admin_password', password);
       } else {
         setMessage('密码错误');
       }
@@ -77,6 +83,45 @@ export default function ChangelogAdminPage() {
     return { version, date, features, optimizations };
   };
 
+  const fetchEntries = async () => {
+    try {
+      const res = await fetch('/api/changelog');
+      if (res.ok) {
+        const data = await res.json();
+        setEntries(data || []);
+      }
+    } catch (error) {
+      // ignore
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchEntries();
+    }
+  }, [isAuthenticated]);
+
+  const handleDelete = async (version: string) => {
+    if (!confirm(`确定删除已发布的版本 ${version} 吗？`)) return;
+    try {
+      const res = await fetch(`/api/changelog?version=${encodeURIComponent(version)}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
+      });
+      if (!res.ok) {
+        const body = await res.json();
+        throw new Error(body?.error || '删除失败');
+      }
+      setMessage('删除成功');
+      fetchEntries();
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : '删除失败');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -97,6 +142,7 @@ export default function ChangelogAdminPage() {
 
       setMessage('发布成功！');
       setContent('');
+      fetchEntries();
 
       setTimeout(() => {
         router.push('/docs/support/changelog');
@@ -194,6 +240,55 @@ export default function ChangelogAdminPage() {
               </button>
             </div>
           </form>
+
+          <div className="mt-8">
+            <h2 className="text-lg font-medium mb-4">已发布更新日志</h2>
+            {entries.length === 0 ? (
+              <p className="text-sm text-gray-500">暂无已发布条目</p>
+            ) : (
+              <div className="space-y-4">
+                {entries.map((entry) => (
+                  <div key={entry.version} className="p-4 border rounded-lg">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-base font-semibold">{entry.version}</div>
+                        <div className="text-sm text-gray-500">{entry.date}</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(entry.version)}
+                        className="px-3 py-1 rounded bg-red-500 text-white text-sm hover:bg-red-600"
+                      >
+                        删除
+                      </button>
+                    </div>
+                    <div className="mt-3 text-sm text-gray-700">
+                      {entry.features && entry.features.length > 0 && (
+                        <div className="mb-2">
+                          <div className="font-semibold">新增</div>
+                          <ul className="list-disc pl-5">
+                            {entry.features.map((item: string, index: number) => (
+                              <li key={index}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {entry.optimizations && entry.optimizations.length > 0 && (
+                        <div>
+                          <div className="font-semibold">优化</div>
+                          <ul className="list-disc pl-5">
+                            {entry.optimizations.map((item: string, index: number) => (
+                              <li key={index}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

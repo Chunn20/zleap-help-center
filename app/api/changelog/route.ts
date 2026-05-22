@@ -45,3 +45,54 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+function verifyAdmin(request: NextRequest) {
+  const pw = request.headers.get('x-admin-password');
+  const correctPassword = process.env.CHANGELOG_ADMIN_PASSWORD || 'zleap2024';
+  return pw === correctPassword;
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    if (!verifyAdmin(request)) {
+      return NextResponse.json({ error: '未授权' }, { status: 401 });
+    }
+
+    const url = new URL(request.url);
+    let version = url.searchParams.get('version');
+
+    if (!version) {
+      try {
+        const body = await request.json();
+        version = body.version;
+      } catch (error) {
+        // ignore
+      }
+    }
+
+    if (!version) {
+      return NextResponse.json({ error: '缺少 version 参数' }, { status: 400 });
+    }
+
+    let changelog: ChangelogEntry[] = [];
+    try {
+      const data = fs.readFileSync(DATA_FILE, 'utf-8');
+      changelog = JSON.parse(data);
+    } catch (error) {
+      changelog = [];
+    }
+
+    const idx = changelog.findIndex((e) => e.version === version);
+    if (idx === -1) {
+      return NextResponse.json({ error: '未找到对应版本' }, { status: 404 });
+    }
+
+    changelog.splice(idx, 1);
+
+    fs.writeFileSync(DATA_FILE, JSON.stringify(changelog, null, 2), 'utf-8');
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: '删除失败' }, { status: 500 });
+  }
+}
